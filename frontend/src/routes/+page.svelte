@@ -1,5 +1,12 @@
 <script>
+	
 	import headshot from '$lib/images/chris-lamberth.jpg';
+	
+
+	import { client } from '../sanity';
+
+let dataPromise = client.fetch('*[_type == "post"] { _id, title, _createdAt, mainImage, slug, description }');
+
 </script>
 
 <div class="container">
@@ -15,9 +22,17 @@
 </div>
 
 <div class="container">
-	<div class="ul">
-	
-	</div>
+	{#await dataPromise}
+  <p>...waiting</p>
+{:then data}
+  <ul>
+    {#each data as post}
+      <li>{post.title}</li>
+    {/each}
+  </ul>
+{:catch error}
+  <p style="color: red">{error.message}</p>
+{/await}
 </div>
 
 <style>
