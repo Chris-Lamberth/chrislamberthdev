@@ -1,0 +1,54 @@
+@import url('https://use.typekit.net/sep8lvu.css');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,500;0,700;1,500;1,700&display=swap');
+
+:root {
+	--sans: 'Work Sans', sans-serif;
+	--serif: buendia, serif;
+	--site-pad: 30px;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	min-height: 100vh;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	background-color: #fff;
+}
+
+img {
+	width: 100%;
+}
+
+button {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.container {
+	width: 100%;
+	max-width: calc(850px + var(--site-pad) + var(--site-pad));
+	margin: 0 auto;
+	padding: 0 var(--site-pad);
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+h1 {
+	font-family: var(--serif);
+	font-size: 3.5rem;
+	line-height: 1em;
+	margin: 0 0 0.2em 0;
+}
