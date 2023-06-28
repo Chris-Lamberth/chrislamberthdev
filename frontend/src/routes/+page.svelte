@@ -1,12 +1,6 @@
 <script>
-	
 	import headshot from '$lib/images/chris-lamberth.jpg';
-	
-
-	import { client } from '../sanity';
-
-let dataPromise = client.fetch('*[_type == "post"] { _id, title, _createdAt, mainImage, slug, description }');
-
+	import Feed from '../components/Feed.svelte';
 </script>
 
 <div class="container">
@@ -21,19 +15,7 @@ let dataPromise = client.fetch('*[_type == "post"] { _id, title, _createdAt, mai
 	</div>
 </div>
 
-<div class="container">
-	{#await dataPromise}
-  <p>...waiting</p>
-{:then data}
-  <ul>
-    {#each data as post}
-      <li>{post.title}</li>
-    {/each}
-  </ul>
-{:catch error}
-  <p style="color: red">{error.message}</p>
-{/await}
-</div>
+<Feed />
 
 <style>
 	.intro{

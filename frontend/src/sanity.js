@@ -9,6 +9,6 @@ export const config = {
  useCdn: false,  
  ignoreBrowserTokenWarning: true  
 };  
-export const client = createClient(config);
+export const client = createClient(config); 
 
 export const urlFor = (/** @type {any} */ source) => createImageUrlBuilder(config).image(source);
