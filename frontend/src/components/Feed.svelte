@@ -13,7 +13,7 @@ let dataPromise = client.fetch('*[_type == "post"] { _id, title, _createdAt, mai
 			{:then data}
 			<div class="group">
 				{#each data as post}
-				<a href={`work/${post._id}`}>
+				<a href={`work/${post.slug.current}`}>
 					<div class="img" style="background-image: url({urlFor(post.mainImage.asset).width(600).format('webp', 'jpg').url()}); 
 						background-position: {post.mainImage.hotspot.x * 100}% {post.mainImage.hotspot.y * 100}%">
 					</div>
