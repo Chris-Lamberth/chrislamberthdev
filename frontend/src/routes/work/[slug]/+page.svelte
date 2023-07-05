@@ -1,14 +1,17 @@
-<script>
-	export let work;
+<script context="module">
+	export { load } from './+page.js';
  </script>
  
- <!-- Then use `work` variable in your component -->
- {#if Array.isArray(work)}
-	{#each work as post}
-	  <h1>{post.title}</h1>
-	  <!-- other properties here -->
-	{/each}
- {:else}
-	<p>No posts to display.</p>
- {/if}
+ <script>
+	export let post;
+ </script>
+ 
+ <h1>{post.title}</h1>
+ <svelte:head>
+	<title>{post.title}</title>
+ </svelte:head>
+ 
+ <article>
+	{@html post.body}
+ </article>
  
