@@ -12,3 +12,22 @@ export const config = {
 export const client = createClient(config); 
 
 export const urlFor = (/** @type {any} */ source) => createImageUrlBuilder(config).image(source);
+
+
+export async function load({ params }) {
+	const { slug } = params;
+	const query = `*[_type == "post" && slug.current == $slug][0]`;
+	const queryParams = { slug };
+	const data = await client.fetch(query, queryParams);
+ 
+	if (data) {
+	  return {
+		 post: data,
+	  };
+	}
+ 
+	return {
+	  status: 404,
+	  error: new Error('Not found'),
+	};
+ }

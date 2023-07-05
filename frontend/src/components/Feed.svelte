@@ -1,6 +1,6 @@
 <script>
 
-import { client, urlFor } from '../sanity';
+import { client, urlFor } from '$lib/sanity';
 
 let dataPromise = client.fetch('*[_type == "post"] { _id, title, _createdAt, mainImage, slug, description }');
 
