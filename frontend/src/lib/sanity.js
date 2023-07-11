@@ -1,5 +1,5 @@
 import { createClient } from '@sanity/client'; 
-import createImageUrlBuilder from '@sanity/image-url';  
+import createImageUrlBuilder from '@sanity/image-url';
 
 export const config = {  
  projectId: 'ps0x3kbb',  
@@ -9,8 +9,19 @@ export const config = {
  useCdn: true,  
  ignoreBrowserTokenWarning: true  
 };  
+
 export const client = createClient(config); 
 
 export const urlFor = (/** @type {any} */ source) => createImageUrlBuilder(config).image(source);
 
 
+// export async function getPosts() {
+// 	return await client.fetch(`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`);
+// }
+export async function getPost(slug) {
+	return await client.fetch(`*[_type == "post" && slug.current == $slug][0]`,
+	  {
+		 slug,
+	  }
+	);
+ }
