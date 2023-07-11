@@ -14,13 +14,3 @@ export const client = createClient(config);
 export const urlFor = (/** @type {any} */ source) => createImageUrlBuilder(config).image(source);
 
 
-// import sanityClient from '@sanity/client';
-
-// export default sanityClient({
-// 	projectId: 'ps0x3kbb',
-// 	dataset: 'production',
-// 	token:'skwIZiArC4ryImsMMR0eFueBbjVFqxF6etbgpXRxmwclfoXEuwujHRvCzidXx6FoLaksD2Nh3gljsOSr5QWA9rm3rfunC5fy0LQTDPk6kHVzJOVkyLkxwco3rD2sWgZzJbSnhnM1r9ExwFA8JfPbGQJwpOILaN5EeAqCD9sDBDOQcLXfj7kU', 
-// 	apiVersion: 'v2023-06-06', 
-// 	ignoreBrowserTokenWarning: true ,
-// 	useCdn: false // `false` if you want to ensure fresh data
-//  });

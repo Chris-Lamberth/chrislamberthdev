@@ -1,5 +1,5 @@
 <script>
-	import Feed from '../../components/Feed.svelte';
+	import Feed from '$lib/components/Feed.svelte';
 </script>
 
 <Feed />
