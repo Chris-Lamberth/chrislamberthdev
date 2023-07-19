@@ -5,6 +5,8 @@
 	--sans: 'Work Sans', sans-serif;
 	--serif: buendia, serif;
 	--site-pad: 30px;
+	--headline-pad: 1.5rem;
+	--inset-pad: 1rem;
 }
 
 * {
@@ -43,12 +45,38 @@ button {
 	padding: 0 var(--site-pad);
 }
 
-body {
-	font-family: 'Open Sans', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+a,
+button,
+input,
+textarea,
+label,
+span {
+	font-family: var(--sans);
 }
+
 h1 {
-	font-family: var(--serif);
 	font-size: 3.5rem;
 	line-height: 1em;
 	margin: 0 0 0.2em 0;
+}
+
+.section-headline {
+	font-family: var(--serif);
+	font-size: 1.8em;
+}
+.arrow {
+	width: 1em;
+	height: 1em;
+	margin-bottom: -0.1em;
+	pointer-events: none;
 }

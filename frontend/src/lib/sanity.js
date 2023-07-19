@@ -11,13 +11,19 @@ export const config = {
 };  
 
 export const client = createClient(config); 
+export const imgUrl = (/** @type {any} */ source) => createImageUrlBuilder(config).image(source);
 
-export const urlFor = (/** @type {any} */ source) => createImageUrlBuilder(config).image(source);
-
-
-// export async function getPosts() {
-// 	return await client.fetch(`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`);
-// }
+export async function getPosts() {
+	return await client.fetch(`*[_type == "post" && defined(slug.current)] | order(_createdAt desc) {
+		_id,
+		title,
+		mainImage,
+		"categories": categories[]->{
+		  title
+		},
+		slug
+	 }`);
+}
 export async function getPost(slug) {
 	return await client.fetch(`*[_type == "post" && slug.current == $slug][0]`,
 	  {
