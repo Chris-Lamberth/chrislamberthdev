@@ -41,7 +41,7 @@ import { getPosts } from "$lib/sanity";
 		height:15vw;
 		max-height:200px;
 		overflow:hidden;
-		border-radius:2rem;
+		border-radius:var(--radius);
 		background-size: cover;
   		background-repeat: no-repeat;
 		background-position: center center;

@@ -1,6 +1,7 @@
 <script>
 	import Feed from '$lib/components/Feed.svelte';
 	import InstaFeed from '$lib/components/InstaFeed.svelte';
+	import Contact from '$lib/components/Contact.svelte';
 </script>
 
 <section class="intro">
@@ -36,7 +37,7 @@
 				<InstaFeed />
 			</div>
 			<div class="form">
-
+				<Contact />
 			</div>
 		</div>
 	</div>
@@ -50,7 +51,7 @@
 	}
 	.intro .img{
 		max-width:20rem;
-		border-radius:2rem;
+		border-radius:var(--radius);
 		overflow:hidden;
 		display: grid;
   		place-items: center;
@@ -109,6 +110,17 @@
 		color:#000;
 		text-decoration:none;
 		font-size:1.4rem;
+	}
+	.contact .group{
+		display:flex;
+		align-items: flex-end;
+		gap:3rem;
+	}
+	.contact .group > div{
+		flex:1;
+	}
+	.insta h2{
+		margin: 0 0 var(--headline-pad) 0;
 	}
 
 </style>

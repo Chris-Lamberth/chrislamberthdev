@@ -13,6 +13,7 @@ export const config = {
 export const client = createClient(config); 
 export const imgUrl = (/** @type {any} */ source) => createImageUrlBuilder(config).image(source);
 
+// All Posts (Work)
 export async function getPosts() {
 	return await client.fetch(`*[_type == "post" && defined(slug.current)] | order(_createdAt desc) {
 		_id,
@@ -24,6 +25,8 @@ export async function getPosts() {
 		slug
 	 }`);
 }
+
+//Single Page (Work)
 export async function getPost(slug) {
 	return await client.fetch(`*[_type == "post" && slug.current == $slug][0]`,
 	  {
@@ -31,3 +34,13 @@ export async function getPost(slug) {
 	  }
 	);
  }
+
+ // Instagram Feed
+ export async function getInstaPosts() {
+	return await client.fetch(`*[_type == "instaFeed"]{
+		_id,
+		name,
+		postURLs,
+		"imageUrl": postImage.asset->url
+	}`);
+}
