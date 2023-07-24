@@ -42,9 +42,11 @@ import { getPosts } from "$lib/sanity";
 		max-height:200px;
 		overflow:hidden;
 		border-radius:var(--radius);
-		background-size: cover;
+		background-size: 100%;
   		background-repeat: no-repeat;
 		background-position: center center;
+		box-shadow: 0 0 0 0 rgba(255, 255, 255, 1), 0 0 0 0px #000;
+		transition:background-size 2s ease-out, box-shadow .1s ease-in-out;
 	}
 	.txt{
 		padding:.5rem 0 0 1rem;
@@ -52,6 +54,16 @@ import { getPosts } from "$lib/sanity";
 	a{
 		text-decoration:none;
 		color:#000;
+		outline:none;
+	}
+	a:hover .img{
+		background-size:115%;
+		box-shadow: 0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px #000;
+	}
+	a:focus .img{
+		outline: none;
+		box-shadow: 0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px #000;
+		
 	}
 	h3{
 		font-size:1rem;
@@ -67,5 +79,14 @@ import { getPosts } from "$lib/sanity";
 		color:#9f9f9f;
 		display:inline-block;
 		margin:0 .8em 0 0;
+	}
+	@media (width <= 600px) {
+		.group{
+		grid-gap: 1rem;
+		grid-template-columns: 1fr 1fr;
+		}
+		.img{
+			height:8rem;
+		}
 	}
 </style>

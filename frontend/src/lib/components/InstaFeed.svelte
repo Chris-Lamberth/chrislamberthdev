@@ -20,14 +20,36 @@
  <style>
 	.group{
 		display:grid;
-		gap:2rem;
+		gap:1.5rem;
 		grid-template-columns: 1fr 1fr;
+	}
+	a{
+		outline:none;
 	}
 	.group .img{
 		aspect-ratio: 1;
-		background-size: cover;
+		background-size: 100%;
   		background-repeat: no-repeat;
 		background-position: center center;
 		border-radius: var(--radius);
+		box-shadow: 0 0 0 0 rgba(255, 255, 255, 1), 0 0 0 0px #000;
+		transition:background-size 5s ease-out, box-shadow .1s ease-in-out;
 	}
+	a:hover .img{
+		background-size:110%;
+		box-shadow: 0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px #000;
+	}
+	a:focus .img{
+		outline: none;
+		box-shadow: 0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px #000;
+		
+	}
+	@media (width <= 600px) {
+		.group{
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			gap:1rem;
+		}
+	}
+
  </style>
+

@@ -116,11 +116,39 @@
 		align-items: flex-end;
 		gap:3rem;
 	}
-	.contact .group > div{
-		flex:1;
-	}
+	
 	.insta h2{
 		margin: 0 0 var(--headline-pad) 0;
+	}
+	.insta{
+		flex:5;
+	}
+
+	.form{
+		flex:7;
+	}
+	@media (width <= 800px) {
+		.contact .group{
+			gap:2rem;
+		}
+	}
+	@media (width <= 750px) {
+		.contact .group{
+			align-items: flex-start;
+		}
+	}
+	@media (width <= 600px) {
+		.contact .group{
+			flex-direction:column-reverse;
+			gap:1rem;
+		}
+		.insta{
+			flex:none;
+			width:100%;
+		}
+		.form{
+			margin:0 0 2rem 0;
+		}
 	}
 
 </style>
