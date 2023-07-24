@@ -2,6 +2,7 @@
 	import Feed from '$lib/components/Feed.svelte';
 	import InstaFeed from '$lib/components/InstaFeed.svelte';
 	import Contact from '$lib/components/Contact.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 </script>
 
 <section class="intro">
@@ -42,7 +43,7 @@
 		</div>
 	</div>
 </section>
-
+<Footer />
 <style>
 	.intro .group{
 		display:flex;
@@ -110,6 +111,9 @@
 		color:#000;
 		text-decoration:none;
 		font-size:1.4rem;
+	}
+	.contact{
+		margin:0 0 3rem 0;
 	}
 	.contact .group{
 		display:flex;
