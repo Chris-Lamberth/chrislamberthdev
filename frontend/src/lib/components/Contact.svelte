@@ -1,19 +1,37 @@
+<script>
+	let name = '';
+	let email = '';
+	let message = '';
+
+	const submitForm = async (event) => {
+		 event.preventDefault();
+		 const formData = { name, email, message };
+		 console.log(formData);
+
+		 // Here you can handle your form data. 
+		 // For example, make a POST request to your server or use fetch to send this data to some API
+	};
+</script>
+<h2>name:</h2><p>{name}</p>
+<h2>email:</h2><p>{email}</p>
+<h2>message:</h2><p>{message}</p>
 <div class="card">
-	<h2 class="section-headline">reach out</h2>
-	<p>Got a rad project or just want to say hello? Shoot me a message and let's chat.</p>
-	<form method="POST" use:enhance>
-		<div class="field">
-			<input type="text" id="name" name="name" placeholder="name" />
-		</div>
-		<div class="field">
-			<input type="email" id="email" placeholder="email" name="email" />
-		</div>
-		<div class="field">
-			<textarea name="message" id="message" placeholder="message" cols="30" rows="5" />
-		</div>
-		<button type="submit">send</button>
-	</form>
+  <h2 class="section-headline">reach out</h2>
+  <p>Got a rad project or just want to say hello? Shoot me a message and let's chat.</p>
+  <form on:submit={submitForm}>
+	  <div class="field">
+		  <input type="text" bind:value={name} id="name" name="name" placeholder="name" />
+	  </div>
+	  <div class="field">
+		  <input type="email" bind:value={email} id="email" placeholder="email" name="email" />
+	  </div>
+	  <div class="field">
+		  <textarea bind:value={message} name="message" id="message" placeholder="message" cols="30" rows="5"></textarea>
+	  </div>
+	  <button type="submit">send</button>
+  </form>
 </div>
+
 
 <style>
 	.card {
