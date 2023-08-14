@@ -1,34 +1,28 @@
 <script>
-import { imgUrl } from '$lib/sanity';
-import { getPosts } from "$lib/sanity";
-
-
+  import { imgUrl } from '$lib/sanity';
+  export let posts = [];
 </script>
-{#await getPosts()}
-<p>Loading Feed</p>
-{:then data}
+
 <div class="group">
-  {#each data as post}
-	 <a href={`work/${post.slug.current}`}>
-		<div class="img" style="background-image: url({imgUrl(post.mainImage.asset).width(600).format('webp', 'jpg').url()}); 
-			 background-position: {post.mainImage.hotspot.x * 100}% {post.mainImage.hotspot.y * 100}%">
-		</div>
-		<div class="txt">
-		  <h3>{post.title}</h3>
-			{#if post.categories}
-				<p class="categories">
-					{#each post.categories as category, index}
-						<span>{category.title}</span>
-					{/each}
-				</p>
-			{/if}
-		</div>
-	 </a>
+  {#each posts as post}
+    <a href={`work/${post.slug.current}`}>
+      <div class="img" style="background-image: url({imgUrl(post.mainImage.asset).width(600).format('webp', 'jpg').url()}); 
+           background-position: {post.mainImage.hotspot.x * 100}% {post.mainImage.hotspot.y * 100}%">
+      </div>
+      <div class="txt">
+        <h3>{post.title}</h3>
+        {#if post.categories}
+          <p class="categories">
+            {#each post.categories as category, index}
+              <span>{category.title}</span>
+            {/each}
+          </p>
+        {/if}
+      </div>
+    </a>
   {/each}
 </div>
-{:catch error}
-<p style="color: red">{error.message}</p>
-{/await}
+
 
 <style>
 	

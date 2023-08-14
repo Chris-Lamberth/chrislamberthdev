@@ -3,7 +3,14 @@
 	import InstaFeed from '$lib/components/InstaFeed.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+
+	export let data;
+	const { posts } = data;
+	console.log("Posts in +page.svelte:", posts);
+	$: console.log("Reactive posts +page.svelte:", posts);
+	
 </script>
+
 
 <section class="intro">
 	<div class="container">
@@ -26,7 +33,12 @@
 			<a href="./work">more of it <object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow"></object>
 			</a>
 		</div>
-		<Feed />
+		{#if posts && posts.length}
+			<Feed {posts} />
+		{:else}
+			<p>Loading...</p>
+		{/if}
+		
 	</div>
 </section>
 
