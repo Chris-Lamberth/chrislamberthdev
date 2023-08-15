@@ -2,7 +2,6 @@
 	import Feed from '$lib/components/Feed.svelte';
 	import InstaFeed from '$lib/components/InstaFeed.svelte';
 	import Contact from '$lib/components/Contact.svelte';
-	import Footer from '$lib/components/Footer.svelte';
 
 	export let data;
 	const { posts } = data.posts;
@@ -53,7 +52,7 @@
 		</div>
 	</div>
 </section>
-<Footer />
+
 <style>
 	.intro .group{
 		display:flex;

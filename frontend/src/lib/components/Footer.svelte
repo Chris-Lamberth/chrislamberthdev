@@ -35,6 +35,7 @@
 	footer{
 		background:#000;
 		padding: 3rem 0;
+		margin: auto 0 0 0;
 	}
 	.group{
 		display:flex;
