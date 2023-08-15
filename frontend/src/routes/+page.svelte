@@ -5,10 +5,8 @@
 	import Footer from '$lib/components/Footer.svelte';
 
 	export let data;
-	const { posts } = data;
-	console.log("Posts in +page.svelte:", posts);
-	$: console.log("Reactive posts +page.svelte:", posts);
-	
+	const { posts } = data.posts;
+	const { instaPosts } = data.instaPosts;
 </script>
 
 
@@ -47,7 +45,7 @@
 		<div class="group">
 			<div class="insta">
 				<h2 class="section-headline">insta feed</h2>
-				<InstaFeed />
+				<InstaFeed {instaPosts} />
 			</div>
 			<div class="form">
 				<Contact />

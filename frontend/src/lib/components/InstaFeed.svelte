@@ -1,21 +1,14 @@
 <script>
-	import { getInstaPosts } from '$lib/sanity';
+	export let instaPosts = [];
  </script>
  
- {#await getInstaPosts()}
-	<p>Loading Feed</p>
- {:then data}
-	<div class="group">
-	  {#each data as post}
-		 <a href={post.postURLs} target="_blank">
-			<div class="img" style="background-image: url({post.imageUrl})"></div>
-		 </a>
-	  {/each}
-	</div>
- {:catch error}
-	<p style="color: red">{error.message}</p>
- {/await}
- 
+ <div class="group">
+	{#each instaPosts as post}
+	  <a href={post.postURLs} target="_blank">
+		 <div class="img" style="background-image: url({post.imageUrl})"></div>
+	  </a>
+	{/each}
+ </div>
 
  <style>
 	.group{
