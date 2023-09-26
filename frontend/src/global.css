@@ -69,6 +69,7 @@ span {
 }
 
 h1 {
+	font-family: var(--serif);
 	font-size: 3.5rem;
 	line-height: 1em;
 	margin: 0 0 0.2em 0;
@@ -91,4 +92,22 @@ p {
 	:root {
 		--inset-pad: 0;
 	}
+}
+.line {
+	outline: none;
+	position: relative;
+}
+.line::after,
+.line:focus::after {
+	content: '';
+	position: absolute;
+	inset: auto 50% -0.1em 50%;
+	height: 0.2rem;
+	border-radius: 4rem;
+	background: var(--color-accent);
+	transition: inset 0.1s ease;
+}
+.line:hover::after,
+.line:focus::after {
+	inset: auto 0 -0.1em 0;
 }

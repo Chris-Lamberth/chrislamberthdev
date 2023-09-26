@@ -29,12 +29,17 @@ export async function getPosts() {
 
 //Single Page (Work)
 export async function getPost(slug) {
-	return await client.fetch(`*[_type == "post" && slug.current == $slug][0]`,
-	  {
+	return await client.fetch(`*[_type == "post" && slug.current == $slug][0]{
+		 _id,
+		 title,
+		 mainImage,
+		 "categories": categories[]->{
+			  title
+		 },
 		 slug,
-	  }
-	);
- }
+		 body
+	}`, { slug });
+}
 
  // Instagram Feed
  export async function getInstaPosts() {
