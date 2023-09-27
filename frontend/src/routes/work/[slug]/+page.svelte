@@ -24,7 +24,15 @@
 					.y * 100}%"
 			/>
 		</div>
-		<div class="content" />
+		<div class="content">
+			{#each data.body as item}
+				{#if item._type === 'block'}
+					<p>{item.children[0].text}</p>
+				{:else if item._type === 'image'}
+					<img src={imgUrl(item.asset).url()} alt={item.alt || 'Image'} />
+				{/if}
+			{/each}
+		</div>
 	</div>
 </section>
 

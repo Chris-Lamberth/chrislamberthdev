@@ -30,16 +30,23 @@ export async function getPosts() {
 //Single Page (Work)
 export async function getPost(slug) {
 	return await client.fetch(`*[_type == "post" && slug.current == $slug][0]{
-		 _id,
-		 title,
-		 mainImage,
-		 "categories": categories[]->{
-			  title
-		 },
-		 slug,
-		 body
+	  _id,
+	  title,
+	  mainImage,
+	  "categories": categories[]->{
+		 title
+	  },
+	  slug,
+	  body[]{
+		 _key,
+		 ...,
+		 markDefs[]{
+			_key,
+			...
+		 }
+	  }
 	}`, { slug });
-}
+ }
 
  // Instagram Feed
  export async function getInstaPosts() {

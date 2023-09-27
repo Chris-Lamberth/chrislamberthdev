@@ -60,8 +60,20 @@ export default defineType({
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
     defineArrayMember({
-      type: 'image',
-      options: {hotspot: true},
-    }),
+		type: 'image',
+		options: {hotspot: true},
+		fields: [
+			{
+				name: 'alt',
+				type: 'string',
+				title: 'Alternative Text',
+				description: 'Description for this image (used for accessibility)',
+				options: {
+				isHighlighted: true // This will make the alt field pop up when an image is added
+				}
+			}
+		]
+		}),
+
   ],
 })
