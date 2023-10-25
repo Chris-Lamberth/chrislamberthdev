@@ -25,15 +25,7 @@ export default defineType({
       type: 'reference',
       to: {type: 'author'},
     }),
-    defineField({
-      name: 'mainImage',
-      title: 'Main image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
+	 defineField({
       name: 'categories',
       title: 'Categories',
       type: 'array',
@@ -45,12 +37,25 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
+      name: 'mainImage',
+      title: 'Main image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+	 defineField({
+      name: 'additionalImages',
+      title: 'Additional images',
+      type: 'array',
+      of: [{type: 'image', options: {hotspot: true}}],
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
     }),
   ],
-
   preview: {
     select: {
       title: 'title',

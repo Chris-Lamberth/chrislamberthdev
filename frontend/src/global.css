@@ -111,3 +111,17 @@ p {
 .line:focus::after {
 	inset: auto 0 -0.1em 0;
 }
+.hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+}
+.hl_sm {
+	font-size: 0.8rem;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--gray-200);
+}

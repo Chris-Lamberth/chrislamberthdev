@@ -67,10 +67,7 @@ export default defineType({
 				name: 'alt',
 				type: 'string',
 				title: 'Alternative Text',
-				description: 'Description for this image (used for accessibility)',
-				options: {
-				isHighlighted: true // This will make the alt field pop up when an image is added
-				}
+				description: 'Description for this image (used for accessibility)'
 			}
 		]
 		}),

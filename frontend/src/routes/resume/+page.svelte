@@ -35,7 +35,7 @@
 		<div class="details">
 			<div>
 				<section>
-					<h2>Experience</h2>
+					<h2 class="hl_sm">Experience</h2>
 					<div class="item">
 						<h3>2019 - {currentYear}</h3>
 						<h4>Dalton Agency</h4>
@@ -63,7 +63,7 @@
 					</div>
 				</section>
 				<section>
-					<h2>Education</h2>
+					<h2 class="hl_sm">Education</h2>
 					<div class="item">
 						<h3>2008 - 2011</h3>
 						<h4>Art Institute of Jacksonville</h4>
@@ -73,7 +73,7 @@
 			</div>
 			<div>
 				<section>
-					<h2>Career Objective</h2>
+					<h2 class="hl_sm">Career Objective</h2>
 					<p>
 						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis maiores ad asperiores
 						consequuntur odit repudiandae minus quisquam? Atque harum animi eos maxime, fugiat fuga
@@ -85,11 +85,11 @@
 					</p>
 				</section>
 				<section>
-					<h2>Design Skills</h2>
+					<h2 class="hl_sm">Design Skills</h2>
 					<p><strong>Figma, Photoshop, Illustrator, InDesign, Premiere, After Effects</strong></p>
 				</section>
 				<section>
-					<h2>Web Skills</h2>
+					<h2 class="hl_sm">Web Skills</h2>
 					<p><strong>HTML, CSS, Javascript, PHP, Wordpress, Node, SvelteKit</strong></p>
 				</section>
 			</div>
@@ -118,12 +118,7 @@
 		margin: 0 0 0.1em 0;
 	}
 	h2 {
-		font-size: 0.8rem;
-		font-weight: 500;
 		margin: 0 0 1em 0;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		color: var(--gray-200);
 	}
 	.header p {
 		font-size: 1.4rem;
