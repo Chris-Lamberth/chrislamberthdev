@@ -44,7 +44,8 @@ export async function getPost(slug) {
 			_key,
 			...
 		 }
-	  }
+	  },
+	  additionalImages,
 	}`, { slug });
  }
 

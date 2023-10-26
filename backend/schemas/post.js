@@ -19,12 +19,6 @@ export default defineType({
         maxLength: 96,
       },
     }),
-    defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: {type: 'author'},
-    }),
 	 defineField({
       name: 'categories',
       title: 'Categories',
@@ -45,11 +39,31 @@ export default defineType({
       },
     }),
 	 defineField({
-      name: 'additionalImages',
-      title: 'Additional images',
-      type: 'array',
-      of: [{type: 'image', options: {hotspot: true}}],
-    }),
+		name: 'additionalImages',
+		title: 'Additional images',
+		type: 'array',
+		of: [
+		  {
+			 title: 'Image',
+			 type: 'object',
+			 fields: [
+				{
+				  name: 'image',
+				  type: 'image',
+				  options: { hotspot: true },
+				  title: 'Image',
+				},
+				{
+				  name: 'alt',
+				  type: 'string',
+				  title: 'Alternative Text',
+				  description: 'A description of the image for accessibility purposes',
+				},
+			 ],
+		  },
+		],
+	 }),
+	 
     defineField({
       name: 'body',
       title: 'Body',
@@ -57,14 +71,12 @@ export default defineType({
     }),
   ],
   preview: {
-    select: {
-      title: 'title',
-      author: 'author.name',
-      media: 'mainImage',
-    },
-    prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
-    },
-  },
+	select: {
+	  title: 'title',
+	  media: 'mainImage',
+	},
+	prepare(selection) {
+	  return {...selection}
+	},
+ },
 })

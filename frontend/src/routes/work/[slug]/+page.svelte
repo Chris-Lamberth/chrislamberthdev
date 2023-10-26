@@ -1,6 +1,7 @@
 <script>
 	export let data;
 	import { imgUrl } from '$lib/sanity';
+	console.log('Additional Images:', data.additionalImages);
 </script>
 
 <h1 class="hidden">{data.title}</h1>
@@ -26,14 +27,27 @@
 				.y * 100}%"
 		/>
 		<div class="content">
-			{#each data.body as item}
-				{#if item._type === 'block'}
-					<p>{item.children[0].text}</p>
-				{:else if item._type === 'image'}
-					<img src={imgUrl(item.asset).url()} alt={item.alt || 'Image'} />
-				{/if}
-			{/each}
+			{#if data.body}
+				{#each data.body as item}
+					{#if item._type === 'block'}
+						<p>{item.children[0].text}</p>
+					{:else if item._type === 'image'}
+						<img src={imgUrl(item.asset).url()} alt={item.alt || 'Image'} />
+					{/if}
+				{/each}
+			{/if}
 		</div>
+		{#if data.additionalImages && data.additionalImages.length > 0}
+			<section class="images">
+				{#each data.additionalImages as { image, alt }}
+					{#if image}
+						<div class="img">
+							<img src={imgUrl(image).url()} alt={alt || 'Image'} />
+						</div>
+					{/if}
+				{/each}
+			</section>
+		{/if}
 	</div>
 </div>
 
@@ -44,7 +58,8 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		border-radius: var(--radius);
-		height: 20rem;
+		height: 30rem;
+		margin: 0 0 2rem 0;
 	}
 	.info {
 		margin: 0 0 3rem 0;
@@ -57,5 +72,19 @@
 		font-family: var(--serif);
 		font-size: 2rem;
 		margin: 0 0 1em 0;
+	}
+	.images {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+	}
+	.images .img {
+		border-radius: var(--radius);
+		overflow: hidden;
+	}
+	.images .img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 </style>

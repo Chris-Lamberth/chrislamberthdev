@@ -19,7 +19,7 @@
 				{#if post.categories}
 					<p class="categories">
 						{#each post.categories as category, index}
-							<span>{category.title}</span>
+							<span>{category.title}{index < post.categories.length - 1 ? ', ' : ''}</span>
 						{/each}
 					</p>
 				{/if}
@@ -39,7 +39,7 @@
 		max-height: 200px;
 		overflow: hidden;
 		border-radius: var(--radius);
-		background-size: 100%;
+		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center center;
 		box-shadow: 0 0 0 0 rgba(255, 255, 255, 1), 0 0 0 0px #000;
@@ -54,7 +54,6 @@
 		outline: none;
 	}
 	a:hover .img {
-		background-size: 115%;
 		box-shadow: 0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px #000;
 	}
 	a:focus .img {
