@@ -40,28 +40,13 @@ export default defineType({
     }),
 	 defineField({
 		name: 'additionalImages',
-		title: 'Additional images',
+		title: 'Additional Images',
 		type: 'array',
 		of: [
-		  {
-			 title: 'Image',
-			 type: 'object',
-			 fields: [
-				{
-				  name: 'image',
-				  type: 'image',
-				  options: { hotspot: true },
-				  title: 'Image',
-				},
-				{
-				  name: 'alt',
-				  type: 'string',
-				  title: 'Alternative Text',
-				  description: 'A description of the image for accessibility purposes',
-				},
-			 ],
-		  },
-		],
+			{
+			  type: 'imageWithColumns',
+			},
+		 ],
 	 }),
 	 
     defineField({

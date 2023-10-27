@@ -45,7 +45,11 @@ export async function getPost(slug) {
 			...
 		 }
 	  },
-	  additionalImages,
+	  "additionalImages": additionalImages[]{
+		 image{ ..., hotspot },
+		 alt,
+		 columns
+	  },
 	}`, { slug });
  }
 

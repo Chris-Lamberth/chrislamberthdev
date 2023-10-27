@@ -1,7 +1,6 @@
 <script>
 	export let data;
 	import { imgUrl } from '$lib/sanity';
-	console.log('Additional Images:', data.additionalImages);
 </script>
 
 <h1 class="hidden">{data.title}</h1>
@@ -39,10 +38,16 @@
 		</div>
 		{#if data.additionalImages && data.additionalImages.length > 0}
 			<section class="images">
-				{#each data.additionalImages as { image, alt }}
+				{#each data.additionalImages as { image, alt, columns }}
 					{#if image}
-						<div class="img">
-							<img src={imgUrl(image).url()} alt={alt || 'Image'} />
+						<div class="img" style="grid-column: span {columns}">
+							<img
+								src={imgUrl(image).url()}
+								alt={alt || 'Image'}
+								style="object-position: {image.hotspot
+									? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%`
+									: 'center'}"
+							/>
 						</div>
 					{/if}
 				{/each}
@@ -75,7 +80,7 @@
 	}
 	.images {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(12, 1fr);
 		gap: 2rem;
 	}
 	.images .img {
