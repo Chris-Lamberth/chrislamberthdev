@@ -18,15 +18,15 @@
 				</p>
 			{/if}
 		</section>
-		<div
+		<section
 			class="main-image"
 			style="background-image:url('{imgUrl(data.mainImage.asset)
 				.format('webp', 'jpg')
 				.url()}'); background-position: {data.mainImage.hotspot.x * 100}% {data.mainImage.hotspot
 				.y * 100}%"
 		/>
-		<div class="content">
-			{#if data.body}
+		{#if data.body}
+			<section class="rich_text">
 				{#each data.body as item}
 					{#if item._type === 'block'}
 						<p>{item.children[0].text}</p>
@@ -34,10 +34,11 @@
 						<img src={imgUrl(item.asset).url()} alt={item.alt || 'Image'} />
 					{/if}
 				{/each}
-			{/if}
-		</div>
+			</section>
+		{/if}
+
 		{#if data.additionalImages && data.additionalImages.length > 0}
-			<section class="images">
+			<section class="content_grid">
 				{#each data.additionalImages as { image, alt, columns }}
 					{#if image}
 						<div class="img" style="grid-column: span {columns}">
@@ -57,6 +58,13 @@
 </div>
 
 <style>
+	:root {
+		--gutter: 1.2rem;
+	}
+	.info {
+		text-align: center;
+		margin: 0 0 3rem 0;
+	}
 	.main-image {
 		flex: 1;
 		background-position: center center;
@@ -64,11 +72,10 @@
 		background-repeat: no-repeat;
 		border-radius: var(--radius);
 		height: 30rem;
-		margin: 0 0 2rem 0;
+		margin: 0 0 var(--gutter) 0;
 	}
-	.info {
-		margin: 0 0 3rem 0;
-		text-align: center;
+	.rich_text {
+		margin: 0 0 var(--gutter) 0;
 	}
 	h2 {
 		margin: 0 0 0.5em 0;
@@ -78,16 +85,17 @@
 		font-size: 2rem;
 		margin: 0 0 1em 0;
 	}
-	.images {
+	.content_grid {
 		display: grid;
 		grid-template-columns: repeat(12, 1fr);
-		gap: 2rem;
+		gap: var(--gutter);
+		margin: 0 0 3rem 0;
 	}
-	.images .img {
+	.content_grid .img {
 		border-radius: var(--radius);
 		overflow: hidden;
 	}
-	.images .img img {
+	.content_grid .img img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
