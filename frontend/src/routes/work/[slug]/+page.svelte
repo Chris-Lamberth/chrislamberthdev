@@ -54,6 +54,11 @@
 				{/each}
 			</section>
 		{/if}
+		{#if data.websiteLink}
+			<section class="cta">
+				<a href={data.websiteLink} target="_blank" class="btn">view website</a>
+			</section>
+		{/if}
 	</div>
 </div>
 
@@ -99,5 +104,22 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+	.cta {
+		text-align: center;
+	}
+	.btn {
+		padding: 1em 2em;
+		background: #000;
+		border-radius: 0.6em;
+		display: inline-block;
+		color: #fff;
+		text-decoration: none;
+	}
+	.btn:hover {
+		background: #272727;
+	}
+	.cta .btn {
+		margin: 0 0 3em 0;
 	}
 </style>

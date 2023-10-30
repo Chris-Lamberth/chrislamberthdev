@@ -54,7 +54,18 @@ export default defineType({
       title: 'Body',
       type: 'blockContent',
     }),
+
+	 defineField({
+		name: 'websiteLink',
+		title: 'Website Link',
+		type: 'url',
+		validation: Rule => Rule.uri({
+		  scheme: ['http', 'https', 'mailto', 'tel'],
+		  allowRelative: false,
+		}).optional(),
+	 }),
   ],
+  
   preview: {
 	select: {
 	  title: 'title',

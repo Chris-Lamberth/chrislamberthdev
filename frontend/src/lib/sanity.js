@@ -50,6 +50,7 @@ export async function getPost(slug) {
 		 alt,
 		 columns
 	  },
+	  "websiteLink": websiteLink,
 	}`, { slug });
  }
 
