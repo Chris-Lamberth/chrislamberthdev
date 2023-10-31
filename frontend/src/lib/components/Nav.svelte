@@ -15,7 +15,7 @@
 		<div class="group">
 			<div class="logo">
 				<div class="img">
-					<img src="images/chris-lamberth.jpg" alt="Chris Lamberth" />
+					<img src="../images/chris-lamberth.jpg" alt="Chris Lamberth" />
 				</div>
 				<div>
 					<p>Chris Lamberth</p>
@@ -23,7 +23,7 @@
 				</div>
 			</div>
 			<nav>
-				<a class="line" href="/" class:active={homeActive}>home</a>
+				<a class="line" href="/" class:activeHome={homeActive}>home</a>
 				<a class="line" href="/about" class:active={aboutActive}>about</a>
 				<a class="line" href="/resume" class:active={resumeActive}>resume</a>
 				<a class="line" href="/work" class:active={workActive}>work</a>
@@ -36,6 +36,7 @@
 	.bar {
 		margin: 0 0 3rem 0;
 		transition: background 0.2s linear;
+		overflow: hidden;
 	}
 	.bar.int {
 		background-color: #000;
@@ -55,6 +56,8 @@
 		font-size: 1rem;
 		line-height: 1em;
 		letter-spacing: 0.05em;
+		opacity: 0;
+		animation: logotxt 0.3s ease forwards;
 	}
 	.bar .logo p span {
 		font-size: 0.8rem;
@@ -71,7 +74,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: flex-start;
-		animation: enter 0.3s ease;
+		animation: headshot 0.3s ease forwards;
 	}
 	.logo .img img {
 		object-fit: cover;
@@ -98,22 +101,34 @@
 		line-height: 1em;
 		color: #000;
 		text-decoration: none;
-		transition: color 0.1s ease;
+		transition: color 0.3s ease;
 	}
 
 	a.active,
 	.bar.int a.active {
-		opacity: 0.3;
+		color: var(--color-accent);
 		pointer-events: none;
 	}
-	@keyframes enter {
+	a.activeHome {
+		color: #c3c3c3;
+		pointer-events: none;
+	}
+	@keyframes headshot {
 		0% {
-			transform: scale(5);
-			translate: 3rem 10rem;
+			translate: 0 5rem;
 		}
 		100% {
-			transform: scale(1);
 			translate: 0 0;
+		}
+	}
+	@keyframes logotxt {
+		0% {
+			translate: -3rem 0;
+			opacity: 0;
+		}
+		100% {
+			translate: 0 0;
+			opacity: 1;
 		}
 	}
 </style>
