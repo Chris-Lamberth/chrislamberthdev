@@ -1,6 +1,7 @@
 <script>
 	export let data;
 	import { imgUrl } from '$lib/sanity';
+	console.log(data.posts);
 </script>
 
 <h1 class="hidden">{data.title}</h1>
@@ -62,6 +63,27 @@
 	</div>
 </div>
 
+<section class="post_nav">
+	<div class="container">
+		<hr />
+		<nav>
+			<a class="previous line" href="#">
+				<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow" />
+				previous
+			</a>
+			<a class="line view_all" href="/work">view all</a>
+			<a class="next line" href="#"
+				>next <object
+					class="arrow"
+					data="/images/arrow.svg"
+					type="image/svg+xml"
+					aria-label="arrow"
+				/>
+			</a>
+		</nav>
+	</div>
+</section>
+
 <style>
 	:root {
 		--gutter: 1.2rem;
@@ -121,5 +143,42 @@
 	}
 	.cta .btn {
 		margin: 0 0 3em 0;
+	}
+	.post_nav {
+		margin: 2rem 0;
+	}
+	.post_nav nav {
+		display: flex;
+		justify-content: space-between;
+	}
+	.post_nav a {
+		font-family: var(--serif);
+		color: #000;
+		text-decoration: none;
+		font-size: 1.4rem;
+	}
+	hr {
+		border: none;
+		height: 1px;
+		background: var(--gray-100);
+		border-radius: 4px;
+		margin: 0 0 1rem 0;
+	}
+	.post_nav .previous::after {
+		translate: 0.8rem 0;
+		scale: 0.8 1;
+	}
+	.post_nav .next::after {
+		translate: -0.8rem 0;
+		scale: 0.7 1;
+	}
+	.post_nav .view_all {
+		margin: 0 0 0 -2em;
+	}
+	.post_nav .arrow object {
+		translate: 0 0.2rem;
+	}
+	.post_nav .previous object {
+		rotate: 180deg;
 	}
 </style>
