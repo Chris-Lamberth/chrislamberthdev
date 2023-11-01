@@ -1,7 +1,22 @@
 <script>
-	export let data;
 	import { imgUrl } from '$lib/sanity';
-	console.log(data.posts);
+	import { page } from '$app/stores';
+	export let data;
+
+	let previousPost, currentPost, nextPost;
+
+	$: if (data && data.posts && Array.isArray(data.posts.posts)) {
+		const currentSlug = $page.params.slug;
+		const posts = data.posts.posts;
+
+		const currentIndex = posts.findIndex((p) => p.slug.current === currentSlug);
+
+		if (currentIndex !== -1) {
+			previousPost = posts[currentIndex - 1] || null;
+			currentPost = posts[currentIndex] || null;
+			nextPost = posts[currentIndex + 1] || null;
+		}
+	}
 </script>
 
 <h1 class="hidden">{data.title}</h1>
@@ -67,19 +82,29 @@
 	<div class="container">
 		<hr />
 		<nav>
-			<a class="previous line" href="#">
-				<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow" />
-				previous
-			</a>
+			{#if previousPost}
+				<a class="previous line" href={`/work/${previousPost.slug.current}`}>
+					<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow" />
+					previous
+				</a>
+			{:else}
+				<span class="previous line disabled">
+					<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow" />
+					previous
+				</span>
+			{/if}
 			<a class="line view_all" href="/work">view all</a>
-			<a class="next line" href="#"
-				>next <object
-					class="arrow"
-					data="/images/arrow.svg"
-					type="image/svg+xml"
-					aria-label="arrow"
-				/>
-			</a>
+			{#if nextPost}
+				<a class="next line" href={`/work/${nextPost.slug.current}`}>
+					next
+					<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow" />
+				</a>
+			{:else}
+				<span class="next line disabled">
+					next
+					<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow" />
+				</span>
+			{/if}
 		</nav>
 	</div>
 </section>
@@ -151,11 +176,16 @@
 		display: flex;
 		justify-content: space-between;
 	}
-	.post_nav a {
+	.post_nav a,
+	.post_nav span {
 		font-family: var(--serif);
 		color: #000;
 		text-decoration: none;
 		font-size: 1.4rem;
+	}
+	.post_nav .disabled {
+		opacity: 0.2;
+		pointer-events: none;
 	}
 	hr {
 		border: none;
@@ -175,7 +205,7 @@
 	.post_nav .view_all {
 		margin: 0 0 0 -2em;
 	}
-	.post_nav .arrow object {
+	.post_nav .arrow {
 		translate: 0 0.2rem;
 	}
 	.post_nav .previous object {

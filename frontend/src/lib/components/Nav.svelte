@@ -101,7 +101,11 @@
 		line-height: 1em;
 		color: #000;
 		text-decoration: none;
-		transition: color 0.3s ease;
+		transform-origin: center center;
+		transition: color 0.3s ease, scale 0.1s ease;
+	}
+	a:active {
+		scale: 0.9;
 	}
 
 	a.active,
