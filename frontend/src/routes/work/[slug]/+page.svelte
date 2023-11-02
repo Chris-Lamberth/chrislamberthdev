@@ -38,8 +38,8 @@
 			class="main-image"
 			style="background-image:url('{imgUrl(data.mainImage.asset)
 				.format('webp', 'jpg')
-				.url()}'); background-position: {data.mainImage.hotspot.x * 100}% {data.mainImage.hotspot
-				.y * 100}%"
+				.url()}'); background-position: {data?.mainImage?.hotspot?.x * 100}% {data?.mainImage
+				?.hotspot?.y * 100}%"
 		/>
 		{#if data.body}
 			<section class="rich_text">

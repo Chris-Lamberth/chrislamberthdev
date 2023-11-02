@@ -12,7 +12,8 @@
 					.width(600)
 					.format('webp', 'jpg')
 					.url()}); 
-           background-position: {post.mainImage.hotspot.x * 100}% {post.mainImage.hotspot.y * 100}%"
+           background-position: {post?.mainImage?.hotspot?.x * 100}% {post?.mainImage?.hotspot?.y *
+					100}%"
 			/>
 			<div class="txt">
 				<h3>{post.title}</h3>
@@ -73,7 +74,7 @@
 		font-size: 0.7rem;
 		color: #9f9f9f;
 		display: inline-block;
-		margin: 0 0.8em 0 0;
+		margin: 0 0.4em 0 0;
 	}
 	@media (width <= 600px) {
 		.group {
