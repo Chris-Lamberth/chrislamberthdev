@@ -100,7 +100,7 @@ p {
 .line:focus::after {
 	content: '';
 	position: absolute;
-	inset: auto 50% -0.1em 50%;
+	inset: auto 50.1% -0.1em 50.1%;
 	height: 0.2rem;
 	border-radius: 4rem;
 	background: var(--color-accent);
