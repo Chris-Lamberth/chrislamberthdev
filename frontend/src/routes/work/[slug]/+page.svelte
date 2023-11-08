@@ -20,7 +20,7 @@
 	}
 </script>
 
-<BannerAds />
+<!-- <BannerAds /> -->
 
 <h1 class="hidden">{data.title}</h1>
 <div class="post">
