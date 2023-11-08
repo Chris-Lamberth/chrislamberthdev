@@ -85,7 +85,7 @@
 	}
 	h1 {
 		font-family: var(--serif);
-		font-size: 3.5rem;
+		font-size: 3.1rem;
 		line-height: 1em;
 		margin: 0 0 0.2em 0;
 	}

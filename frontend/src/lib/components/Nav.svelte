@@ -14,9 +14,9 @@
 	<div class="container">
 		<div class="group">
 			<div class="logo">
-				<div class="img">
+				<a href="/" class="img">
 					<img src="../images/chris-lamberth.jpg" alt="Chris Lamberth" />
-				</div>
+				</a>
 				<div>
 					<p>Chris Lamberth</p>
 					<p><span>web developer & graphic designer</span></p>
@@ -75,6 +75,17 @@
 		justify-content: center;
 		align-items: flex-start;
 		animation: headshot 0.3s ease forwards;
+		position: relative;
+	}
+	.logo .img::before {
+		content: '';
+		position: absolute;
+		background: url('../images/chris-lamberth-hoodie-sm.jpg') top center / 150% no-repeat;
+		inset: 0;
+		display: none;
+	}
+	.logo .img:hover::before {
+		display: block;
 	}
 	.logo .img img {
 		object-fit: cover;

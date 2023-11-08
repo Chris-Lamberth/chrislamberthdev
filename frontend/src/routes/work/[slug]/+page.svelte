@@ -1,6 +1,7 @@
 <script>
 	import { imgUrl } from '$lib/sanity';
 	import { page } from '$app/stores';
+	import BannerAds from '$lib/components/BannerAds.svelte';
 	export let data;
 
 	let previousPost, currentPost, nextPost;
@@ -19,6 +20,8 @@
 	}
 </script>
 
+<BannerAds />
+
 <h1 class="hidden">{data.title}</h1>
 <div class="post">
 	<div class="container">
@@ -34,6 +37,14 @@
 				</p>
 			{/if}
 		</section>
+
+		<!-- Test Banner Ad Section -->
+		<section class="banners">
+			<div class="container">
+				<div class="set" />
+			</div>
+		</section>
+
 		<section
 			class="main-image"
 			style="background-image:url('{imgUrl(data.mainImage.asset)
