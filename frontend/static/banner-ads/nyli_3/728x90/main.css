@@ -1,0 +1,88 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+.container {
+	width: 728px;
+	height: 90px;
+	overflow: hidden;
+	position: relative;
+	background-image: url("bg.jpg");
+	box-sizing: border-box;
+	cursor: pointer;
+}
+.border {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border: 1px solid #c9c9cb;
+}
+.text1,
+.text2,
+.cta,
+.line1,
+.line2 {
+	display: block;
+	opacity: 0;
+	position: absolute;
+}
+
+/* Timing */
+
+.line1 {
+	animation: line1 0.5s ease-out 0.2s forwards;
+}
+.line2 {
+	animation: line2 0.5s ease-out 0.2s forwards;
+}
+.text1 {
+	animation: fade 0.5s linear 0.5s forwards;
+}
+.text2 {
+	animation: fade 0.5s linear 1.5s forwards;
+}
+.cta {
+	animation: slideright 0.5s ease-in-out 2.5s forwards;
+}
+
+/* Animation */
+
+@keyframes slideright {
+	from {
+		left: -30px;
+		opacity: 0;
+	}
+	to {
+		left: 0px;
+		opacity: 1;
+	}
+}
+
+@keyframes line1 {
+	from {
+		top: 40px;
+		opacity: 0;
+	}
+	to {
+		top: 0px;
+		opacity: 1;
+	}
+}
+@keyframes line2 {
+	from {
+		top: -40px;
+		opacity: 0;
+	}
+	to {
+		top: 0px;
+		opacity: 1;
+	}
+}
+
+@keyframes fade {
+	to {
+		opacity: 1;
+	}
+}

@@ -2,6 +2,7 @@
 	import Feed from '$lib/components/Feed.svelte';
 	import InstaFeed from '$lib/components/InstaFeed.svelte';
 	import Contact from '$lib/components/Contact.svelte';
+	import Headshot from '../lib/components/Headshot.svelte';
 
 	export let data;
 	const { posts } = data.posts;
@@ -11,9 +12,8 @@
 <section class="intro">
 	<div class="container">
 		<div class="group">
-			<div class="img">
-				<img src="images/chris-lamberth.jpg" alt="Chris Lamberth" />
-			</div>
+			<Headshot />
+
 			<div class="txt">
 				<div>
 					<h1>Hello👋, I'm Chris</h1>
@@ -65,18 +65,7 @@
 		align-items: center;
 		gap: 2rem;
 	}
-	.intro .img {
-		flex: 1;
-		max-width: 20rem;
-		border-radius: 20rem;
-		aspect-ratio: 1;
-		overflow: hidden;
-		display: grid;
-		place-items: center;
-	}
-	.intro .img img {
-		object-fit: cover;
-	}
+
 	.intro .txt {
 		flex: 2;
 		display: flex;
@@ -101,9 +90,6 @@
 	}
 
 	@media (width <= 790px) {
-		.intro .img {
-			max-width: 40vw;
-		}
 		h1 {
 			font-size: 7vw;
 		}
@@ -115,9 +101,6 @@
 		.intro .group {
 			flex-direction: column;
 			gap: 3rem;
-		}
-		.intro .img {
-			max-width: 30vw;
 		}
 		h1 {
 			font-size: 3rem;

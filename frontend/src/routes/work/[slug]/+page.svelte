@@ -1,7 +1,6 @@
 <script>
 	import { imgUrl } from '$lib/sanity';
 	import { page } from '$app/stores';
-	import BannerAds from '$lib/components/BannerAds.svelte';
 	export let data;
 
 	let previousPost, currentPost, nextPost;
@@ -20,8 +19,6 @@
 	}
 </script>
 
-<!-- <BannerAds /> -->
-
 <h1 class="hidden">{data.title}</h1>
 <div class="post">
 	<div class="container">
@@ -38,13 +35,7 @@
 			{/if}
 		</section>
 
-		<!-- Test Banner Ad Section -->
-		<section class="banners">
-			<div class="container">
-				<div class="set" />
-			</div>
-		</section>
-
+		<!-- Main Image -->
 		<section
 			class="main-image"
 			style="background-image:url('{imgUrl(data.mainImage.asset)
@@ -52,6 +43,8 @@
 				.url()}'); background-position: {data?.mainImage?.hotspot?.x * 100}% {data?.mainImage
 				?.hotspot?.y * 100}%"
 		/>
+
+		<!-- Rich Text -->
 		{#if data.body}
 			<section class="rich_text">
 				{#each data.body as item}
@@ -64,6 +57,7 @@
 			</section>
 		{/if}
 
+		<!-- Additional Images -->
 		{#if data.additionalImages && data.additionalImages.length > 0}
 			<section class="content_grid">
 				{#each data.additionalImages as { image, alt, columns }}
@@ -81,6 +75,71 @@
 				{/each}
 			</section>
 		{/if}
+
+		<!-- Banner Ads Section -->
+		{#if data.adSets}
+			<section class="banners">
+				{#each data.adSets as adSet}
+					<div class="set">
+						{#if adSet.size728x90}
+							<div>
+								<div class="restart" data-size="728x90">
+									<iframe
+										src={`../banner-ads/${adSet.name}/728x90/index.html`}
+										frameborder="0"
+										title={`${data.title} 728x90 Banner Ad`}
+									/>
+								</div>
+							</div>
+						{/if}
+						{#if adSet.size300x600}
+							<div>
+								<div class="restart" data-size="300x600">
+									<iframe
+										src={`../banner-ads/${adSet.name}/300x600/index.html`}
+										frameborder="0"
+										title={`${data.title} 300x600 Banner Ad`}
+									/>
+								</div>
+							</div>
+						{/if}
+						{#if adSet.size160x600}
+							<div>
+								<div class="restart" data-size="160x600">
+									<iframe
+										src={`../banner-ads/${adSet.name}/160x600/index.html`}
+										frameborder="0"
+										title={`${data.title} 160x600 Banner Ad`}
+									/>
+								</div>
+							</div>
+						{/if}
+						<div>
+							{#if adSet.size300x250}
+								<div class="restart" data-size="300x250">
+									<iframe
+										src={`../banner-ads/${adSet.name}/300x250/index.html`}
+										frameborder="0"
+										title={`${data.title} 300x250 Banner Ad`}
+									/>
+								</div>
+							{/if}
+							{#if adSet.size300x50}
+								<div class="restart" data-size="300x50">
+									<iframe
+										src={`../banner-ads/${adSet.name}/300x50/index.html`}
+										frameborder="0"
+										title={`${data.title} 300x50 Banner Ad`}
+									/>
+								</div>
+							{/if}
+						</div>
+					</div>
+				{/each}
+			</section>
+		{/if}
+
+		<!-- Link for client website -->
 		{#if data.websiteLink}
 			<section class="cta">
 				<a href={data.websiteLink} target="_blank" class="btn">view website</a>
@@ -89,6 +148,7 @@
 	</div>
 </div>
 
+<!-- Post Navigation -->
 <section class="post_nav">
 	<div class="container">
 		<hr />
@@ -221,5 +281,65 @@
 	}
 	.post_nav .previous object {
 		rotate: 180deg;
+	}
+
+	.banners .set {
+		background: #ececec;
+		border-radius: var(--radius);
+		padding: 4rem 1rem;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+		margin: 0 0 var(--gutter) 0;
+	}
+	.banners .set > div {
+		display: flex;
+		gap: 1rem;
+		flex-direction: column;
+	}
+	iframe {
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+	[data-size='728x90'] {
+		width: 728px;
+		height: 90px;
+		aspect-ratio: 728 / 90;
+	}
+	[data-size='300x600'] {
+		width: 300px;
+		height: 600px;
+		aspect-ratio: 300 / 600;
+	}
+	[data-size='160x600'] {
+		width: 160px;
+		height: 600px;
+		aspect-ratio: 160 / 600;
+	}
+	[data-size='300x250'] {
+		width: 300px;
+		height: 250px;
+		aspect-ratio: 300 / 250;
+	}
+	[data-size='300x50'] {
+		width: 300px;
+		height: 50px;
+		aspect-ratio: 300 / 50;
+	}
+	@media (width <= 840px) {
+		[data-size='728x90'] {
+			display: none;
+		}
+		.banners .set div:has([data-size='728x90']) {
+			display: none;
+		}
+	}
+	.restart {
+		cursor: url('../images/refresh.png'), auto;
+	}
+	.restart:active iframe {
+		display: none;
 	}
 </style>

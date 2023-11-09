@@ -51,6 +51,14 @@ export async function getPost(slug) {
 		 columns
 	  },
 	  "websiteLink": websiteLink,
+	  "adSets": adSets[]{ 
+		name,
+		size728x90,
+		size300x600,
+		size160x600,
+		size300x250,
+		size300x50,
+	 }
 	}`, { slug });
  }
 

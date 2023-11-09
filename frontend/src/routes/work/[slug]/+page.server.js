@@ -8,3 +8,4 @@ export const load = async ({ params }) => {
 
   throw error(404, "Not found");
 };
+

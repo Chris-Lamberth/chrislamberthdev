@@ -15,7 +15,7 @@
 		<div class="group">
 			<div class="logo">
 				<a href="/" class="img">
-					<img src="../images/chris-lamberth.jpg" alt="Chris Lamberth" />
+					<img src="../images/chris-lamberth-sm.jpg" alt="Chris Lamberth" />
 				</a>
 				<div>
 					<p>Chris Lamberth</p>

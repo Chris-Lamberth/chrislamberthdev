@@ -10,7 +10,6 @@ body {
 	background-image: url("bg.jpg");
 	background-size: 100%;
 	box-sizing: border-box;
-	cursor: pointer;
 }
 img {
 	width: 100%;
