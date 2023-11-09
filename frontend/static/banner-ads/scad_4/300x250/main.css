@@ -1,0 +1,110 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+img {
+	width: 100%;
+}
+.container {
+	width: 300px;
+	height: 250px;
+	overflow: hidden;
+	position: relative;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+.border {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border: 1px solid #c9c9cb;
+}
+.logo,
+.text1,
+.text2,
+.text3,
+.pablo,
+.cta {
+	display: block;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.bg {
+	display: block;
+	position: relative;
+}
+.bg img {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.bg img:nth-child(2) {
+	left: 77%;
+}
+/* Timing */
+.bg {
+	animation: slide 15s linear forwards;
+}
+
+.logo {
+	animation: fadein 0.5s linear 0.3s forwards;
+}
+
+.text1 {
+	animation: fadein 0.5s linear 1s forwards;
+}
+.text2 {
+	animation: fadein 0.5s linear 3s forwards;
+}
+.pablo {
+	animation: fadein 0.5s linear 3s forwards;
+}
+.fadeout {
+	animation: fadeout 0.5s linear 6s forwards;
+}
+.text3 {
+	animation: fadein 0.5s linear 6.7s forwards;
+}
+
+.cta {
+	animation: slideright 0.5s ease-in-out 6.5s forwards;
+}
+
+/* Animation */
+
+@keyframes slide {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-30%);
+	}
+}
+@keyframes slideright {
+	from {
+		transform: translateX(-50px);
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+@keyframes fadein {
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeout {
+	to {
+		opacity: 0;
+	}
+}

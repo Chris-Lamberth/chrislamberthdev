@@ -1,0 +1,199 @@
+:root {
+	--width: 300px;
+	--height: 250px;
+}
+
+img {
+	width: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+.container {
+	width: var(--width);
+	height: var(--height);
+	overflow: hidden;
+	position: relative;
+	box-sizing: border-box;
+	cursor: pointer;
+	background: var(--color2);
+}
+
+.border {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border: 1px solid #c9c9cb;
+}
+
+.logo,
+.text1,
+.text2,
+.text3,
+.text4,
+.cta {
+	display: block;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.cloud1,
+.cloud2,
+.sun,
+.group {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+}
+.peach {
+	display: block;
+	position: absolute;
+	width: 75px;
+	top: 0;
+	right: -10px;
+	left: auto;
+	transform-origin: top center;
+	animation: peachRotate 2s ease-in-out infinite alternate-reverse,
+		peachDown 15s linear forwards;
+}
+
+.starburst {
+	position: absolute;
+	width: 400%;
+	height: 400%;
+	top: 120%;
+	left: 50%;
+	translate: -50% -50%;
+	animation: spin 15s ease-out forwards;
+	background: url("starburst.svg") center center / cover no-repeat;
+}
+.sun {
+	top: 50%;
+}
+
+.cloud1 {
+	top: 1%;
+	right: auto;
+	translate: -70px 0;
+}
+.cloud2 {
+	top: 30%;
+	translate: -80px 0;
+}
+
+/* Timing */
+.text1 {
+	top: 20px;
+	scale: 1.5;
+	animation: in 1s ease forwards, up 1s ease 1.5s forwards,
+		fadeout 0.5s linear 4s forwards;
+}
+.text2 {
+	scale: 1.5;
+	animation: in 1s ease 1.5s forwards, fadeout 0.5s linear 4s forwards;
+}
+.sun {
+	animation: sunUp 1.5s ease 4s forwards;
+}
+.cloud1 {
+	animation: cloud1 15s ease-out forwards, cloud1Up 1.5s ease 4s forwards;
+}
+.cloud2 {
+	animation: cloud2 15s ease-out forwards, cloud2Up 1.5s ease 4s forwards;
+}
+.logo {
+	scale: 1.5;
+	animation: in 0.5s ease-out 4.5s forwards;
+}
+.text3 {
+	animation: in 1s ease 4.5s forwards, fadeout 0.5s linear 6s forwards;
+}
+.text4 {
+	animation: in 1s ease 6.5s forwards;
+}
+.cta {
+	translate: -20px 0;
+	animation: in 1s ease 6.5s forwards;
+	transition: transform 0.125s ease;
+}
+.container:hover .cta {
+	transform: scale(1.1) translateY(-8px);
+}
+
+/* Animation */
+
+@keyframes in {
+	100% {
+		opacity: 1;
+		scale: 1;
+		translate: 0 0;
+	}
+}
+@keyframes up {
+	100% {
+		translate: 0 -20px;
+	}
+}
+@keyframes sunUp {
+	100% {
+		translate: 0 -100%;
+	}
+}
+@keyframes cloud1Up {
+	100% {
+		transform: translateY(-10%);
+	}
+}
+@keyframes cloud2Up {
+	100% {
+		transform: translateY(-40%);
+	}
+}
+
+@keyframes fadeout {
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes cloud1 {
+	100% {
+		translate: 0 0;
+	}
+}
+@keyframes cloud2 {
+	100% {
+		translate: 0 0;
+	}
+}
+
+@keyframes peachRotate {
+	0% {
+		rotate: 20deg;
+	}
+	100% {
+		rotate: -20deg;
+	}
+}
+@keyframes peachDown {
+	100% {
+		top: calc(var(--height) + 10px);
+	}
+}
+
+@keyframes spin {
+	100% {
+		transform: rotate(150deg);
+	}
+}
