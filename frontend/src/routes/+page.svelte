@@ -10,18 +10,7 @@
 </script>
 
 <section class="intro">
-	<div class="container">
-		<div class="group">
-			<Headshot />
-
-			<div class="txt">
-				<div>
-					<h1>Hello👋, I'm Chris</h1>
-					<p>I design stuff & build websites</p>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="container" />
 </section>
 
 <section class="feed">
@@ -60,60 +49,15 @@
 </section>
 
 <style>
-	.intro .group {
-		display: flex;
-		align-items: center;
-		gap: 2rem;
-	}
-
-	.intro .txt {
-		flex: 2;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	h1 {
-		font-family: var(--serif);
-		font-size: 3.1rem;
-		line-height: 1em;
-		margin: 0 0 0.2em 0;
-	}
 	.section-headline {
 		padding-left: var(--inset-pad);
 	}
 	.arrow {
 		margin-right: var(--inset-pad);
 	}
-	.intro .txt p {
-		font-size: 1.8rem;
-		line-height: 1.2em;
-	}
-
-	@media (width <= 790px) {
-		h1 {
-			font-size: 7vw;
-		}
-		.intro .txt p {
-			font-size: 3.5vw;
-		}
-	}
-	@media (width <= 675px) {
-		.intro .group {
-			flex-direction: column;
-			gap: 3rem;
-		}
-		h1 {
-			font-size: 3rem;
-			text-align: center;
-		}
-		.intro .txt p {
-			font-size: 1.8rem;
-			text-align: center;
-		}
-	}
 
 	.feed {
-		margin: 4em 0;
+		margin: 2.5em 0 4em 0;
 	}
 	.feed .txt {
 		display: flex;

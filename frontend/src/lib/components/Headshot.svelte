@@ -1,6 +1,12 @@
 <script>
 	import { onMount } from 'svelte';
 
+	import { page } from '$app/stores';
+	let currentPath;
+
+	$: currentPath = $page.url.pathname;
+	$: isInteriorPage = currentPath !== '/';
+
 	let bgElement; // This will hold our .bg element reference
 
 	onMount(() => {
@@ -29,21 +35,27 @@
 	});
 </script>
 
-<div class="img">
+<a href="/" class="img" class:int={isInteriorPage}>
 	<div bind:this={bgElement} class="bg" />
 	<div class="headshot" />
-</div>
+</a>
 
 <style>
 	.img {
 		flex: 1;
-		width: 100%;
+		width: 100vw;
 		max-width: 20rem;
 		aspect-ratio: 1;
 		position: relative;
 		overflow: hidden;
 		border-radius: 30rem;
 		aspect-ratio: 3/2;
+	}
+	.img.int {
+		width: 3.2rem;
+		height: 3.2rem;
+		aspect-ratio: unset;
+		margin: -3.2rem 0;
 	}
 	.headshot {
 		position: absolute;
@@ -52,6 +64,9 @@
 		background: url('../images/headshot/chris.jpg') center center / contain no-repeat;
 		mask: url('../images/headshot/mask.png') center center / contain no-repeat;
 		-webkit-mask: url('../images/headshot/mask.png') center center / contain no-repeat;
+	}
+	.int .headshot {
+		inset: -0.5rem -1rem -1rem -1rem;
 	}
 	.bg {
 		position: absolute;

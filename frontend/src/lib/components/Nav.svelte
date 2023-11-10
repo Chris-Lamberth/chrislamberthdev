@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import Headshot from './Headshot.svelte';
 	let currentPath;
 
 	$: currentPath = $page.url.pathname;
@@ -13,13 +14,13 @@
 <div class="bar" class:int={isInteriorPage}>
 	<div class="container">
 		<div class="group">
-			<div class="logo">
-				<a href="/" class="img">
-					<img src="../images/chris-lamberth-sm.jpg" alt="Chris Lamberth" />
-				</a>
-				<div>
-					<p>Chris Lamberth</p>
-					<p><span>web developer & graphic designer</span></p>
+			<div class="wrapper">
+				<Headshot />
+				<div class="txt">
+					<div>
+						<p class="name">Chris Lamberth</p>
+						<p class="sub">Graphic Designer & Web Developer</p>
+					</div>
 				</div>
 			</div>
 			<nav>
@@ -34,68 +35,64 @@
 
 <style>
 	.bar {
-		margin: 0 0 3rem 0;
 		transition: background 0.2s linear;
 		overflow: hidden;
 	}
 	.bar.int {
 		background-color: #000;
-	}
-	.bar .logo {
-		display: none;
-	}
-	.bar.int .logo {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		color: #fff;
-		margin: -1rem 0;
-	}
-	.bar .logo p {
-		font-family: var(--serif);
-		font-size: 1rem;
-		line-height: 1em;
-		letter-spacing: 0.05em;
-		opacity: 0;
-		animation: logotxt 0.3s ease forwards;
-	}
-	.bar .logo p span {
-		font-size: 0.8rem;
-		color: #c3c3c3;
-		letter-spacing: 0;
-	}
-	.logo .img {
-		overflow: hidden;
-		width: 3rem;
-		height: 3rem;
-		aspect-ratio: 1;
-		border-radius: 50%;
-		align-self: flex-start;
-		display: flex;
-		justify-content: center;
-		align-items: flex-start;
-		animation: headshot 0.3s ease forwards;
-		position: relative;
-	}
-	.logo .img::before {
-		content: '';
-		position: absolute;
-		background: url('../images/chris-lamberth-hoodie-sm.jpg') top center / 150% no-repeat;
-		inset: 0;
-		display: none;
-	}
-	.logo .img:hover::before {
-		display: block;
-	}
-	.logo .img img {
-		object-fit: cover;
-		width: 150%;
+		margin: 0 0 3rem 0;
 	}
 	.group {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 1.5rem 0;
+		flex-direction: column-reverse;
+	}
+	.int .group {
+		flex-direction: row;
+	}
+
+	.txt {
+		flex: 1;
+	}
+	.int .txt {
+		flex: unset;
+		text-align: left;
+	}
+	.name {
+		font-family: var(--serif);
+		font-size: 3rem;
+		line-height: 1em;
+		margin: 0 0 0.2em 0;
+	}
+	.int .name {
+		font-size: 1.2rem;
+		letter-spacing: 1px;
+	}
+	.sub {
+		font-family: var(--sans);
+		line-height: 1em;
+		font-size: 1.2rem;
+	}
+	.int .sub {
+		font-size: 0.7rem;
+	}
+	.bar.int p {
+		color: #fff;
+	}
+	.wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 3rem;
+		width: 100%;
+		margin: 2rem 0 0 0;
+	}
+	.int .wrapper {
+		width: unset;
+		gap: 1rem;
+		margin: unset;
 	}
 	nav {
 		display: flex;
