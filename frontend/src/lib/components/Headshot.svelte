@@ -8,8 +8,8 @@
 			const { clientX, clientY, target } = event;
 			const { innerWidth, innerHeight } = window;
 
-			const xPercent = (clientX / innerWidth - 0.5) * 2; // -1 to 1
-			const yPercent = (clientY / innerHeight - 0.5) * 2; // -1 to 1
+			const xPercent = (clientX / innerWidth - 0.5) * -2;
+			const yPercent = (clientY / innerHeight - 0.5) * -2;
 
 			const maxTranslate = 30; // Maximum translation for the bg element in pixels
 
@@ -40,9 +40,10 @@
 		width: 100%;
 		max-width: 20rem;
 		aspect-ratio: 1;
-		overflow: hidden;
 		position: relative;
-		border-radius: 50%;
+		overflow: hidden;
+		border-radius: 30rem;
+		aspect-ratio: 3/2;
 	}
 	.headshot {
 		position: absolute;

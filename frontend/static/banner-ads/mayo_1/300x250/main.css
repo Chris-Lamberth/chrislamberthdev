@@ -1,0 +1,160 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+:root {
+	--width: 300px;
+	--height: 250px;
+}
+img {
+	width: 100%;
+	display: block;
+}
+.container {
+	width: var(--width);
+	height: var(--height);
+	overflow: hidden;
+	position: relative;
+	background: #0057b8;
+	cursor: pointer;
+}
+.container > * {
+	position: absolute;
+}
+.border {
+	inset: 0;
+	border: 1px solid #e6e6e6;
+}
+.circle-b {
+	width: 342px;
+	inset: -48px auto auto -102px;
+	transform: scale(0.9);
+	animation: grow 15s ease-in-out forwards;
+}
+.circle-g {
+	width: 367px;
+	inset: auto -190px -216px auto;
+	transform: scale(0.8);
+	animation: grow 15s ease-in-out forwards, fadeout 1s linear 9.2s forwards;
+}
+.logo {
+	width: 50px;
+	inset: 30px 40px auto auto;
+	animation: fadeout 0.2s linear 2.5s forwards, logo-final 1s linear 10s forwards;
+}
+.txt1 {
+	width: 166px;
+	inset: 30px auto auto 40px;
+	opacity: 0;
+	animation: in ease forwards, fadeout 0.2s linear 2.5s forwards;
+}
+.txt2 {
+	width: 196px;
+	inset: auto auto 30px 40px;
+	opacity: 0;
+	translate: 30px 0;
+	animation: in 0.5s 1s ease forwards, fadeout 0.2s linear 2.5s forwards;
+}
+.txt3 {
+	width: 201px;
+	inset: 45px auto auto 40px;
+	opacity: 0;
+	animation: in 0.2s 3s ease forwards, fadeout 0.2s linear 6s forwards;
+}
+.txt4 {
+	width: 180px;
+	inset: 109px auto auto 40px;
+	opacity: 0;
+	translate: 30px 0;
+	animation: in 0.5s 3.5s ease forwards, fadeout 0.2s linear 6s forwards;
+}
+.txt5 {
+	width: 194px;
+	opacity: 0;
+	inset: auto auto 35px 40px;
+	animation: fadein 0.2s linear 4.3s forwards, fadeout 0.2s linear 6s forwards;
+}
+.txt6 {
+	width: 32px;
+	opacity: 0;
+	inset: 90px auto auto 40px;
+	animation: fadein 0.2s linear 6.5s forwards, fadeout 0.2s linear 9.2s forwards;
+}
+.txt7 {
+	width: 57px;
+	inset: 81px auto auto 80px;
+	opacity: 0;
+	translate: 30px 0;
+	animation: in 0.5s 7s ease forwards, fadeout 0.2s linear 9.2s forwards;
+}
+.txt8 {
+	width: 182px;
+	opacity: 0;
+	inset: auto auto 73px 38px;
+	animation: fadein 0.2s linear 7.5s forwards, fadeout 0.2s linear 9.2s forwards;
+}
+.txt9 {
+	width: 237px;
+	opacity: 0;
+	inset: auto auto 17px 31px;
+	animation: fadein 0.2s linear 10s forwards;
+}
+.cta {
+	opacity: 0;
+	inset: 108px 26px auto auto;
+	width: 130px;
+	animation: cta 0.5s ease 10s forwards, pop 0.5s ease 12s;
+	transition: scale 0.2s ease;
+}
+.container:hover .cta {
+	scale: 1.1;
+}
+@keyframes grow {
+	100% {
+		transform: scale(1.2);
+	}
+}
+
+@keyframes in {
+	100% {
+		translate: 0 0;
+		opacity: 1;
+		scale: 1;
+	}
+}
+@keyframes logo-final {
+	0% {
+		opacity: 0;
+		width: 75px;
+		inset: 87px auto auto 33px;
+	}
+	100% {
+		opacity: 1;
+		width: 75px;
+		inset: 87px auto auto 33px;
+	}
+}
+@keyframes fadein {
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes fadeout {
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes cta {
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes pop {
+	50% {
+		scale: 1.1;
+	}
+	100% {
+		scale: 1;
+	}
+}

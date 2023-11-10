@@ -1,0 +1,166 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+:root {
+	--width: 160px;
+	--height: 600px;
+}
+img {
+	width: 100%;
+	display: block;
+}
+.container {
+	width: var(--width);
+	height: var(--height);
+	overflow: hidden;
+	position: relative;
+	background: #0057b8;
+	cursor: pointer;
+}
+.container > * {
+	position: absolute;
+}
+.border {
+	inset: 0;
+	border: 1px solid #e6e6e6;
+}
+.circle-b {
+	width: 447px;
+	inset: 73px auto auto -186px;
+	transform: scale(0.9);
+	animation: grow 15s ease-in-out forwards, fadeout 0.5s linear 9.2s forwards,
+		fadein 0.5s linear 9.7s forwards, move-cb-1 0s linear 9.7s forwards;
+}
+.circle-g {
+	width: 445px;
+	inset: 290px auto auto -22px;
+	transform: scale(0.8);
+	animation: grow 15s ease-in-out forwards, fadeout 1s linear 9.2s forwards;
+}
+.logo {
+	width: 50px;
+	inset: 40px auto auto 55px;
+	animation: fadeout 0.2s linear 2.5s forwards, logo-final 1s linear 10s forwards;
+}
+.txt1 {
+	width: 101px;
+	inset: 240px auto auto 20px;
+	opacity: 0;
+	animation: in ease forwards, fadeout 0.2s linear 2.5s forwards;
+}
+.txt2 {
+	width: 119px;
+	inset: 343px auto auto 20px;
+	opacity: 0;
+	translate: 30px 0;
+	animation: in 0.5s 1s ease forwards, fadeout 0.2s linear 2.5s forwards;
+}
+.txt3 {
+	width: 116px;
+	inset: 251px auto auto 19px;
+	opacity: 0;
+	animation: in 0.2s 3s ease forwards, fadeout 0.2s linear 6s forwards;
+}
+.txt4 {
+	width: 109px;
+	inset: 290px auto auto 19px;
+	opacity: 0;
+	translate: 30px 0;
+	animation: in 0.5s 3.5s ease forwards, fadeout 0.2s linear 6s forwards;
+}
+.txt5 {
+	width: 113px;
+	opacity: 0;
+	inset: 317px auto auto 19px;
+	animation: fadein 0.2s linear 4.3s forwards, fadeout 0.2s linear 6s forwards;
+}
+.txt6 {
+	width: 19px;
+	opacity: 0;
+	inset: 278px auto auto 21px;
+	animation: fadein 0.2s linear 6.5s forwards, fadeout 0.2s linear 9.2s forwards;
+}
+.txt7 {
+	width: 34px;
+	inset: 272px auto auto 45px;
+	opacity: 0;
+	translate: 30px 0;
+	animation: in 0.5s 7s ease forwards, fadeout 0.2s linear 9.2s forwards;
+}
+.txt8 {
+	width: 106px;
+	opacity: 0;
+	inset: 298px auto auto 20px;
+	animation: fadein 0.2s linear 7.5s forwards, fadeout 0.2s linear 9.2s forwards;
+}
+.txt9 {
+	width: 118px;
+	opacity: 0;
+	inset: 534px auto auto 20px;
+	animation: fadein 0.2s linear 10s forwards;
+}
+.cta {
+	opacity: 0;
+	inset: 339px auto auto 14px;
+	width: 130px;
+	animation: cta 0.5s ease 10s forwards, pop 0.5s ease 12s;
+	transition: scale 0.2s ease;
+}
+.container:hover .cta {
+	scale: 1.1;
+}
+@keyframes grow {
+	100% {
+		transform: scale(1.2);
+	}
+}
+
+@keyframes in {
+	100% {
+		translate: 0 0;
+		opacity: 1;
+		scale: 1;
+	}
+}
+@keyframes logo-final {
+	0% {
+		opacity: 0;
+		width: 75px;
+		inset: 226px auto auto 42px;
+	}
+	100% {
+		opacity: 1;
+		width: 75px;
+		inset: 226px auto auto 42px;
+	}
+}
+@keyframes fadein {
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes fadeout {
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes cta {
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes pop {
+	50% {
+		scale: 1.1;
+	}
+	100% {
+		scale: 1;
+	}
+}
+@keyframes move-cb-1 {
+	100% {
+		inset: 37px auto auto -144px;
+	}
+}

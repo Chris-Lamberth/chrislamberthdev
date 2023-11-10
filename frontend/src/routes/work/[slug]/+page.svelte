@@ -37,7 +37,7 @@
 
 		<!-- Main Image -->
 		<section
-			class="main-image"
+			class="main-image border-1"
 			style="background-image:url('{imgUrl(data.mainImage.asset)
 				.format('webp', 'jpg')
 				.url()}'); background-position: {data?.mainImage?.hotspot?.x * 100}% {data?.mainImage
@@ -62,7 +62,7 @@
 			<section class="content_grid">
 				{#each data.additionalImages as { image, alt, columns }}
 					{#if image}
-						<div class="img" style="grid-column: span {columns}">
+						<div class="img border-1" style="grid-column: span {columns}">
 							<img
 								src={imgUrl(image).url()}
 								alt={alt || 'Image'}

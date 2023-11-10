@@ -41,7 +41,10 @@ button {
 	border: none;
 	cursor: pointer;
 }
-
+.border-1 {
+	border: 0.5px solid rgb(236, 236, 236);
+	border-style: inside;
+}
 .container {
 	width: 100%;
 	max-width: calc(850px + var(--site-pad) + var(--site-pad));
