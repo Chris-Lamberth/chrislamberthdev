@@ -33,9 +33,30 @@
 			window.removeEventListener('mousemove', handleMouseMove);
 		};
 	});
+
+	// page transitions
+	import { tweened } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
+
+	// Tweened values for width and height
+	const imgSize = tweened(320, {
+		duration: 400,
+		easing: cubicOut
+	});
+
+	$: if (isInteriorPage) {
+		imgSize.set(50); // Assuming 32 is the new size for interior pages
+	} else {
+		imgSize.set(200); // Assuming 320 is the size for the home page
+	}
 </script>
 
-<a href="/" class="img" class:int={isInteriorPage}>
+<a
+	href="/"
+	class="img"
+	class:int={isInteriorPage}
+	style="width: {$imgSize}px; height: {$imgSize}px;"
+>
 	<div bind:this={bgElement} class="bg" />
 	<div class="headshot" />
 </a>

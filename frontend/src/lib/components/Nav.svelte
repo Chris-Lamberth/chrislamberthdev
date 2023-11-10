@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import Headshot from './Headshot.svelte';
+	import { flip } from 'svelte/animate';
 	let currentPath;
 
 	$: currentPath = $page.url.pathname;
@@ -14,20 +15,20 @@
 <div class="bar" class:int={isInteriorPage}>
 	<div class="container">
 		<div class="group">
-			<div class="wrapper">
+			<div class="wrapper" in:flip>
 				<Headshot />
-				<div class="txt">
+				<div class="txt" in:flip>
 					<div>
-						<p class="name">Chris Lamberth</p>
-						<p class="sub">Graphic Designer & Web Developer</p>
+						<p class="name" in:flip>Chris Lamberth</p>
+						<p class="sub" in:flip>Graphic Designer & Web Developer</p>
 					</div>
 				</div>
 			</div>
-			<nav>
-				<a class="line" href="/" class:activeHome={homeActive}>home</a>
-				<a class="line" href="/about" class:active={aboutActive}>about</a>
-				<a class="line" href="/resume" class:active={resumeActive}>resume</a>
-				<a class="line" href="/work" class:active={workActive}>work</a>
+			<nav in:flip>
+				<a class="line" href="/" class:activeHome={homeActive} in:flip>home</a>
+				<a class="line" href="/about" class:active={aboutActive} in:flip>about</a>
+				<a class="line" href="/resume" class:active={resumeActive} in:flip>resume</a>
+				<a class="line" href="/work" class:active={workActive} in:flip>work</a>
 			</nav>
 		</div>
 	</div>
