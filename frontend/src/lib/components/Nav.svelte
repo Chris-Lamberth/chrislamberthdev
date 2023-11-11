@@ -1,7 +1,6 @@
 <script>
 	import { page } from '$app/stores';
 	import Headshot from './Headshot.svelte';
-	import { flip } from 'svelte/animate';
 	let currentPath;
 
 	$: currentPath = $page.url.pathname;
@@ -15,20 +14,20 @@
 <div class="bar" class:int={isInteriorPage}>
 	<div class="container">
 		<div class="group">
-			<div class="wrapper" in:flip>
-				<Headshot />
-				<div class="txt" in:flip>
+			<div class="wrapper">
+				<div class="txt">
 					<div>
-						<p class="name" in:flip>Chris Lamberth</p>
-						<p class="sub" in:flip>Graphic Designer & Web Developer</p>
+						<p class="name">Chris Lamberth</p>
+						<p class="sub">Graphic Designer & Web Developer</p>
 					</div>
 				</div>
+				<Headshot />
 			</div>
-			<nav in:flip>
-				<a class="line" href="/" class:activeHome={homeActive} in:flip>home</a>
-				<a class="line" href="/about" class:active={aboutActive} in:flip>about</a>
-				<a class="line" href="/resume" class:active={resumeActive} in:flip>resume</a>
-				<a class="line" href="/work" class:active={workActive} in:flip>work</a>
+			<nav>
+				<a class="line" href="/" class:activeHome={homeActive}>home</a>
+				<a class="line" href="/about" class:active={aboutActive}>about</a>
+				<a class="line" href="/resume" class:active={resumeActive}>resume</a>
+				<a class="line" href="/work" class:active={workActive}>work</a>
 			</nav>
 		</div>
 	</div>
@@ -36,45 +35,49 @@
 
 <style>
 	.bar {
-		transition: background 0.2s linear;
-		overflow: hidden;
+		--bar-height: 3.5rem;
+		transition: background 0.22s linear;
+		margin: 0 0 16rem 0;
+		height: var(--bar-height);
+		transition: margin 0.22s 0.05s var(--easing-1);
 	}
 	.bar.int {
 		background-color: #000;
 		margin: 0 0 3rem 0;
 	}
 	.group {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 1.5rem 0;
-		flex-direction: column-reverse;
-	}
-	.int .group {
-		flex-direction: row;
+		position: relative;
 	}
 
 	.txt {
-		flex: 1;
+		position: absolute;
+		inset: 9.5rem auto auto 34vw;
+		transition: inset 0.22s var(--easing-1);
 	}
 	.int .txt {
 		flex: unset;
 		text-align: left;
+		inset: 0.8rem auto auto 4rem;
 	}
 	.name {
 		font-family: var(--serif);
 		font-size: 3rem;
 		line-height: 1em;
 		margin: 0 0 0.2em 0;
+		transition: font-size 0.22s var(--easing-1), letter-spacing 0.22s var(--easing-1),
+			color 0.3s linear, margin 0.22s var(--easing-1);
 	}
 	.int .name {
 		font-size: 1.2rem;
 		letter-spacing: 1px;
+		margin: 0 0 0.05em 0;
 	}
 	.sub {
 		font-family: var(--sans);
 		line-height: 1em;
 		font-size: 1.2rem;
+		transition: font-size 0.22s var(--easing-1), letter-spacing 0.22s var(--easing-1),
+			color 0.22s linear, margin 0.22s var(--easing-1);
 	}
 	.int .sub {
 		font-size: 0.7rem;
@@ -83,23 +86,15 @@
 		color: #fff;
 	}
 	.wrapper {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 3rem;
-		width: 100%;
-		margin: 2rem 0 0 0;
-	}
-	.int .wrapper {
-		width: unset;
-		gap: 1rem;
-		margin: unset;
+		height: var(--bar-height);
 	}
 	nav {
 		display: flex;
 		grid-gap: 1rem;
 		gap: 1rem;
 		margin: 0 0 0 auto;
+		position: absolute;
+		inset: 1rem 0 auto auto;
 	}
 	.bar.int a {
 		color: #fff;
@@ -111,7 +106,7 @@
 		color: #000;
 		text-decoration: none;
 		transform-origin: center center;
-		transition: color 0.3s ease, scale 0.1s ease;
+		transition: color 0.22s var(--easing-1), scale 0.22s var(--easing-1);
 	}
 	a:active {
 		scale: 0.9;
@@ -132,16 +127,6 @@
 		}
 		100% {
 			translate: 0 0;
-		}
-	}
-	@keyframes logotxt {
-		0% {
-			translate: -3rem 0;
-			opacity: 0;
-		}
-		100% {
-			translate: 0 0;
-			opacity: 1;
 		}
 	}
 </style>
