@@ -2,7 +2,6 @@
 	import Feed from '$lib/components/Feed.svelte';
 	import InstaFeed from '$lib/components/InstaFeed.svelte';
 	import Contact from '$lib/components/Contact.svelte';
-	import Headshot from '../lib/components/Headshot.svelte';
 
 	export let data;
 	const { posts } = data.posts;

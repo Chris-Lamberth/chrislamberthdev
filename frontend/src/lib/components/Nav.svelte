@@ -51,7 +51,7 @@
 
 	.txt {
 		position: absolute;
-		inset: 9.5rem auto auto 34vw;
+		inset: 9.5rem auto auto 36vw;
 		transition: inset 0.22s var(--easing-1);
 	}
 	.int .txt {
@@ -127,6 +127,11 @@
 		}
 		100% {
 			translate: 0 0;
+		}
+	}
+	@media (min-width: 1233px) {
+		.txt {
+			inset: 9.5rem auto auto 26rem;
 		}
 	}
 </style>
