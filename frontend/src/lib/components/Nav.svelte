@@ -36,14 +36,34 @@
 <style>
 	.bar {
 		--bar-height: 3.5rem;
-		transition: background 0.22s linear;
+		transition: background 0.26s linear;
 		margin: 0 0 16rem 0;
 		height: var(--bar-height);
-		transition: margin 0.22s 0.05s var(--easing-1);
+		transition: margin 0.26s 0.05s var(--easing-1);
+		position: relative;
 	}
 	.bar.int {
-		background-color: #000;
 		margin: 0 0 3rem 0;
+	}
+	.bar::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 auto 0;
+		height: 100%;
+		background: #000;
+		translate: 0 -100%;
+		transition: translate 0.26s var(--easing-1);
+	}
+	.bar.int::before {
+		translate: 0 0;
+	}
+	@keyframes bar-bg {
+		0% {
+			translate: 0 -100%;
+		}
+		100% {
+			translate: 0 0;
+		}
 	}
 	.group {
 		position: relative;
@@ -52,7 +72,7 @@
 	.txt {
 		position: absolute;
 		inset: 9.5rem auto auto 36vw;
-		transition: inset 0.22s var(--easing-1);
+		transition: inset 0.26s var(--easing-1);
 	}
 	.int .txt {
 		flex: unset;
@@ -64,8 +84,8 @@
 		font-size: 3rem;
 		line-height: 1em;
 		margin: 0 0 0.2em 0;
-		transition: font-size 0.22s var(--easing-1), letter-spacing 0.22s var(--easing-1),
-			color 0.3s linear, margin 0.22s var(--easing-1);
+		transition: font-size 0.26s var(--easing-1), letter-spacing 0.26s var(--easing-1),
+			color 0.3s linear, margin 0.26s var(--easing-1);
 	}
 	.int .name {
 		font-size: 1.2rem;
@@ -76,8 +96,8 @@
 		font-family: var(--sans);
 		line-height: 1em;
 		font-size: 1.2rem;
-		transition: font-size 0.22s var(--easing-1), letter-spacing 0.22s var(--easing-1),
-			color 0.22s linear, margin 0.22s var(--easing-1);
+		transition: font-size 0.26s var(--easing-1), letter-spacing 0.26s var(--easing-1),
+			color 0.26s linear, margin 0.26s var(--easing-1);
 	}
 	.int .sub {
 		font-size: 0.7rem;
@@ -106,7 +126,7 @@
 		color: #000;
 		text-decoration: none;
 		transform-origin: center center;
-		transition: color 0.22s var(--easing-1), scale 0.22s var(--easing-1);
+		transition: color 0.26s var(--easing-1), scale 0.26s var(--easing-1);
 	}
 	a:active {
 		scale: 0.9;

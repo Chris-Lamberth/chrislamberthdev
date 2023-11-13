@@ -2,15 +2,10 @@
 	import Feed from '$lib/components/Feed.svelte';
 	import InstaFeed from '$lib/components/InstaFeed.svelte';
 	import Contact from '$lib/components/Contact.svelte';
-
 	export let data;
 	const { posts } = data.posts;
 	const { instaPosts } = data.instaPosts;
 </script>
-
-<section class="intro">
-	<div class="container" />
-</section>
 
 <section class="feed">
 	<div class="container">
@@ -26,7 +21,7 @@
 			</a>
 		</div>
 		{#if posts && posts.length}
-			<Feed {posts} />
+			<Feed {posts} limit={6} />
 		{:else}
 			<p>Loading...</p>
 		{/if}

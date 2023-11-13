@@ -1,13 +1,14 @@
 <script>
 	import { imgUrl } from '$lib/sanity';
 	export let posts = [];
+	export let limit = posts.length;
 </script>
 
 <div class="group">
-	{#each posts as post}
+	{#each posts.slice(0, limit) as post}
 		<a href={`work/${post.slug.current}`}>
 			<div
-				class="img"
+				class="img border-1"
 				style="background-image: url({imgUrl(post.mainImage.asset)
 					.width(600)
 					.format('webp', 'jpg')

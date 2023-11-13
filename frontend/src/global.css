@@ -11,7 +11,7 @@
 	--color-accent: #00ffcc;
 	--gray-100: #c2c2c2;
 	--gray-200: #979797;
-	--easing-1: cubic-bezier(0.52, -0.25, 0.15, 1.25);
+	--easing-1: cubic-bezier(0.52, -0.25, 0.1, 1);
 }
 
 * {
