@@ -25,13 +25,13 @@
 							enter: {
 								x: '4rem',
 								y: '0.8rem',
-								duration: 0.26,
+								duration: 0.27,
 								ease: 'back.inOut'
 							},
 							exit: {
 								x: '36vw',
 								y: '9.5rem',
-								duration: 0.26,
+								duration: 0.27,
 								delay: 0.05,
 								ease: 'back.inOut'
 							}
@@ -48,7 +48,7 @@
 									color: '#fff',
 									letterSpacing: '1px',
 									margin: '0 0 0.05em 0',
-									duration: 0.26,
+									duration: 0.27,
 									ease: 'back.inOut'
 								},
 								exit: {
@@ -56,7 +56,7 @@
 									color: '#000',
 									letterSpacing: 'unset',
 									margin: '0 0 0.2em 0',
-									duration: 0.26,
+									duration: 0.27,
 									delay: 0.05,
 									ease: 'back.inOut'
 								}
@@ -73,13 +73,13 @@
 								enter: {
 									fontSize: '0.7rem',
 									color: '#fff',
-									duration: 0.26,
+									duration: 0.27,
 									ease: 'back.inOut'
 								},
 								exit: {
 									fontSize: '1.2rem',
 									color: '#000',
-									duration: 0.26,
+									duration: 0.27,
 									delay: 0.06,
 									ease: 'back.inOut'
 								}
