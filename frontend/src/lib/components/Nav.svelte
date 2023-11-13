@@ -1,7 +1,10 @@
 <script>
 	import { page } from '$app/stores';
 	import Headshot from './Headshot.svelte';
+	import { animation } from '$lib/animation';
+
 	let currentPath;
+	let isInteriorPage;
 
 	$: currentPath = $page.url.pathname;
 	$: homeActive = currentPath === '/';
@@ -15,9 +18,77 @@
 	<div class="container">
 		<div class="group">
 			<div class="wrapper">
-				<div class="txt">
-					<p class="name">Chris Lamberth</p>
-					<p class="sub">Graphic Designer & Web Developer</p>
+				<div
+					class="txt"
+					use:animation={{
+						animation: {
+							enter: {
+								x: '4rem',
+								y: '0.8rem',
+								duration: 0.26,
+								ease: 'back.inOut'
+							},
+							exit: {
+								x: '36vw',
+								y: '9.5rem',
+								duration: 0.26,
+								delay: 0.05,
+								ease: 'back.inOut'
+							}
+						},
+						trigger: isInteriorPage
+					}}
+				>
+					<p
+						class="name"
+						use:animation={{
+							animation: {
+								enter: {
+									fontSize: '1.2rem',
+									color: '#fff',
+									letterSpacing: '1px',
+									margin: '0 0 0.05em 0',
+									duration: 0.26,
+									ease: 'back.inOut'
+								},
+								exit: {
+									fontSize: '3rem',
+									color: '#000',
+									letterSpacing: 'unset',
+									margin: '0 0 0.2em 0',
+									duration: 0.26,
+									delay: 0.05,
+									ease: 'back.inOut'
+								}
+							},
+							trigger: isInteriorPage
+						}}
+					>
+						Chris Lamberth
+					</p>
+					<p
+						class="sub"
+						use:animation={{
+							animation: {
+								enter: {
+									fontSize: '0.7rem',
+									color: '#fff',
+									duration: 0.26,
+									ease: 'back.inOut'
+								},
+								exit: {
+									fontSize: '1.2rem',
+									color: '#000',
+									duration: 0.26,
+									delay: 0.06,
+									ease: 'back.inOut'
+								}
+							},
+							trigger: isInteriorPage
+						}}
+					>
+						Graphic Designer & Web Developer
+					</p>
 				</div>
 				<Headshot />
 			</div>
@@ -69,21 +140,16 @@
 
 	.txt {
 		position: absolute;
-		translate: 36vw 9.5rem;
-		transition: translate 0.26s var(--easing-1);
+		transform: translate(36vw, 9.5rem);
 	}
 	.int .txt {
-		flex: unset;
-		text-align: left;
-		translate: 4rem 0.8rem;
+		transform: translate(4rem, 0.8rem);
 	}
 	.name {
 		font-family: var(--serif);
 		font-size: 3rem;
 		line-height: 1em;
 		margin: 0 0 0.2em 0;
-		transition: font-size 0.26s var(--easing-1), letter-spacing 0.26s var(--easing-1),
-			color 0.3s linear, margin 0.26s var(--easing-1);
 	}
 	.int .name {
 		font-size: 1.2rem;
@@ -94,14 +160,9 @@
 		font-family: var(--sans);
 		line-height: 1em;
 		font-size: 1.2rem;
-		transition: font-size 0.26s var(--easing-1), letter-spacing 0.26s var(--easing-1),
-			color 0.26s linear, margin 0.26s var(--easing-1);
 	}
 	.int .sub {
 		font-size: 0.7rem;
-	}
-	.bar.int p {
-		color: #fff;
 	}
 	.wrapper {
 		height: var(--bar-height);

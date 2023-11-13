@@ -1,8 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-
+	import { animation } from '$lib/animation';
 	let currentPath;
+	let isInteriorPage;
 
 	$: currentPath = $page.url.pathname;
 	$: isInteriorPage = currentPath !== '/';
@@ -33,9 +34,58 @@
 	});
 </script>
 
-<a href="/" class="img" class:int={isInteriorPage}>
+<a
+	href="/"
+	class="img"
+	class:int={isInteriorPage}
+	use:animation={{
+		animation: {
+			enter: {
+				width: '3.2rem', // '30vw
+				height: '2.8rem',
+				x: 'auto',
+				y: '0.4rem',
+				duration: 0.27,
+				delay: 0.05,
+				ease: 'back.inOut'
+			},
+			exit: {
+				width: '30vw',
+				height: '12rem',
+				x: 'auto',
+				y: '6rem',
+				duration: 0.27,
+				ease: 'back.inOut'
+			}
+		},
+		trigger: isInteriorPage
+	}}
+>
 	<div bind:this={bgElement} class="bg" />
-	<div class="headshot" />
+	<div
+		class="headshot"
+		use:animation={{
+			animation: {
+				enter: {
+					x: '0',
+					y: '0.7rem',
+					scale: '1.1',
+					duration: 0.27,
+					delay: 0.05,
+					ease: 'back.inOut'
+				},
+				exit: {
+					x: '0',
+					y: '1.8rem',
+					scale: '1',
+					duration: 0.27,
+					delay: 0.05,
+					ease: 'back.inOut'
+				}
+			},
+			trigger: isInteriorPage
+		}}
+	/>
 </a>
 
 <style>
@@ -43,6 +93,7 @@
 		width: 30vw;
 		max-width: 20rem;
 		height: 12rem;
+		transform: translate(0, 6rem);
 		overflow: hidden;
 		/* border-radius: 30rem; */
 		mask-image: url('../images/mask.svg');
@@ -54,29 +105,23 @@
 		mask-position: center center;
 		-webkit-mask-position: center center;
 		position: absolute;
-		inset: 6rem auto auto 0;
-		transition: width 0.26s 0.05s var(--easing-1), height 0.26s 0.05s var(--easing-1),
-			inset 0.26s 0.05s var(--easing-1), translate 0.26s 0.05s var(--easing-1);
 	}
 	.img.int {
 		width: 3.2rem;
 		height: 2.8rem;
-		inset: 50% 0 auto 0;
-		translate: 0 -50%;
+		transform: translate(0, 0.4rem);
 	}
 	.headshot {
 		position: absolute;
 		inset: 0;
-		translate: 0 1.8rem;
+		transform: translate(0, 1.8rem) scale(1);
 
 		background: url('../images/headshot/chris.jpg') center center / contain no-repeat;
 		mask: url('../images/headshot/mask.png') center center / contain no-repeat;
 		-webkit-mask: url('../images/headshot/mask.png') center center / contain no-repeat;
-		transition: translate 0.26s var(--easing-1), scale 0.26s var(--easing-1);
 	}
 	.int .headshot {
-		translate: 0 0.7rem;
-		scale: 1.1;
+		transform: translate(0, 0.7rem), scale(1.1);
 	}
 	.bg {
 		position: absolute;
