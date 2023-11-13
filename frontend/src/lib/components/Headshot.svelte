@@ -1,13 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
-
 	import { page } from '$app/stores';
+
 	let currentPath;
 
 	$: currentPath = $page.url.pathname;
 	$: isInteriorPage = currentPath !== '/';
 
-	let bgElement; // This will hold our .bg element reference
+	let bgElement;
 
 	onMount(() => {
 		function handleMouseMove(event) {
@@ -17,18 +17,16 @@
 			const xPercent = (clientX / innerWidth - 0.5) * -2;
 			const yPercent = (clientY / innerHeight - 0.5) * -2;
 
-			const maxTranslate = 30; // Maximum translation for the bg element in pixels
+			const maxTranslate = 30;
 
 			const translateX = xPercent * maxTranslate;
 			const translateY = yPercent * maxTranslate;
 
-			// Apply the transformation
 			bgElement.style.transform = `translate(${translateX}px, ${translateY}px)`;
 		}
 
 		window.addEventListener('mousemove', handleMouseMove);
 
-		// Cleanup the event listener when the component is destroyed
 		return () => {
 			window.removeEventListener('mousemove', handleMouseMove);
 		};
@@ -70,14 +68,15 @@
 		position: absolute;
 		inset: 0;
 		translate: 0 1.8rem;
+
 		background: url('../images/headshot/chris.jpg') center center / contain no-repeat;
 		mask: url('../images/headshot/mask.png') center center / contain no-repeat;
 		-webkit-mask: url('../images/headshot/mask.png') center center / contain no-repeat;
-		transition: inset 0.26s var(--easing-1), translate 0.26s var(--easing-1);
+		transition: translate 0.26s var(--easing-1), scale 0.26s var(--easing-1);
 	}
 	.int .headshot {
-		inset: -0.5rem -1rem -1rem -1rem;
-		translate: 0 1rem;
+		translate: 0 0.7rem;
+		scale: 1.1;
 	}
 	.bg {
 		position: absolute;

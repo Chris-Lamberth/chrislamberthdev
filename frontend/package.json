@@ -25,6 +25,7 @@
 	"dependencies": {
 		"@sanity/client": "^6.1.7",
 		"@sanity/image-url": "^1.0.2",
-		"groc": "^0.8.0"
+		"groc": "^0.8.0",
+		"gsap": "^3.12.2"
 	}
 }

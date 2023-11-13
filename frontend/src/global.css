@@ -44,7 +44,6 @@ button {
 }
 .border-1 {
 	border: 0.5px solid rgb(236, 236, 236);
-	border-style: inside;
 }
 .container {
 	width: 100%;
@@ -127,4 +126,7 @@ p {
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
 	color: var(--gray-200);
+}
+.disable-transitions * {
+	transition: none !important;
 }

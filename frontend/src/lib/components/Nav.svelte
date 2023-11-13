@@ -16,10 +16,8 @@
 		<div class="group">
 			<div class="wrapper">
 				<div class="txt">
-					<div>
-						<p class="name">Chris Lamberth</p>
-						<p class="sub">Graphic Designer & Web Developer</p>
-					</div>
+					<p class="name">Chris Lamberth</p>
+					<p class="sub">Graphic Designer & Web Developer</p>
 				</div>
 				<Headshot />
 			</div>
@@ -71,13 +69,13 @@
 
 	.txt {
 		position: absolute;
-		inset: 9.5rem auto auto 36vw;
-		transition: inset 0.26s var(--easing-1);
+		translate: 36vw 9.5rem;
+		transition: translate 0.26s var(--easing-1);
 	}
 	.int .txt {
 		flex: unset;
 		text-align: left;
-		inset: 0.8rem auto auto 4rem;
+		translate: 4rem 0.8rem;
 	}
 	.name {
 		font-family: var(--serif);
@@ -147,11 +145,6 @@
 		}
 		100% {
 			translate: 0 0;
-		}
-	}
-	@media (min-width: 1233px) {
-		.txt {
-			inset: 9.5rem auto auto 26rem;
 		}
 	}
 </style>

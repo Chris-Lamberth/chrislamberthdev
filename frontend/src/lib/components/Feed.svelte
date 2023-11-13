@@ -45,7 +45,7 @@
 		background-repeat: no-repeat;
 		background-position: center center;
 		box-shadow: 0 0 0 0 rgba(255, 255, 255, 1), 0 0 0 0px #000;
-		transition: background-size 2s ease-out, box-shadow 0.1s ease-in-out;
+		transition: box-shadow 0.1s ease-in-out;
 	}
 	.txt {
 		padding: 0.5rem 0 0 1rem;
