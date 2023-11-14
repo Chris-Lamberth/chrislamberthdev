@@ -45,17 +45,17 @@
 				height: '2.8rem',
 				x: 'auto',
 				y: '0.4rem',
-				duration: 0.27,
+				duration: 0.22,
 				delay: 0.05,
-				ease: 'back.inOut'
+				ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 			},
 			exit: {
 				width: '30vw',
 				height: '12rem',
 				x: 'auto',
 				y: '6rem',
-				duration: 0.27,
-				ease: 'back.inOut'
+				duration: 0.22,
+				ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 			}
 		},
 		trigger: isInteriorPage
@@ -70,17 +70,17 @@
 					x: '0',
 					y: '0.7rem',
 					scale: '1.1',
-					duration: 0.27,
+					duration: 0.22,
 					delay: 0.05,
-					ease: 'back.inOut'
+					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 				},
 				exit: {
 					x: '0',
 					y: '1.8rem',
 					scale: '1',
-					duration: 0.27,
+					duration: 0.22,
 					delay: 0.05,
-					ease: 'back.inOut'
+					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 				}
 			},
 			trigger: isInteriorPage

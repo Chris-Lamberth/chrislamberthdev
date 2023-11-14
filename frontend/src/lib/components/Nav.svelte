@@ -12,53 +12,74 @@
 	$: resumeActive = currentPath === '/resume';
 	$: workActive = currentPath === '/work';
 	$: isInteriorPage = currentPath !== '/';
+
+	import { onMount, onDestroy } from 'svelte';
+	import { writable } from 'svelte/store';
+
+	const windowWidth = writable(0); // Initialize with a default value
+
+	onMount(() => {
+		// Set the initial width and update on resize
+		windowWidth.set(window.innerWidth);
+
+		function handleResize() {
+			windowWidth.set(window.innerWidth);
+		}
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	});
+
+	let animationConfig;
+
+	$: {
+		animationConfig = {
+			animation: {
+				enter: {
+					x: '4rem',
+					y: '0.8rem',
+					duration: 0.22,
+					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+				},
+				exit: {
+					x: $windowWidth > 1000 ? '26rem' : '40vw',
+					y: '9.5rem',
+					duration: 0.22,
+					delay: 0.05,
+					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+				}
+			},
+			trigger: isInteriorPage
+		};
+	}
 </script>
 
 <div class="bar" class:int={isInteriorPage}>
 	<div class="container">
 		<div class="group">
 			<div class="wrapper">
-				<div
-					class="txt"
-					use:animation={{
-						animation: {
-							enter: {
-								x: '4rem',
-								y: '0.8rem',
-								duration: 0.27,
-								ease: 'back.inOut'
-							},
-							exit: {
-								x: '36vw',
-								y: '9.5rem',
-								duration: 0.27,
-								delay: 0.05,
-								ease: 'back.inOut'
-							}
-						},
-						trigger: isInteriorPage
-					}}
-				>
+				<div class="txt" use:animation={animationConfig}>
 					<p
 						class="name"
 						use:animation={{
 							animation: {
 								enter: {
-									fontSize: '1.2rem',
 									color: '#fff',
 									letterSpacing: '1px',
 									margin: '0 0 0.05em 0',
-									duration: 0.27,
-									ease: 'back.inOut'
+									duration: 0.22,
+									ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 								},
 								exit: {
-									fontSize: '3rem',
 									color: '#000',
 									letterSpacing: 'unset',
 									margin: '0 0 0.2em 0',
-									duration: 0.27,
+									duration: 0.22,
 									delay: 0.05,
-									ease: 'back.inOut'
+									ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 								}
 							},
 							trigger: isInteriorPage
@@ -71,17 +92,15 @@
 						use:animation={{
 							animation: {
 								enter: {
-									fontSize: '0.7rem',
 									color: '#fff',
-									duration: 0.27,
-									ease: 'back.inOut'
+									duration: 0.22,
+									ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 								},
 								exit: {
-									fontSize: '1.2rem',
 									color: '#000',
-									duration: 0.27,
+									duration: 0.22,
 									delay: 0.06,
-									ease: 'back.inOut'
+									ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 								}
 							},
 							trigger: isInteriorPage
@@ -105,15 +124,14 @@
 <style>
 	.bar {
 		--bar-height: 3.5rem;
-		transition: background 0.26s linear;
-		margin: 0 0 16rem 0;
+		/* margin: 0 0 16rem 0; */
 		height: var(--bar-height);
 		transition: margin 0.26s 0.05s var(--easing-1);
 		position: relative;
 	}
-	.bar.int {
+	/* .bar.int {
 		margin: 0 0 3rem 0;
-	}
+	} */
 	.bar::before {
 		content: '';
 		position: absolute;
@@ -140,7 +158,7 @@
 
 	.txt {
 		position: absolute;
-		transform: translate(36vw, 9.5rem);
+		transform: translate(40vw, 9.5rem);
 	}
 	.int .txt {
 		transform: translate(4rem, 0.8rem);
@@ -208,4 +226,18 @@
 			translate: 0 0;
 		}
 	}
+
+	@media (min-width: 1000px) {
+		.txt {
+			transform: translate(40vw, 9.5rem);
+		}
+	}
+	/* @media (max-width: 720px) {
+		.name {
+			font-size: 6vw;
+		}
+		.sub {
+			font-size: 2.5vw;
+		}
+	} */
 </style>
