@@ -2,6 +2,8 @@
 	import { page } from '$app/stores';
 	import Headshot from './Headshot.svelte';
 	import { animation } from '$lib/animation';
+	import { onMount, onDestroy } from 'svelte';
+	import { writable } from 'svelte/store';
 
 	let currentPath;
 	let isInteriorPage;
@@ -12,9 +14,6 @@
 	$: resumeActive = currentPath === '/resume';
 	$: workActive = currentPath === '/work';
 	$: isInteriorPage = currentPath !== '/';
-
-	import { onMount, onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
 
 	const windowWidth = writable(0); // Initialize with a default value
 
@@ -62,52 +61,10 @@
 		<div class="group">
 			<div class="wrapper">
 				<div class="txt" use:animation={animationConfig}>
-					<p
-						class="name"
-						use:animation={{
-							animation: {
-								enter: {
-									color: '#fff',
-									letterSpacing: '1px',
-									margin: '0 0 0.05em 0',
-									duration: 0.22,
-									ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-								},
-								exit: {
-									color: '#000',
-									letterSpacing: 'unset',
-									margin: '0 0 0.2em 0',
-									duration: 0.22,
-									delay: 0.05,
-									ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-								}
-							},
-							trigger: isInteriorPage
-						}}
-					>
-						Chris Lamberth
-					</p>
-					<p
-						class="sub"
-						use:animation={{
-							animation: {
-								enter: {
-									color: '#fff',
-									duration: 0.22,
-									ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-								},
-								exit: {
-									color: '#000',
-									duration: 0.22,
-									delay: 0.06,
-									ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-								}
-							},
-							trigger: isInteriorPage
-						}}
-					>
-						Graphic Designer & Web Developer
-					</p>
+					<div>
+						<p class="name">Chris Lamberth</p>
+						<p class="sub">Graphic Designer & Web Developer</p>
+					</div>
 				</div>
 				<Headshot />
 			</div>
@@ -158,10 +115,13 @@
 
 	.txt {
 		position: absolute;
+		inset: 0 0 auto 0;
 		transform: translate(40vw, 9.5rem);
+		transition: color 0.26s linear;
 	}
 	.int .txt {
 		transform: translate(4rem, 0.8rem);
+		color: #fff;
 	}
 	.name {
 		font-family: var(--serif);
@@ -229,15 +189,15 @@
 
 	@media (min-width: 1000px) {
 		.txt {
-			transform: translate(40vw, 9.5rem);
+			transform: translate(26rem, 9.5rem);
 		}
 	}
-	/* @media (max-width: 720px) {
+	@media (max-width: 720px) {
 		.name {
 			font-size: 6vw;
 		}
 		.sub {
 			font-size: 2.5vw;
 		}
-	} */
+	}
 </style>
