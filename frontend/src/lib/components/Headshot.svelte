@@ -121,7 +121,7 @@
 		-webkit-mask: url('../images/headshot/mask.png') center center / contain no-repeat;
 	}
 	.int .headshot {
-		transform: translate(0, 0.7rem), scale(1.1);
+		transform: translate(0, 0.7rem) scale(1.1);
 	}
 	.bg {
 		position: absolute;

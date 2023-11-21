@@ -68,6 +68,10 @@
 				</div>
 				<Headshot />
 			</div>
+			<button class="nav_btn">
+				<div />
+				<div />
+			</button>
 			<nav>
 				<a class="line" href="/" class:activeHome={homeActive}>home</a>
 				<a class="line" href="/about" class:active={aboutActive}>about</a>
@@ -178,6 +182,17 @@
 		color: #c3c3c3;
 		pointer-events: none;
 	}
+	.nav_btn {
+		display: flex;
+		flex-direction: column;
+		width: 3rem;
+		height: 2rem;
+	}
+	.nav_btn > div {
+		width: 100%;
+		height: 0.5rem;
+		background: #fff;
+	}
 	@keyframes headshot {
 		0% {
 			translate: 0 5rem;
@@ -198,6 +213,14 @@
 		}
 		.sub {
 			font-size: 2.5vw;
+		}
+	}
+	@media (max-width: 680px) {
+		nav {
+			display: none;
+		}
+		.nav_btn {
+			display: block;
 		}
 	}
 </style>
