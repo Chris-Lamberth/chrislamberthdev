@@ -122,6 +122,7 @@
 		inset: 0 0 auto 0;
 		transform: translate(40vw, 9.5rem);
 		transition: color 0.26s linear;
+		width: fit-content;
 	}
 	.int .txt {
 		transform: translate(4rem, 0.8rem);
