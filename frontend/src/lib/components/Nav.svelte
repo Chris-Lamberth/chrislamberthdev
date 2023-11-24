@@ -226,7 +226,9 @@
 	.int .nav_btn > div {
 		background: #fff;
 	}
-
+	.nav_btn.close-state > div {
+		background: #fff;
+	}
 	.mobile-state-open {
 		translate: 0 0;
 	}

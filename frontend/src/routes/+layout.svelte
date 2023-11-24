@@ -20,11 +20,11 @@
 <style>
 	.wrapper {
 		translate: 0 4rem;
-		display: block;
 		transition: translate 0.3s var(--easing-1);
-		min-height: 100vh;
 		display: flex;
+		justify-content: space-between;
 		flex-direction: column;
+		min-height: 95vh;
 	}
 	.wrapper.int {
 		translate: 0 16rem;
