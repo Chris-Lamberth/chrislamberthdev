@@ -22,6 +22,9 @@
 		translate: 0 4rem;
 		display: block;
 		transition: translate 0.3s var(--easing-1);
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
 	}
 	.wrapper.int {
 		translate: 0 16rem;

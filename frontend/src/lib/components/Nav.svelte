@@ -54,6 +54,14 @@
 			trigger: isInteriorPage
 		};
 	}
+
+	// Reactive state variable to track if the nav is open
+	let navOpen = false;
+
+	// Function to toggle nav open state
+	function toggleNav() {
+		navOpen = !navOpen;
+	}
 </script>
 
 <div class="bar" class:int={isInteriorPage}>
@@ -68,15 +76,15 @@
 				</div>
 				<Headshot />
 			</div>
-			<button class="nav_btn">
+			<button class="nav_btn" class:close-state={navOpen} on:click={toggleNav}>
 				<div />
 				<div />
 			</button>
-			<nav>
-				<a class="line" href="/" class:activeHome={homeActive}>home</a>
-				<a class="line" href="/about" class:active={aboutActive}>about</a>
-				<a class="line" href="/resume" class:active={resumeActive}>resume</a>
-				<a class="line" href="/work" class:active={workActive}>work</a>
+			<nav class:mobile-state-open={navOpen}>
+				<a class="line" href="/" on:click={toggleNav} class:activeHome={homeActive}>home</a>
+				<a class="line" href="/about" on:click={toggleNav} class:active={aboutActive}>about</a>
+				<a class="line" href="/resume" on:click={toggleNav} class:active={resumeActive}>resume</a>
+				<a class="line" href="/work" on:click={toggleNav} class:active={workActive}>work</a>
 			</nav>
 		</div>
 	</div>
@@ -96,11 +104,12 @@
 	.bar::before {
 		content: '';
 		position: absolute;
-		inset: 0 0 auto 0;
-		height: 100%;
+		inset: -20px 0 auto 0;
+		height: calc(100% + 20px);
 		background: #000;
 		translate: 0 -100%;
 		transition: translate 0.26s var(--easing-1);
+		overflow: hidden;
 	}
 	.bar.int::before {
 		translate: 0 0;
@@ -184,15 +193,42 @@
 		pointer-events: none;
 	}
 	.nav_btn {
-		display: flex;
+		position: absolute;
+		inset: 0 calc(var(--site-pad) * -1) 0 auto;
+		display: none;
 		flex-direction: column;
-		width: 3rem;
-		height: 2rem;
+		align-items: flex-end;
+		gap: 0.8em;
+		padding: 1.4em var(--site-pad) 1.4em 1.4em;
+		width: 6em;
+		z-index: 51;
 	}
 	.nav_btn > div {
+		background: #000;
+		border-radius: 2rem;
 		width: 100%;
-		height: 0.5rem;
+		height: 100%;
+		transition: width 0.15s var(--easing-1), translate 0.15s var(--easing-1),
+			rotate 0.15s var(--easing-1);
+	}
+	.nav_btn > div:nth-child(2) {
+		width: 85%;
+	}
+	.nav_btn.close-state > div:nth-child(1) {
+		rotate: -45deg;
+		translate: 0 183%;
+	}
+	.nav_btn.close-state > div:nth-child(2) {
+		width: 100%;
+		rotate: 45deg;
+		translate: 0 -183%;
+	}
+	.int .nav_btn > div {
 		background: #fff;
+	}
+
+	.mobile-state-open {
+		translate: 0 0;
 	}
 	@keyframes headshot {
 		0% {
@@ -217,11 +253,28 @@
 		}
 	}
 	@media (max-width: 680px) {
-		nav {
-			display: none;
-		}
 		.nav_btn {
-			display: block;
+			display: flex;
+		}
+		nav {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			inset: 0 -6rem auto 30%;
+			padding: calc(var(--bar-height) + var(--site-pad)) 4rem
+				calc(var(--bar-height) + var(--site-pad)) 0;
+			background: #000;
+			z-index: 50;
+			border-radius: 0 0 0 var(--radius);
+			translate: 100% 0;
+			transition: translate 0.26s var(--easing-1);
+		}
+		a {
+			font-size: 3rem;
+			color: #fff;
+		}
+		a.activeHome {
+			color: var(--color-accent);
 		}
 	}
 </style>
