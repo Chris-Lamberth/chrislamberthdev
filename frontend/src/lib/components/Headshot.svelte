@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { animation } from '$lib/animation';
+	import { writable } from 'svelte/store';
 	let currentPath;
 	let isInteriorPage;
 
@@ -10,6 +11,24 @@
 
 	let bgElement;
 
+	const windowWidth = writable(0); // Initialize with a default value
+
+	onMount(() => {
+		// Set the initial width and update on resize
+		windowWidth.set(window.innerWidth);
+
+		function handleResize() {
+			windowWidth.set(window.innerWidth);
+		}
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	});
+
+	let animationConfig;
 	onMount(() => {
 		function handleMouseMove(event) {
 			const { clientX, clientY, target } = event;
@@ -32,35 +51,34 @@
 			window.removeEventListener('mousemove', handleMouseMove);
 		};
 	});
+
+	$: {
+		animationConfig = {
+			animation: {
+				enter: {
+					width: '3.2rem', // '30vw
+					height: '2.8rem',
+					x: 'auto',
+					y: '0.4rem',
+					duration: 0.22,
+					delay: 0.05,
+					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+				},
+				exit: {
+					width: $windowWidth <= 680 ? '50vw' : '30vw',
+					height: '12rem',
+					x: $windowWidth <= 680 ? '20vw' : 'auto',
+					y: $windowWidth <= 680 ? '2.5rem' : '6rem',
+					duration: 0.22,
+					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+				}
+			},
+			trigger: isInteriorPage
+		};
+	}
 </script>
 
-<a
-	href="/"
-	class="img"
-	class:int={isInteriorPage}
-	use:animation={{
-		animation: {
-			enter: {
-				width: '3.2rem', // '30vw
-				height: '2.8rem',
-				x: 'auto',
-				y: '0.4rem',
-				duration: 0.22,
-				delay: 0.05,
-				ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-			},
-			exit: {
-				width: '30vw',
-				height: '12rem',
-				x: 'auto',
-				y: '6rem',
-				duration: 0.22,
-				ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-			}
-		},
-		trigger: isInteriorPage
-	}}
->
+<a href="/" class="img" class:int={isInteriorPage} use:animation={animationConfig}>
 	<div bind:this={bgElement} class="bg" />
 	<div
 		class="headshot"
@@ -128,5 +146,12 @@
 		inset: -2rem;
 		translate: 0 0;
 		background: url(../images/headshot/bg.jpg) center center / cover no-repeat;
+		transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); /* Elastic easing */
+	}
+	@media (max-width: 680px) {
+		.img {
+			transform: translate(20vw, 2.5rem);
+			width: 50vw;
+		}
 	}
 </style>

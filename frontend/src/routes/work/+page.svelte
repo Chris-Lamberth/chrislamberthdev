@@ -5,5 +5,13 @@
 </script>
 
 <section class="container">
-	<Feed {posts} />
+	<div class="wrapper">
+		<Feed {posts} />
+	</div>
 </section>
+
+<style>
+	.wrapper {
+		padding: 0 0 3rem 0;
+	}
+</style>

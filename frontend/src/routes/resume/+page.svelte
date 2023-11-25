@@ -102,7 +102,7 @@
 		padding: 3rem;
 		border: 1px solid var(--gray-100);
 		border-radius: var(--radius);
-		margin: 0 0 4rem 0;
+		margin: 0 0 3rem 0;
 	}
 	.header {
 		margin: 0 0 3rem 0;
