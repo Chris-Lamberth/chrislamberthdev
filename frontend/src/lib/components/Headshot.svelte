@@ -11,7 +11,12 @@
 
 	let bgElement;
 
-	const windowWidth = writable(0); // Initialize with a default value
+	const windowWidth = writable(typeof window !== 'undefined' ? window.innerWidth : 0);
+	if (typeof window !== 'undefined') {
+		window.addEventListener('resize', () => {
+			windowWidth.set(window.innerWidth);
+		});
+	}
 
 	onMount(() => {
 		// Set the initial width and update on resize
