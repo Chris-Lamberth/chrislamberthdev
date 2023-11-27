@@ -23,7 +23,6 @@
 	}
 
 	onMount(() => {
-		// Set the initial width and update on resize
 		windowWidth.set(window.innerWidth);
 
 		function handleResize() {
@@ -242,18 +241,10 @@
 		background: #fff;
 	}
 	.mobile-state-open {
-		translate: 0 0;
+		translate: -100% 0;
 	}
 	.nav_btn:hover > div {
 		background: var(--color-accent);
-	}
-	@keyframes headshot {
-		0% {
-			translate: 0 5rem;
-		}
-		100% {
-			translate: 0 0;
-		}
 	}
 
 	@media (min-width: 1000px) {
@@ -261,6 +252,7 @@
 			transform: translate(26rem, 9.5rem);
 		}
 	}
+
 	@media (max-width: 680px) {
 		.txt {
 			width: 100%;
@@ -283,14 +275,14 @@
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			inset: 0 -6rem auto 20%;
+			inset: 0 auto auto 120%;
 			padding: calc(var(--bar-height) + var(--site-pad)) 4rem
 				calc(var(--bar-height) + var(--site-pad)) 0;
 			background: linear-gradient(170deg, #02242a 0%, #000 50%, #00221d 90%);
 			z-index: 50;
 			border-radius: var(--radius) 0 var(--radius) var(--radius);
-			translate: 100% 0;
 			transition: translate 0.26s var(--easing-1);
+			width: 100%;
 		}
 		a {
 			font-size: 3rem;
