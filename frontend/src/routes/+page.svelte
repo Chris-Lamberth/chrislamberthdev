@@ -64,6 +64,10 @@
 		color: #000;
 		text-decoration: none;
 		font-size: 1.4rem;
+		transition: scale 0.26s var(--easing-1);
+	}
+	.feed .txt a:active {
+		scale: 0.9;
 	}
 	.feed .line::after {
 		translate: -1.3rem 0;

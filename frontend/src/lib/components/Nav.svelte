@@ -212,6 +212,10 @@
 		padding: 1.3em var(--site-pad) 1.3em 1.3em;
 		width: 6em;
 		z-index: 51;
+		transition: scale 0.26s var(--easing-1);
+	}
+	.nav_btn:active {
+		scale: 0.8;
 	}
 	.nav_btn > div {
 		background: #000;

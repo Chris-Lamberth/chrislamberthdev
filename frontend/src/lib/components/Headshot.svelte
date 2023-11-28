@@ -146,12 +146,13 @@
 	.int .headshot {
 		transform: translate(0, 0.7rem) scale(1.1);
 	}
+
 	.bg {
 		position: absolute;
 		inset: -2rem;
 		translate: 0 0;
 		background: url(../images/headshot/bg.jpg) center center / cover no-repeat;
-		transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); /* Elastic easing */
+		transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 	@media (max-width: 680px) {
 		.img {
