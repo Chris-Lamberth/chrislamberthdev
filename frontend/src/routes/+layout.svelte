@@ -21,7 +21,8 @@
 			layers.forEach((layer, index) => {
 				gsap.to(layer, {
 					yPercent: -20 * (index + 1),
-					ease: 'none',
+					ease: 'power1.out',
+
 					scrollTrigger: {
 						trigger: '.bg',
 						start: 'top top',
@@ -74,7 +75,7 @@
 		position: absolute;
 		inset: 0;
 		z-index: 1;
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%);
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 1) 50%);
 	}
 	.layer {
 		position: absolute;
