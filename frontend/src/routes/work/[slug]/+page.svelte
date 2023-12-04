@@ -154,27 +154,57 @@
 		<hr />
 		<nav>
 			{#if previousPost}
-				<a class="previous line" href={`/work/${previousPost.slug.current}`}>
-					<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow" />
-					previous
-				</a>
+				<div>
+					<a class="previous line" href={`/work/${previousPost.slug.current}`}>
+						<object
+							class="arrow"
+							data="/images/arrow.svg"
+							type="image/svg+xml"
+							aria-label="arrow"
+						/>
+						previous
+					</a>
+				</div>
 			{:else}
-				<span class="previous line disabled">
-					<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow" />
-					previous
-				</span>
+				<div>
+					<span class="previous line disabled">
+						<object
+							class="arrow"
+							data="/images/arrow.svg"
+							type="image/svg+xml"
+							aria-label="arrow"
+						/>
+						previous
+					</span>
+				</div>
 			{/if}
-			<a class="line view_all" href="/work">view all</a>
+			<div>
+				<a class="viewall line" href="/work">view all</a>
+			</div>
 			{#if nextPost}
-				<a class="next line" href={`/work/${nextPost.slug.current}`}>
-					next
-					<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow" />
-				</a>
+				<div>
+					<a class="next line" href={`/work/${nextPost.slug.current}`}>
+						next
+						<object
+							class="arrow"
+							data="/images/arrow.svg"
+							type="image/svg+xml"
+							aria-label="arrow"
+						/>
+					</a>
+				</div>
 			{:else}
-				<span class="next line disabled">
-					next
-					<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow" />
-				</span>
+				<div>
+					<span class="next line disabled">
+						next
+						<object
+							class="arrow"
+							data="/images/arrow.svg"
+							type="image/svg+xml"
+							aria-label="arrow"
+						/>
+					</span>
+				</div>
 			{/if}
 		</nav>
 	</div>
@@ -244,8 +274,18 @@
 		margin: 2rem 0;
 	}
 	.post_nav nav {
-		display: flex;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		width: 100%;
+	}
+	.post_nav nav > div:nth-child(1) {
+		text-align: left;
+	}
+	.post_nav nav > div:nth-child(2) {
+		text-align: center;
+	}
+	.post_nav nav > div:nth-child(3) {
+		text-align: right;
 	}
 	.post_nav a,
 	.post_nav span {
@@ -253,6 +293,7 @@
 		color: #000;
 		text-decoration: none;
 		font-size: 1.4rem;
+		line-height: 2em;
 	}
 	.post_nav .disabled {
 		opacity: 0.2;
@@ -273,9 +314,7 @@
 		translate: -0.8rem 0;
 		scale: 0.7 1;
 	}
-	.post_nav .view_all {
-		margin: 0 0 0 -2em;
-	}
+
 	.post_nav .arrow {
 		translate: 0 0.2rem;
 	}
