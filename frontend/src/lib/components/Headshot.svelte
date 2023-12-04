@@ -151,7 +151,7 @@
 		position: absolute;
 		inset: -2rem;
 		translate: 0 0;
-		background: url(../images/headshot/bg.jpg) center center / cover no-repeat;
+		background: url('../images/headshot/bg.jpg') center center / cover no-repeat;
 		transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 	@media (max-width: 680px) {
