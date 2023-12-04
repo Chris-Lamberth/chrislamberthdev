@@ -54,6 +54,7 @@
 	.main_wrapper {
 		position: relative;
 		overflow-x: hidden;
+		height: 100vh;
 	}
 	.wrapper {
 		translate: 0 16rem;
