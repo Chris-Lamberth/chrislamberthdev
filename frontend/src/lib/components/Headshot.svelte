@@ -36,18 +36,20 @@
 	let animationConfig;
 	onMount(() => {
 		function handleMouseMove(event) {
-			const { clientX, clientY, target } = event;
-			const { innerWidth, innerHeight } = window;
+			if ($windowWidth > 680) {
+				const { clientX, clientY } = event;
+				const { innerWidth, innerHeight } = window;
 
-			const xPercent = (clientX / innerWidth - 0.5) * -2;
-			const yPercent = (clientY / innerHeight - 0.5) * -2;
+				const xPercent = (clientX / innerWidth - 0.5) * -2;
+				const yPercent = (clientY / innerHeight - 0.5) * -2;
 
-			const maxTranslate = 30;
+				const maxTranslate = 30;
 
-			const translateX = xPercent * maxTranslate;
-			const translateY = yPercent * maxTranslate;
+				const translateX = xPercent * maxTranslate;
+				const translateY = yPercent * maxTranslate;
 
-			bgElement.style.transform = `translate(${translateX}px, ${translateY}px)`;
+				bgElement.style.transform = `translate(${translateX}px, ${translateY}px)`;
+			}
 		}
 
 		window.addEventListener('mousemove', handleMouseMove);
