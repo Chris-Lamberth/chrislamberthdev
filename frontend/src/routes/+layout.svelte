@@ -82,15 +82,15 @@
 		inset: 0;
 	}
 	.layer:nth-child(1) {
-		background: url('../images/layer3.svg') center top / cover no-repeat;
+		background: url('images/layer3.svg') center top / cover no-repeat;
 		opacity: 0.4;
 	}
 	.layer:nth-child(2) {
-		background: url('../images/layer2.svg') center top / cover no-repeat;
+		background: url('images/layer2.svg') center top / cover no-repeat;
 		opacity: 0.6;
 	}
 	.layer:nth-child(3) {
-		background: url('../images/layer1.svg') center top / cover no-repeat;
+		background: url('images/layer1.svg') center top / cover no-repeat;
 		opacity: 0.8;
 	}
 </style>
