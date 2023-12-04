@@ -71,8 +71,9 @@
 	}
 	.bg {
 		position: fixed;
-		inset: 0;
+		inset: 0 0 auto 0;
 		background: #f0f0f0;
+		height: 100vh;
 	}
 	.bg::after {
 		content: '';
