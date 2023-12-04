@@ -75,13 +75,15 @@
 				<section>
 					<h2 class="hl_sm">Career Objective</h2>
 					<p>
-						Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis maiores ad asperiores
-						consequuntur odit repudiandae minus quisquam? Atque harum animi eos maxime, fugiat fuga
-						aut, maiores esse aspernatur ipsum officia? Aperiam porro eos, possimus odio corrupti
-						harum id nam blanditiis est voluptatibus voluptatum assumenda nostrum quam consequatur
-						tenetur voluptatem illo minus tempora atque iste voluptates dolorum earum hic. Omnis,
-						adipisci! Culpa beatae sed fuga labore temporibus! Quis sequi aspernatur delectus earum,
-						optio explicabo, cupiditate.
+						Dynamic and creative professional with a comprehensive background in Web Development and
+						Graphic Design, seeking to apply my skills in a challenging and innovative environment.
+						With a rich history of Web Developement, complemented by a strong foundation in Graphic
+						Design from the Art Institute of Jacksonville, I'm equipped to contribute effectively on
+						digital media projects. My goal is to work with forward-thinking organizations and small
+						businesses where I can blend my technical skills and creative vision to produce
+						outstanding digital content and web apps. I'm passionate about creating engaging digital
+						experiences and committed to staying abreast of the latest industry trends to deliver
+						high-quality solutions.
 					</p>
 				</section>
 				<section>
