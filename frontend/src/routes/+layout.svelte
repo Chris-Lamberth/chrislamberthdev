@@ -35,41 +35,38 @@
 	});
 </script>
 
-<div class="main_wrapper">
-	<div class="bg">
-		<div class="layer" />
-		<div class="layer" />
-		<div class="layer" />
-	</div>
+<div class="bg">
+	<div class="layer" />
+	<div class="layer" />
+	<div class="layer" />
+</div>
+<div class="wrapper">
 	<Nav />
-	<div class="wrapper" class:int={!isInteriorPage}>
-		<main>
-			<slot />
-		</main>
-		<Footer />
-	</div>
+	<main>
+		<div class="spacer" class:int={!isInteriorPage} />
+		<slot />
+	</main>
+	<Footer />
 </div>
 
 <style>
-	.main_wrapper {
-		position: relative;
-		overflow-x: hidden;
-		height: 100vh;
-	}
 	.wrapper {
-		translate: 0 16rem;
-		transition: translate 0.3s var(--easing-1);
-		display: flex;
-		justify-content: space-between;
-		flex-direction: column;
-		min-height: 95vh;
+		overflow-x: hidden;
 	}
-	.wrapper.int {
-		translate: 0 2rem;
+	main {
+		position: relative;
+		min-height: calc(100vh - 13rem);
+	}
+	.spacer {
+		height: 16rem;
+		transition: height 0.4s var(--easing-1);
+	}
+	.spacer.int {
+		height: 2rem;
 	}
 	@media (max-width: 680px) {
-		.wrapper {
-			translate: 0 18rem;
+		.spacer {
+			height: 18rem;
 		}
 	}
 	.bg {

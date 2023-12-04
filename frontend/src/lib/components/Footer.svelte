@@ -45,6 +45,7 @@
 		background: #000;
 		padding: 3rem 0;
 		margin: auto 0 0 0;
+		position: relative;
 	}
 	.group {
 		display: flex;
