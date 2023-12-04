@@ -35,20 +35,26 @@
 	});
 </script>
 
-<div class="bg">
-	<div class="layer" />
-	<div class="layer" />
-	<div class="layer" />
-</div>
-<Nav />
-<div class="wrapper" class:int={!isInteriorPage}>
-	<main>
-		<slot />
-	</main>
-	<Footer />
+<div class="main_wrapper">
+	<div class="bg">
+		<div class="layer" />
+		<div class="layer" />
+		<div class="layer" />
+	</div>
+	<Nav />
+	<div class="wrapper" class:int={!isInteriorPage}>
+		<main>
+			<slot />
+		</main>
+		<Footer />
+	</div>
 </div>
 
 <style>
+	.main_wrapper {
+		position: relative;
+		overflow-x: hidden;
+	}
 	.wrapper {
 		translate: 0 16rem;
 		transition: translate 0.3s var(--easing-1);
