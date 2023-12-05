@@ -1,6 +1,7 @@
 <script>
 	import { imgUrl } from '$lib/sanity';
 	import { page } from '$app/stores';
+	import { fade } from 'svelte/transition';
 	export let data;
 
 	let previousPost, currentPost, nextPost;
@@ -20,7 +21,7 @@
 </script>
 
 <h1 class="hidden">{data.title}</h1>
-<div class="post">
+<div class="post" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
 	<div class="container">
 		<section class="info">
 			<h2 class="hl_sm">client</h2>
@@ -149,7 +150,7 @@
 </div>
 
 <!-- Post Navigation -->
-<section class="post_nav">
+<section class="post_nav" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
 	<div class="container">
 		<hr />
 		<nav>

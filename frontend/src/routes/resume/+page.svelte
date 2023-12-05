@@ -1,16 +1,17 @@
 <script>
 	let currentYear = new Date().getFullYear();
+	import { fade, fly } from 'svelte/transition';
 </script>
 
-<div class="container">
+<div class="container" in:fade={{ duration: 300, delay: 50 }} out:fade={{ duration: 50 }}>
 	<div class="resume">
 		<div class="header">
 			<div class="group">
 				<div>
-					<h1>Chris Lamberth</h1>
-					<p>web developer & graphic designer</p>
+					<h1 in:fly={{ duration: 300, delay: 50, x: 30 }}>Chris Lamberth</h1>
+					<p in:fly={{ duration: 300, delay: 100, x: 30 }}>web developer & graphic designer</p>
 				</div>
-				<div>
+				<div n:fade={{ duration: 200, delay: 200 }}>
 					<button class="download">
 						<span>Download PDF</span>
 						<svg
