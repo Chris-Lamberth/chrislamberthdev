@@ -49,6 +49,7 @@
 	</main>
 	<Footer />
 </div>
+injectSpeedInsights();
 
 <style>
 	.wrapper {
