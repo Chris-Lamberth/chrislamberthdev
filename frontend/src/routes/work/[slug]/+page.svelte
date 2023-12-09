@@ -377,7 +377,7 @@
 		}
 	}
 	.restart {
-		cursor: url('../images/refresh.png'), auto;
+		cursor: url('/images/refresh.png'), auto;
 	}
 	.restart:active iframe {
 		display: none;
