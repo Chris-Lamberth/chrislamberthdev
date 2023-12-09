@@ -1,5 +1,7 @@
 import { getPosts, getInstaPosts } from "$lib/sanity";
 
+import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+
 export async function load() {
 
 	const loadPosts = async () => {
@@ -29,6 +31,6 @@ export async function load() {
 
 }
 	
- 
+injectSpeedInsights();
 
   

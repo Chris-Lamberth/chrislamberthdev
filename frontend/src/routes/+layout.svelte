@@ -4,7 +4,6 @@
 	import '../global.css';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
 	let currentPath;
 	$: currentPath = $page.url.pathname;
@@ -49,7 +48,6 @@
 	</main>
 	<Footer />
 </div>
-injectSpeedInsights();
 
 <style>
 	.wrapper {
