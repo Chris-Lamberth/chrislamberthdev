@@ -2,10 +2,41 @@
 	import { imgUrl } from '$lib/sanity';
 	export let posts = [];
 	export let limit = posts.length;
+	export let showFilter = false;
+
+	let categories = [];
+	posts.forEach((post) => {
+		post.categories.forEach((category) => {
+			if (!categories.includes(category.title)) {
+				categories.push(category.title);
+			}
+		});
+	});
+
+	let selectedCategory = 'all';
+
+	$: filteredPosts =
+		selectedCategory === 'all'
+			? posts
+			: posts.filter((post) =>
+					post.categories.some((category) => category.title === selectedCategory)
+			  );
 </script>
 
+{#if showFilter}
+	<div class="filter">
+		<span>filter:</span>
+		<select bind:value={selectedCategory}>
+			<option value="all">All</option>
+			{#each categories as category}
+				<option value={category}>{category}</option>
+			{/each}
+		</select>
+	</div>
+{/if}
+
 <div class="group">
-	{#each posts.slice(0, limit) as post}
+	{#each filteredPosts.slice(0, limit) as post}
 		<a href={`work/${post.slug.current}`}>
 			<div
 				class="img border-1"
@@ -85,5 +116,18 @@
 		.img {
 			height: 8rem;
 		}
+	}
+	.filter {
+		text-align: right;
+	}
+	.filter span {
+		font-family: var(--serif);
+		font-size: 1.4rem;
+	}
+	.filter select {
+		background: transparent;
+		border: none;
+		font-family: var(--serif);
+		font-size: 1.4rem;
 	}
 </style>

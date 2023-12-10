@@ -7,7 +7,7 @@
 
 <section class="container" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
 	<div class="wrapper">
-		<Feed {posts} />
+		<Feed {posts} showFilter={true} />
 	</div>
 </section>
 
