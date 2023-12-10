@@ -24,14 +24,15 @@
 </script>
 
 {#if showFilter}
-	<div class="filter">
-		<span>filter:</span>
-		<select bind:value={selectedCategory}>
-			<option value="all">All</option>
-			{#each categories as category}
-				<option value={category}>{category}</option>
-			{/each}
-		</select>
+	<div class="filter-wrapper">
+		<div class="filter">
+			<select bind:value={selectedCategory}>
+				<option value="all">All</option>
+				{#each categories as category}
+					<option value={category}>{category}</option>
+				{/each}
+			</select>
+		</div>
 	</div>
 {/if}
 
@@ -117,17 +118,51 @@
 			height: 8rem;
 		}
 	}
-	.filter {
+	.filter-wrapper {
 		text-align: right;
 	}
-	.filter span {
-		font-family: var(--serif);
-		font-size: 1.4rem;
+	.filter {
+		text-align: right;
+		margin: 0 0 1rem auto;
+		display: inline-block;
+		position: relative;
 	}
+	.filter::after {
+		content: '';
+		position: absolute;
+		inset: 50% 0 auto auto;
+		width: 1.6rem;
+		height: 1.6rem;
+		background: var(--color-accent);
+		border-radius: 30rem;
+		z-index: 1;
+		translate: 0 -50%;
+		scale: 0;
+		transition: scale 0.2s ease;
+	}
+
 	.filter select {
 		background: transparent;
 		border: none;
 		font-family: var(--serif);
-		font-size: 1.4rem;
+		font-size: 1rem;
+		-webkit-appearance: none; /* for Chrome, Safari */
+		-moz-appearance: none; /* for Firefox */
+		appearance: none; /* for modern browsers */
+		background-image: url('/images/icon_filter.svg');
+		background-repeat: no-repeat;
+		background-position: right 5px center;
+		background-size: 1rem;
+		text-align: right;
+		padding: 0 2rem 0 0;
+		cursor: pointer;
+		outline: none;
+		z-index: 2;
+		position: relative;
+	}
+
+	.filter:focus-within::after,
+	.filter:hover::after {
+		scale: 1;
 	}
 </style>
