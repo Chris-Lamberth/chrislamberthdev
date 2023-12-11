@@ -14,9 +14,7 @@
 		As a kid, I found joy in illustration and painting, a passion that naturally led me to the world
 		of computers and technology. This dual interest brought me to The Art Institute at Jacksonville,
 		where I earned my BA in Graphic Design. Now, I'm part of the Dalton Agency family, where my days
-		are filled with a mix of IT, graphic design, and primarily web development. My work involves
-		collaborating with a range of clients, from local businesses to notable names like the Mayo
-		Clinic and Zoo Atlanta.
+		are filled with a mix of IT, graphic design, and primarily web development.
 	</p>
 
 	<p>
