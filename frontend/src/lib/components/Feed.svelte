@@ -37,7 +37,7 @@
 				class="dropdown {dropdownOpen ? 'active' : ''}"
 				on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
 			>
-				<button on:click={() => (dropdownOpen = !dropdownOpen)}>
+				<button class="filter-btn" on:click={() => (dropdownOpen = !dropdownOpen)}>
 					{selectedCategory}
 				</button>
 				{#if dropdownOpen}
@@ -178,14 +178,16 @@
 		scale: 0;
 		transition: scale 0.2s ease;
 	}
+
 	.filter:has(.active)::after {
 		scale: 1;
 	}
+
 	.filter:hover::after,
 	.filter:focus-within::after {
 		scale: 1;
 	}
-	.dropdown button:not(.item) {
+	.filter-btn {
 		background: transparent;
 		border: none;
 		font-family: var(--sans);
@@ -203,6 +205,11 @@
 		outline: none;
 		z-index: 12;
 		position: relative;
+		transition: background 0.1s ease;
+	}
+	.filter-btn:active {
+		background-size: 0.9rem;
+		background-position: right 6px center;
 	}
 
 	.dropdown-menu {
