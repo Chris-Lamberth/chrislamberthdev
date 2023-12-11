@@ -42,8 +42,8 @@
 				</button>
 				{#if dropdownOpen}
 					<div class="dropdown-menu" out:fade={{ duration: 100 }}>
-						<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-						<div
+						<button
+							class="item"
 							tabindex="0"
 							on:keydown={(e) => e.key === 'Enter' && selectCategory('all')}
 							on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
@@ -51,10 +51,10 @@
 							on:click={() => selectCategory('all')}
 						>
 							all
-						</div>
+						</button>
 						{#each categories as category, index}
-							<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-							<div
+							<button
+								class="item"
 								tabindex="0"
 								in:fly={{ duration: 300, delay: (index + 1) * 10, x: 40 }}
 								on:click={() => selectCategory(category)}
@@ -62,7 +62,7 @@
 								on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
 							>
 								{category}
-							</div>
+							</button>
 						{/each}
 					</div>
 				{/if}
@@ -185,7 +185,7 @@
 	.filter:focus-within::after {
 		scale: 1;
 	}
-	.dropdown button {
+	.dropdown button:not(.item) {
 		background: transparent;
 		border: none;
 		font-family: var(--sans);
@@ -226,20 +226,21 @@
 		}
 	}
 
-	.dropdown-menu div {
+	.dropdown-menu .item {
 		font-size: 1.1rem;
 		font-family: var(--sans);
 		cursor: pointer;
 		white-space: nowrap;
 		color: #fff;
-		transform-origin: center right;
+		transform-origin: center center;
 		transition: scale 0.1s ease;
+		display: block;
 	}
-	.dropdown-menu div:not(:last-child) {
+	.dropdown-menu .item:not(:last-child) {
 		margin: 0 0 0.7rem 0;
 	}
-	.dropdown-menu div:hover,
-	.dropdown-menu div:focus-within {
+	.dropdown-menu .item:hover,
+	.dropdown-menu .item:focus-within {
 		color: var(--color-accent);
 		outline: none;
 		scale: 1.05;
