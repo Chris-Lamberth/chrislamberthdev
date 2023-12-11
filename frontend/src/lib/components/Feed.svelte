@@ -3,6 +3,7 @@
 	export let posts = [];
 	export let limit = posts.length;
 	export let showFilter = false;
+	import { fly, fade } from 'svelte/transition';
 
 	let categories = [];
 	posts.forEach((post) => {
@@ -14,6 +15,12 @@
 	});
 
 	let selectedCategory = 'all';
+	let dropdownOpen = false;
+
+	function selectCategory(category) {
+		selectedCategory = category;
+		dropdownOpen = false;
+	}
 
 	$: filteredPosts =
 		selectedCategory === 'all'
@@ -26,19 +33,50 @@
 {#if showFilter}
 	<div class="filter-wrapper">
 		<div class="filter">
-			<select bind:value={selectedCategory}>
-				<option value="all">All</option>
-				{#each categories as category}
-					<option value={category}>{category}</option>
-				{/each}
-			</select>
+			<div
+				class="dropdown {dropdownOpen ? 'active' : ''}"
+				on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
+			>
+				<button on:click={() => (dropdownOpen = !dropdownOpen)}>
+					{selectedCategory}
+				</button>
+				{#if dropdownOpen}
+					<div class="dropdown-menu" out:fade={{ duration: 100 }}>
+						<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+						<div
+							tabindex="0"
+							on:keydown={(e) => e.key === 'Enter' && selectCategory('all')}
+							on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
+							in:fly={{ duration: 300, delay: 0, x: 40 }}
+							on:click={() => selectCategory('all')}
+						>
+							all
+						</div>
+						{#each categories as category, index}
+							<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+							<div
+								tabindex="0"
+								in:fly={{ duration: 300, delay: (index + 1) * 10, x: 40 }}
+								on:click={() => selectCategory(category)}
+								on:keydown={(e) => e.key === 'Enter' && selectCategory(category)}
+								on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
+							>
+								{category}
+							</div>
+						{/each}
+					</div>
+				{/if}
+			</div>
 		</div>
 	</div>
 {/if}
 
 <div class="group">
-	{#each filteredPosts.slice(0, limit) as post}
-		<a href={`work/${post.slug.current}`}>
+	{#each filteredPosts.slice(0, limit) as post, index}
+		<a
+			href={`work/${post.slug.current}`}
+			in:fly={{ duration: 100, y: 50, delay: (index + 1) * 30 }}
+		>
 			<div
 				class="img border-1"
 				style="background-image: url({imgUrl(post.mainImage.asset)
@@ -135,20 +173,26 @@
 		height: 1.6rem;
 		background: var(--color-accent);
 		border-radius: 30rem;
-		z-index: 1;
+		z-index: 11;
 		translate: 0 -50%;
 		scale: 0;
 		transition: scale 0.2s ease;
 	}
-
-	.filter select {
+	.filter:has(.active)::after {
+		scale: 1;
+	}
+	.filter:hover::after,
+	.filter:focus-within::after {
+		scale: 1;
+	}
+	.dropdown button {
 		background: transparent;
 		border: none;
-		font-family: var(--serif);
+		font-family: var(--sans);
 		font-size: 1rem;
-		-webkit-appearance: none; /* for Chrome, Safari */
-		-moz-appearance: none; /* for Firefox */
-		appearance: none; /* for modern browsers */
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
 		background-image: url('/images/icon_filter.svg');
 		background-repeat: no-repeat;
 		background-position: right 5px center;
@@ -157,12 +201,47 @@
 		padding: 0 2rem 0 0;
 		cursor: pointer;
 		outline: none;
-		z-index: 2;
+		z-index: 12;
 		position: relative;
 	}
 
-	.filter:focus-within::after,
-	.filter:hover::after {
-		scale: 1;
+	.dropdown-menu {
+		position: absolute;
+		background: #000;
+		inset: -0.7rem -0.5rem auto auto;
+		z-index: 10;
+		padding: 3rem 2rem 2rem 2rem;
+		border-radius: var(--radius) 1.2rem var(--radius) var(--radius);
+		animation: circle 0.4s ease;
+	}
+	/* animation */
+	@keyframes circle {
+		0% {
+			-webkit-clip-path: circle(0.5% at 92% 1.3rem);
+			clip-path: circle(0.5% at 92% 1.3rem);
+		}
+		100% {
+			-webkit-clip-path: circle(200% at 92% 1.3rem);
+			clip-path: circle(200% at 92% 1.3rem);
+		}
+	}
+
+	.dropdown-menu div {
+		font-size: 1.1rem;
+		font-family: var(--sans);
+		cursor: pointer;
+		white-space: nowrap;
+		color: #fff;
+		transform-origin: center right;
+		transition: scale 0.1s ease;
+	}
+	.dropdown-menu div:not(:last-child) {
+		margin: 0 0 0.7rem 0;
+	}
+	.dropdown-menu div:hover,
+	.dropdown-menu div:focus-within {
+		color: var(--color-accent);
+		outline: none;
+		scale: 1.05;
 	}
 </style>
