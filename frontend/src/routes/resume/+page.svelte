@@ -124,6 +124,9 @@
 	h2 {
 		margin: 0 0 1em 0;
 	}
+	p {
+		font-size: 1.1rem;
+	}
 	.header p {
 		font-size: 1.4rem;
 	}
