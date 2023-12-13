@@ -4,16 +4,16 @@
 
 <div class="container" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
 	<article>
-		<div class="flex">
+		<div class="flex restaurant">
 			<div>
-				<h2 in:fly={{ duration: 300, delay: 50, x: 30 }}>Hi there! I'm Chris,</h2>
+				<h2 in:fly={{ duration: 300, delay: 50, x: 30 }}>Hi there! I'm Chris.</h2>
 				<p>
-					hailing from the vibrant streets of Memphis, TN, and now rooted in the eclectic vibes of
+					Hailing from the vibrant streets of Memphis, TN, and now rooted in the eclectic vibes of
 					Jacksonville, FL.🌴 My journey has taken me through the sunny shores of California, the
 					historic landscapes of Virginia, and the peachy realms of Georgia.
 				</p>
 			</div>
-			<div class="img sm">
+			<div class="img">
 				<img src="/images/restaurant.jpg" alt="Chris at a restaurant" />
 			</div>
 		</div>
@@ -24,8 +24,10 @@
 			family, where my days are filled with a mix of IT, graphic design, and primarily web
 			development.
 		</p>
-		<div class="flex">
-			<div class="img sm" />
+		<div class="flex working">
+			<div class="img">
+				<img src="/images/working.jpg" alt="Chris working at computer" />
+			</div>
 			<div>
 				<p>
 					But what really drives me? It's the joy of creation and the excitement of continuous
@@ -45,32 +47,43 @@
 			my skills and knowledge.
 		</p>
 
-		<p>
-			Away from the screen, I'm a builder at heart. My hobbies - woodworking, interior design, 3D
-			printing, and painting - are all about creating and bringing ideas to life. This builder's
-			mindset extends beyond hobbies; it's a core part of who I am, both professionally and
-			personally.
-		</p>
-		<div class="img lg" />
-		<p>
-			I'm a man of few words, often the quiet one in the room, but always ready to lend a hand or
-			offer a thoughtful solution. I value hard work, organization, and a keen attention to detail
-			in all aspects of life.
-		</p>
-
-		<div class="flex">
+		<div class="flex painting">
 			<div>
 				<p>
-					Joining me in my journey is my wonderful partner of over a decade and our two dogs,a Husky
-					named Mogley (No, he doesn't howl or “talk” he's quiet like his papa) and a Jack
-					Russell/Chihuahua mix named Little, affectionately known as the Fart Squad. We're the
-					adventurous kind, always ready to pack our bags and explore new corners of the world,
-					learning and experiencing as much as we can.
+					Away from the screen, I'm a builder at heart. My hobbies - woodworking, interior design,
+					remodeling, 3D printing, and painting - are all about creating and bringing ideas to life.
+					This builder's mindset extends beyond hobbies; it's a core part of who I am, both
+					professionally and personally.
+				</p>
+				<p>
+					I'm a man of few words, often the quiet one in the room, but always ready to lend a hand
+					or offer a thoughtful solution. I value hard work, organization, and a keen attention to
+					detail in all aspects of life.
 				</p>
 			</div>
-			<div class="img md" />
+			<div class="img">
+				<img src="/images/painting.jpg" alt="Chris painting" />
+			</div>
 		</div>
 
+		<p>
+			Joining me in my journey is my wonderful partner of over a decade and our two dogs, a Husky
+			named Mogley (No, he doesn't howl or “talk” he's quiet, like his papa) and a Jack
+			Russell/Chihuahua mix named Little, affectionately known as the Fart Squad. We're the
+			adventurous kind, always ready to pack our bags and explore new corners of the world, learning
+			and experiencing as much as we can.
+		</p>
+		<div class="flex fam" style="min-height:20vw;">
+			<div class="img">
+				<img src="/images/mogley.gif" alt="Mogley spinning" loading="lazy" />
+			</div>
+			<div class="img">
+				<img src="/images/chrisandbrittany.jpg" alt="Chris & Brittany" />
+			</div>
+			<div class="img">
+				<img src="/images/little.gif" alt="Little digging" loading="lazy" />
+			</div>
+		</div>
 		<p>
 			As I look ahead, my goal is to merge my technical skills with my creative vision in an
 			environment that values innovation and forward-thinking. I'm excited about the possibilities
@@ -110,7 +123,6 @@
 		flex: 6;
 	}
 	.img {
-		border: 2px solid #000;
 		border-radius: var(--radius);
 		overflow: hidden;
 		position: relative;
@@ -122,20 +134,48 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		object-position: top center;
+		object-position: center;
 	}
-	.img.sm {
-		flex: 2;
-	}
-	.img.md {
-		flex: 6;
-	}
-	.img.lg {
-		width: 100%;
-		height: 14rem;
-		margin: 0 auto var(--gap) auto;
-	}
+
 	.flex p {
 		margin: unset;
+	}
+	.flex.restaurant .img {
+		flex: 3;
+	}
+	.flex.working .img {
+		flex: 6;
+	}
+	.flex.painting .img {
+		flex: 4;
+	}
+
+	@media (width <= 600px) {
+		.flex:not(.fam) {
+			flex-direction: column;
+		}
+		.flex:not(.fam) .img {
+			height: 60vw;
+			width: 90%;
+			margin: 0 auto;
+		}
+		.flex.restaurant .img {
+			flex: none;
+		}
+		.flex.working .img {
+			flex: none;
+		}
+		.flex.working .img img {
+			object-position: right;
+		}
+		.flex.painting {
+			flex-direction: column-reverse;
+		}
+		.flex.painting .img {
+			flex: none;
+		}
+		.fam {
+			gap: 0.5rem;
+		}
 	}
 </style>
