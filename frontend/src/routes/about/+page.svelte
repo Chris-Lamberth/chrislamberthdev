@@ -8,13 +8,14 @@
 			<div>
 				<h2 in:fly={{ duration: 300, delay: 50, x: 30 }}>Hi there! I'm Chris,</h2>
 				<p>
-					a blend of creativity and tech-savvy, hailing from the vibrant streets of Memphis, TN, and
-					now rooted in the eclectic vibes of Jacksonville, FL. My journey has taken me through the
-					sunny shores of California, the historic landscapes of Virginia, and the peachy realms of
-					Georgia.
+					hailing from the vibrant streets of Memphis, TN, and now rooted in the eclectic vibes of
+					Jacksonville, FL.🌴 My journey has taken me through the sunny shores of California, the
+					historic landscapes of Virginia, and the peachy realms of Georgia.
 				</p>
 			</div>
-			<div class="img sm" />
+			<div class="img sm">
+				<img src="/images/restaurant.jpg" alt="Chris at a restaurant" />
+			</div>
 		</div>
 		<p>
 			As a kid, I found joy in illustration and painting, a passion that naturally led me to the
@@ -39,9 +40,9 @@
 			My career journey wasn't a straight shot to where I am today. It included various roles, from
 			retail jobs as a teenager to commercial and residential painting while pursuing my studies. It
 			was at Bluwave Productions where I discovered a deeper interest in web development. I created
-			digital interactive ads for Comcast Spotlight's customers using Flash. RIP🙏 This interest
-			blossomed at Dalton Agency, where I've had the opportunity to dive into diverse web projects,
-			constantly expanding my skills and knowledge.
+			digital interactive ads using HTML, CSS and Flash. RIP🙏⚡ This interest blossomed at Dalton
+			Agency, where I've had the opportunity to dive into diverse web projects, constantly expanding
+			my skills and knowledge.
 		</p>
 
 		<p>
@@ -111,9 +112,20 @@
 	.img {
 		border: 2px solid #000;
 		border-radius: var(--radius);
+		overflow: hidden;
+		position: relative;
+	}
+	.img img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: top center;
 	}
 	.img.sm {
-		flex: 4;
+		flex: 2;
 	}
 	.img.md {
 		flex: 6;
