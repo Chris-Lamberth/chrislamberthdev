@@ -74,7 +74,7 @@
 			adventurous kind, always ready to pack our bags and explore new corners of the world, learning
 			and experiencing as much as we can.
 		</p>
-		<div class="group fam" style="min-height:20vw;">
+		<div class="group fam">
 			<div class="img">
 				<img src="/images/mogley.gif" alt="Mogley spinning" loading="lazy" />
 			</div>
@@ -159,6 +159,10 @@
 	}
 	.painting .img {
 		flex: 4;
+	}
+	.fam {
+		height: 20vw;
+		max-height: 15rem;
 	}
 	.fam .img {
 		flex: 1;

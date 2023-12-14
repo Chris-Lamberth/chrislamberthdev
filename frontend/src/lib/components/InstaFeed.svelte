@@ -1,11 +1,18 @@
 <script>
+	import { imgUrl } from '$lib/sanity';
 	export let instaPosts = [];
 </script>
 
 <div class="group">
 	{#each instaPosts as post}
 		<a href={post.postURLs} target="_blank">
-			<div class="img" style="background-image: url({post.imageUrl})" />
+			<div
+				class="img"
+				style="background-image: url({imgUrl(post.imageUrl)
+					.width(400)
+					.format('webp', 'jpg')
+					.url()})"
+			/>
 		</a>
 	{/each}
 </div>
