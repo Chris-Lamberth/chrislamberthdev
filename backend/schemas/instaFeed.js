@@ -26,7 +26,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'name',
+      media: 'postImage',
     },
   },
 });
