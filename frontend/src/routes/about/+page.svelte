@@ -2,10 +2,10 @@
 	import { fade, fly } from 'svelte/transition';
 </script>
 
-<div class="container" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
+<div class="container" in:fade={{ duration: 300, delay: 50 }} out:fade={{ duration: 50 }}>
 	<article>
 		<div class="group restaurant">
-			<div class="img">
+			<div class="img" in:fly={{ duration: 300, delay: 50, x: 30 }}>
 				<img src="/images/restaurant.jpg" alt="Chris at a restaurant" />
 			</div>
 			<div class="txt">
@@ -13,11 +13,12 @@
 				<p>
 					Hailing from the vibrant streets of Memphis, TN, and now rooted in the eclectic vibes of
 					Jacksonville, FL.🌴 My journey has taken me through the sunny shores of California, the
-					historic landscapes of Virginia, and the peachy realms of Georgia.
+					historic landscapes of Virginia, and the peachy realms of Georgia. All that moving around
+					took place early on so it's safe to say I grew up in Florida.
 				</p>
 			</div>
 		</div>
-		<div class="cf" />
+
 		<p>
 			As a kid, I found joy in illustration and painting, a passion that naturally led me to the
 			world of computers and technology. This dual interest brought me to The Art Institute at
@@ -26,7 +27,7 @@
 			development.
 		</p>
 		<div class="group working">
-			<div class="img">
+			<div class="img" in:fly={{ duration: 300, delay: 60, x: -30 }}>
 				<img src="/images/working.jpg" alt="Chris working at computer" />
 			</div>
 			<div class="txt">
@@ -38,8 +39,6 @@
 				</p>
 			</div>
 		</div>
-		<div class="cf" />
-
 		<p>
 			My career journey wasn't a straight shot to where I am today. It included various roles, from
 			retail jobs as a teenager to commercial and residential painting while pursuing my studies. It
@@ -67,7 +66,6 @@
 				</p>
 			</div>
 		</div>
-		<div class="cf" />
 
 		<p>
 			Joining me in my journey is my wonderful partner of over a decade and our two dogs, a Husky
@@ -165,9 +163,6 @@
 	.fam .img {
 		flex: 1;
 	}
-	.cf {
-		clear: both;
-	}
 
 	@media (width <= 600px) {
 		.group {
@@ -179,17 +174,17 @@
 		}
 		.restaurant .img {
 			float: right;
-			margin: 0 0 1rem 1rem;
+			margin: 0 0 0.3rem 1rem;
 		}
 		.working .img {
 			height: 23vw;
 			width: 40%;
 			float: left;
-			margin: 0 1rem 0.5rem 0;
+			margin: 0 1rem 0.3rem 0;
 		}
 		.painting .img {
 			float: right;
-			margin: 0 0 1rem 1rem;
+			margin: 0 0 0.3rem 1rem;
 			width: 45%;
 		}
 		.fam {

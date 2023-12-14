@@ -71,7 +71,7 @@
 	.icon {
 		fill: #fff;
 		stroke-width: 1px;
-		width: 1rem;
+		height: 1rem;
 		transition: fill 0.2s linear;
 	}
 	.social a {
@@ -89,5 +89,24 @@
 		height: 2px;
 		background: var(--color-accent);
 		border-radius: 50px;
+	}
+	@media (width <= 600px) {
+		footer {
+			padding: 4rem 0;
+		}
+		.group {
+			flex-direction: column;
+			align-items: center;
+		}
+		.group .txt {
+			text-align: center;
+			margin: 0 0 4rem 0;
+		}
+		.social {
+			gap: 2rem;
+		}
+		.icon {
+			height: 1.5rem;
+		}
 	}
 </style>
