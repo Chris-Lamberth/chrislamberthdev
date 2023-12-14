@@ -227,7 +227,6 @@
 		margin: 0 0 3rem 0;
 	}
 	.main-image {
-		flex: 1;
 		background-position: center center;
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -384,7 +383,7 @@
 		}
 	}
 	.restart {
-		cursor: url('../images/refresh.png'), auto;
+		cursor: url('/images/refresh.png'), auto;
 	}
 	.restart:active iframe {
 		display: none;
