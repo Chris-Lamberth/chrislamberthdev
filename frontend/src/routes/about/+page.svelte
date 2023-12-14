@@ -4,19 +4,20 @@
 
 <div class="container" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
 	<article>
-		<div class="flex restaurant">
-			<div>
-				<h2 in:fly={{ duration: 300, delay: 50, x: 30 }}>Hi there! I'm Chris.</h2>
+		<div class="group restaurant">
+			<div class="img">
+				<img src="/images/restaurant.jpg" alt="Chris at a restaurant" />
+			</div>
+			<div class="txt">
+				<h2 in:fly={{ duration: 300, delay: 50, x: 30 }}>Hi there! I'm&nbsp;Chris.</h2>
 				<p>
 					Hailing from the vibrant streets of Memphis, TN, and now rooted in the eclectic vibes of
 					Jacksonville, FL.🌴 My journey has taken me through the sunny shores of California, the
 					historic landscapes of Virginia, and the peachy realms of Georgia.
 				</p>
 			</div>
-			<div class="img">
-				<img src="/images/restaurant.jpg" alt="Chris at a restaurant" />
-			</div>
 		</div>
+		<div class="cf" />
 		<p>
 			As a kid, I found joy in illustration and painting, a passion that naturally led me to the
 			world of computers and technology. This dual interest brought me to The Art Institute at
@@ -24,11 +25,11 @@
 			family, where my days are filled with a mix of IT, graphic design, and primarily web
 			development.
 		</p>
-		<div class="flex working">
+		<div class="group working">
 			<div class="img">
 				<img src="/images/working.jpg" alt="Chris working at computer" />
 			</div>
-			<div>
+			<div class="txt">
 				<p>
 					But what really drives me? It's the joy of creation and the excitement of continuous
 					learning. I've always been the one to quietly observe, soak in details, and then bring
@@ -37,6 +38,7 @@
 				</p>
 			</div>
 		</div>
+		<div class="cf" />
 
 		<p>
 			My career journey wasn't a straight shot to where I am today. It included various roles, from
@@ -47,8 +49,11 @@
 			my skills and knowledge.
 		</p>
 
-		<div class="flex painting">
-			<div>
+		<div class="group painting">
+			<div class="img">
+				<img src="/images/painting.jpg" alt="Chris painting" />
+			</div>
+			<div class="txt">
 				<p>
 					Away from the screen, I'm a builder at heart. My hobbies - woodworking, interior design,
 					remodeling, 3D printing, and painting - are all about creating and bringing ideas to life.
@@ -61,10 +66,8 @@
 					detail in all aspects of life.
 				</p>
 			</div>
-			<div class="img">
-				<img src="/images/painting.jpg" alt="Chris painting" />
-			</div>
 		</div>
+		<div class="cf" />
 
 		<p>
 			Joining me in my journey is my wonderful partner of over a decade and our two dogs, a Husky
@@ -73,7 +76,7 @@
 			adventurous kind, always ready to pack our bags and explore new corners of the world, learning
 			and experiencing as much as we can.
 		</p>
-		<div class="flex fam" style="min-height:20vw;">
+		<div class="group fam" style="min-height:20vw;">
 			<div class="img">
 				<img src="/images/mogley.gif" alt="Mogley spinning" loading="lazy" />
 			</div>
@@ -114,14 +117,12 @@
 	article {
 		padding: 2rem 0;
 	}
-	.flex {
+	.group {
 		display: flex;
 		gap: var(--gap);
 		margin: 0 0 var(--gap) 0;
 	}
-	.flex > div {
-		flex: 6;
-	}
+
 	.img {
 		border-radius: var(--radius);
 		overflow: hidden;
@@ -137,45 +138,65 @@
 		object-position: center;
 	}
 
-	.flex p {
+	.group p {
 		margin: unset;
 	}
-	.flex.restaurant .img {
-		flex: 3;
-	}
-	.flex.working .img {
+	.group .txt {
 		flex: 6;
 	}
-	.flex.painting .img {
+	.restaurant {
+		flex-direction: row-reverse;
+	}
+	.restaurant .img {
+		flex: 3;
+	}
+	.working .img {
+		flex: 6;
+	}
+	.working .img img {
+		object-position: right center;
+	}
+	.painting {
+		flex-direction: row-reverse;
+	}
+	.painting .img {
 		flex: 4;
+	}
+	.fam .img {
+		flex: 1;
+	}
+	.cf {
+		clear: both;
 	}
 
 	@media (width <= 600px) {
-		.flex:not(.fam) {
-			flex-direction: column;
+		.group {
+			display: block;
 		}
-		.flex:not(.fam) .img {
-			height: 60vw;
-			width: 90%;
-			margin: 0 auto;
+		.group .img {
+			height: 40vw;
+			width: 35%;
 		}
-		.flex.restaurant .img {
-			flex: none;
+		.restaurant .img {
+			float: right;
+			margin: 0 0 1rem 1rem;
 		}
-		.flex.working .img {
-			flex: none;
+		.working .img {
+			height: 23vw;
+			width: 40%;
+			float: left;
+			margin: 0 1rem 1rem 0;
 		}
-		.flex.working .img img {
-			object-position: right;
-		}
-		.flex.painting {
-			flex-direction: column-reverse;
-		}
-		.flex.painting .img {
-			flex: none;
+		.painting .img {
+			float: right;
+			margin: 0 0 1rem 1rem;
 		}
 		.fam {
-			gap: 0.5rem;
+			display: flex;
+			gap: 1rem;
+		}
+		.fam > div:nth-child(odd) {
+			flex: 2;
 		}
 	}
 </style>
