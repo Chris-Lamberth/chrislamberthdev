@@ -185,15 +185,19 @@
 			height: 23vw;
 			width: 40%;
 			float: left;
-			margin: 0 1rem 1rem 0;
+			margin: 0 1rem 0.5rem 0;
 		}
 		.painting .img {
 			float: right;
 			margin: 0 0 1rem 1rem;
+			width: 45%;
 		}
 		.fam {
 			display: flex;
 			gap: 1rem;
+		}
+		.fam .img {
+			height: 30vw;
 		}
 		.fam > div:nth-child(odd) {
 			flex: 2;
