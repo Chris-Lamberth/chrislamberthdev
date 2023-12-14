@@ -18,6 +18,7 @@
 				</p>
 			</div>
 		</div>
+		<div class="cf" />
 
 		<p>
 			As a kid, I found joy in illustration and painting, a passion that naturally led me to the
@@ -39,6 +40,7 @@
 				</p>
 			</div>
 		</div>
+		<div class="cf" />
 		<p>
 			My career journey wasn't a straight shot to where I am today. It included various roles, from
 			retail jobs as a teenager to commercial and residential painting while pursuing my studies. It
@@ -66,6 +68,7 @@
 				</p>
 			</div>
 		</div>
+		<div class="cf" />
 
 		<p>
 			Joining me in my journey is my wonderful partner of over a decade and our two dogs, a Husky
@@ -85,6 +88,7 @@
 				<img src="/images/little.gif" alt="Little digging" loading="lazy" />
 			</div>
 		</div>
+		<div class="cf" />
 		<p>
 			As I look ahead, my goal is to merge my technical skills with my creative vision in an
 			environment that values innovation and forward-thinking. I'm excited about the possibilities
@@ -201,5 +205,8 @@
 		.fam > div:nth-child(odd) {
 			flex: 2;
 		}
+	}
+	.cf {
+		clear: both;
 	}
 </style>
