@@ -5,7 +5,7 @@
 	import { fade } from 'svelte/transition';
 </script>
 
-<section class="container" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
+<section class="container" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
 	<div class="wrapper">
 		<Feed {posts} showFilter={true} />
 	</div>

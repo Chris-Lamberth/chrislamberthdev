@@ -155,6 +155,9 @@
 		.img {
 			height: 8rem;
 		}
+		.txt {
+			padding: 0.5rem 0 0 0.5rem;
+		}
 	}
 	.filter-wrapper {
 		text-align: right;

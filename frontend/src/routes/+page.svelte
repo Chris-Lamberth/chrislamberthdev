@@ -8,7 +8,7 @@
 	const { instaPosts } = data.instaPosts;
 </script>
 
-<section class="feed" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
+<section class="feed" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
 	<div class="container">
 		<div class="txt">
 			<h2 class="section-headline">some work</h2>

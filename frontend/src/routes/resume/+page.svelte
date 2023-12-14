@@ -3,7 +3,7 @@
 	import { fade, fly } from 'svelte/transition';
 </script>
 
-<div class="container" in:fade={{ duration: 300, delay: 50 }} out:fade={{ duration: 50 }}>
+<div class="container" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
 	<div class="resume">
 		<div class="header">
 			<div class="group">
