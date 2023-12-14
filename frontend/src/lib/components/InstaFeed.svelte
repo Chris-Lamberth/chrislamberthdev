@@ -1,10 +1,11 @@
 <script>
 	import { imgUrl } from '$lib/sanity';
 	export let instaPosts = [];
+	export let limit = instaPosts.length;
 </script>
 
 <div class="group">
-	{#each instaPosts as post}
+	{#each instaPosts.slice(0, limit) as post}
 		<a href={post.postURLs} target="_blank">
 			<div
 				class="img"

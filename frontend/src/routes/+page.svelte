@@ -34,7 +34,7 @@
 		<div class="group">
 			<div class="insta">
 				<h2 class="section-headline">insta feed</h2>
-				<InstaFeed {instaPosts} />
+				<InstaFeed {instaPosts} limit={4} />
 			</div>
 			<div class="form">
 				<Contact />
