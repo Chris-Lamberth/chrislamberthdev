@@ -28,9 +28,9 @@ export async function load() {
 	}
 
 	return {
-		posts: loadPosts(),
-		instaPosts: loadInstaFeed()
-	};
+		posts: await loadPosts(),
+		instaPosts: await loadInstaFeed()
+  };
 
 }
 	
