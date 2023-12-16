@@ -34,6 +34,9 @@
 	<div class="filter-wrapper">
 		<div class="filter">
 			<div
+				aria-label="Filter by category"
+				role="button"
+				tabindex="0"
 				class="dropdown {dropdownOpen ? 'active' : ''}"
 				on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
 			>
