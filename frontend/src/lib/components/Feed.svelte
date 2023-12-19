@@ -77,7 +77,7 @@
 <div class="group">
 	{#each filteredPosts.slice(0, limit) as post, index}
 		<a
-			href={`work/${post.slug.current}`}
+			href={`/work/${post.slug.current}`}
 			in:fly={{ duration: 100, y: 50, delay: (index + 1) * 30 }}
 		>
 			<div
