@@ -3,7 +3,7 @@
 	import { fade, fly } from 'svelte/transition';
 </script>
 
-<div class="container" in:fade={{ duration: 300, delay: 50 }} out:fade={{ duration: 50 }}>
+<div class="container" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
 	<div class="resume">
 		<div class="header">
 			<div class="group">
@@ -78,7 +78,7 @@
 					<p>
 						Dynamic and creative professional with a comprehensive background in Web Development and
 						Graphic Design, seeking to apply my skills in a challenging and innovative environment.
-						With a rich history of Web Developement, complemented by a strong foundation in Graphic
+						With a rich history of Web Development, complemented by a strong foundation in Graphic
 						Design from the Art Institute of Jacksonville, I'm equipped to contribute effectively on
 						digital media projects. My goal is to work with forward-thinking organizations and small
 						businesses where I can blend my technical skills and creative vision to produce
@@ -123,6 +123,9 @@
 	}
 	h2 {
 		margin: 0 0 1em 0;
+	}
+	p {
+		font-size: 1.1rem;
 	}
 	.header p {
 		font-size: 1.4rem;

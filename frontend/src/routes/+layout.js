@@ -26,11 +26,11 @@ export async function load() {
 			return { status: 500, error: new Error('Failed to fetch Instagram feed') };
 		}
 	}
-
+ 
 	return {
-		posts: loadPosts(),
-		instaPosts: loadInstaFeed()
-	};
+		posts: await loadPosts(),
+		instaPosts: await loadInstaFeed()
+  };
 
 }
 	

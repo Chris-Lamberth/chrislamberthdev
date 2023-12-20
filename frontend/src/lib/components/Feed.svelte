@@ -2,11 +2,84 @@
 	import { imgUrl } from '$lib/sanity';
 	export let posts = [];
 	export let limit = posts.length;
+	export let showFilter = false;
+	import { fly, fade } from 'svelte/transition';
+
+	let categories = [];
+	posts.forEach((post) => {
+		post.categories.forEach((category) => {
+			if (!categories.includes(category.title)) {
+				categories.push(category.title);
+			}
+		});
+	});
+
+	let selectedCategory = 'all';
+	let dropdownOpen = false;
+
+	function selectCategory(category) {
+		selectedCategory = category;
+		dropdownOpen = false;
+	}
+
+	$: filteredPosts =
+		selectedCategory === 'all'
+			? posts
+			: posts.filter((post) =>
+					post.categories.some((category) => category.title === selectedCategory)
+			  );
 </script>
 
+{#if showFilter}
+	<div class="filter-wrapper">
+		<div class="filter">
+			<div
+				aria-label="Filter by category"
+				role="button"
+				tabindex="0"
+				class="dropdown {dropdownOpen ? 'active' : ''}"
+				on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
+			>
+				<button class="filter-btn" on:click={() => (dropdownOpen = !dropdownOpen)}>
+					{selectedCategory}
+				</button>
+				{#if dropdownOpen}
+					<div class="dropdown-menu" out:fade={{ duration: 100 }}>
+						<button
+							class="item"
+							tabindex="0"
+							on:keydown={(e) => e.key === 'Enter' && selectCategory('all')}
+							on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
+							in:fly={{ duration: 300, delay: 0, x: 40 }}
+							on:click={() => selectCategory('all')}
+						>
+							all
+						</button>
+						{#each categories as category, index}
+							<button
+								class="item"
+								tabindex="0"
+								in:fly={{ duration: 300, delay: (index + 1) * 10, x: 40 }}
+								on:click={() => selectCategory(category)}
+								on:keydown={(e) => e.key === 'Enter' && selectCategory(category)}
+								on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
+							>
+								{category}
+							</button>
+						{/each}
+					</div>
+				{/if}
+			</div>
+		</div>
+	</div>
+{/if}
+
 <div class="group">
-	{#each posts.slice(0, limit) as post}
-		<a href={`work/${post.slug.current}`}>
+	{#each filteredPosts.slice(0, limit) as post, index}
+		<a
+			href={`/work/${post.slug.current}`}
+			in:fly={{ duration: 100, y: 50, delay: (index + 1) * 30 }}
+		>
 			<div
 				class="img border-1"
 				style="background-image: url({imgUrl(post.mainImage.asset)
@@ -85,5 +158,104 @@
 		.img {
 			height: 8rem;
 		}
+		.txt {
+			padding: 0.5rem 0 0 0.5rem;
+		}
+	}
+	.filter-wrapper {
+		text-align: right;
+	}
+	.filter {
+		text-align: right;
+		margin: 0 0 1rem auto;
+		display: inline-block;
+		position: relative;
+	}
+	.filter::after {
+		content: '';
+		position: absolute;
+		inset: 50% 0 auto auto;
+		width: 1.6rem;
+		height: 1.6rem;
+		background: var(--color-accent);
+		border-radius: 30rem;
+		z-index: 11;
+		translate: 0 -50%;
+		scale: 0;
+		transition: scale 0.2s ease;
+	}
+
+	.filter:has(.active)::after {
+		scale: 1;
+	}
+
+	.filter:hover::after,
+	.filter:focus-within::after {
+		scale: 1;
+	}
+	.filter-btn {
+		background: transparent;
+		border: none;
+		font-family: var(--sans);
+		font-size: 1rem;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background-image: url('/images/icon_filter.svg');
+		background-repeat: no-repeat;
+		background-position: right 5px center;
+		background-size: 1rem;
+		text-align: right;
+		padding: 0 2rem 0 0;
+		cursor: pointer;
+		outline: none;
+		z-index: 12;
+		position: relative;
+		transition: background 0.1s ease;
+	}
+	.filter-btn:active {
+		background-size: 0.9rem;
+		background-position: right 6px center;
+	}
+
+	.dropdown-menu {
+		position: absolute;
+		background: #000;
+		inset: -0.7rem -0.5rem auto auto;
+		z-index: 10;
+		padding: 3rem 2rem 2rem 2rem;
+		border-radius: var(--radius) 1.2rem var(--radius) var(--radius);
+		animation: circle 0.4s ease;
+	}
+	/* animation */
+	@keyframes circle {
+		0% {
+			-webkit-clip-path: circle(0.5% at 92% 1.3rem);
+			clip-path: circle(0.5% at 92% 1.3rem);
+		}
+		100% {
+			-webkit-clip-path: circle(200% at 92% 1.3rem);
+			clip-path: circle(200% at 92% 1.3rem);
+		}
+	}
+
+	.dropdown-menu .item {
+		font-size: 1.1rem;
+		font-family: var(--sans);
+		cursor: pointer;
+		white-space: nowrap;
+		color: #fff;
+		transform-origin: center center;
+		transition: scale 0.1s ease;
+		display: block;
+	}
+	.dropdown-menu .item:not(:last-child) {
+		margin: 0 0 0.7rem 0;
+	}
+	.dropdown-menu .item:hover,
+	.dropdown-menu .item:focus-within {
+		color: var(--color-accent);
+		outline: none;
+		scale: 1.05;
 	}
 </style>

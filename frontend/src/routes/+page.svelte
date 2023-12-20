@@ -8,7 +8,7 @@
 	const { instaPosts } = data.instaPosts;
 </script>
 
-<section class="feed" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
+<section class="feed" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
 	<div class="container">
 		<div class="txt">
 			<h2 class="section-headline">some work</h2>
@@ -34,7 +34,7 @@
 		<div class="group">
 			<div class="insta">
 				<h2 class="section-headline">insta feed</h2>
-				<InstaFeed {instaPosts} />
+				<InstaFeed {instaPosts} limit={4} />
 			</div>
 			<div class="form">
 				<Contact />

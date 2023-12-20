@@ -43,7 +43,7 @@
 				const xPercent = (clientX / innerWidth - 0.5) * -2;
 				const yPercent = (clientY / innerHeight - 0.5) * -2;
 
-				const maxTranslate = 30;
+				const maxTranslate = 15;
 
 				const translateX = xPercent * maxTranslate;
 				const translateY = yPercent * maxTranslate;

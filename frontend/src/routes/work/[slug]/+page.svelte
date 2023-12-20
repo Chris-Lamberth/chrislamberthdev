@@ -65,7 +65,9 @@
 					{#if image}
 						<div class="img border-1" style="grid-column: span {columns}">
 							<img
-								src={imgUrl(image).url()}
+								src={imgUrl(image).url().endsWith('.gif')
+									? imgUrl(image).url()
+									: imgUrl(image).format('webp').url()}
 								alt={alt || 'Image'}
 								style="object-position: {image.hotspot
 									? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%`
@@ -86,6 +88,7 @@
 							<div>
 								<div class="restart" data-size="728x90">
 									<iframe
+										loading="lazy"
 										src={`../banner-ads/${adSet.name}/728x90/index.html`}
 										frameborder="0"
 										title={`${data.title} 728x90 Banner Ad`}
@@ -97,6 +100,7 @@
 							<div>
 								<div class="restart" data-size="300x600">
 									<iframe
+										loading="lazy"
 										src={`../banner-ads/${adSet.name}/300x600/index.html`}
 										frameborder="0"
 										title={`${data.title} 300x600 Banner Ad`}
@@ -108,6 +112,7 @@
 							<div>
 								<div class="restart" data-size="160x600">
 									<iframe
+										loading="lazy"
 										src={`../banner-ads/${adSet.name}/160x600/index.html`}
 										frameborder="0"
 										title={`${data.title} 160x600 Banner Ad`}
@@ -119,6 +124,7 @@
 							{#if adSet.size300x250}
 								<div class="restart" data-size="300x250">
 									<iframe
+										loading="lazy"
 										src={`../banner-ads/${adSet.name}/300x250/index.html`}
 										frameborder="0"
 										title={`${data.title} 300x250 Banner Ad`}
@@ -128,6 +134,7 @@
 							{#if adSet.size300x50}
 								<div class="restart" data-size="300x50">
 									<iframe
+										loading="lazy"
 										src={`../banner-ads/${adSet.name}/300x50/index.html`}
 										frameborder="0"
 										title={`${data.title} 300x50 Banner Ad`}
@@ -220,7 +227,6 @@
 		margin: 0 0 3rem 0;
 	}
 	.main-image {
-		flex: 1;
 		background-position: center center;
 		background-size: cover;
 		background-repeat: no-repeat;
