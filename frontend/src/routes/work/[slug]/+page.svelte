@@ -89,7 +89,7 @@
 								<div class="restart" data-size="728x90">
 									<iframe
 										loading="lazy"
-										src={`../banner-ads/${adSet.name}/728x90/index.html`}
+										src={`/banner-ads/${adSet.name}/728x90/index.html`}
 										frameborder="0"
 										title={`${data.title} 728x90 Banner Ad`}
 									/>
@@ -101,7 +101,7 @@
 								<div class="restart" data-size="300x600">
 									<iframe
 										loading="lazy"
-										src={`../banner-ads/${adSet.name}/300x600/index.html`}
+										src={`/banner-ads/${adSet.name}/300x600/index.html`}
 										frameborder="0"
 										title={`${data.title} 300x600 Banner Ad`}
 									/>
@@ -113,7 +113,7 @@
 								<div class="restart" data-size="160x600">
 									<iframe
 										loading="lazy"
-										src={`../banner-ads/${adSet.name}/160x600/index.html`}
+										src={`/banner-ads/${adSet.name}/160x600/index.html`}
 										frameborder="0"
 										title={`${data.title} 160x600 Banner Ad`}
 									/>
@@ -125,7 +125,7 @@
 								<div class="restart" data-size="300x250">
 									<iframe
 										loading="lazy"
-										src={`../banner-ads/${adSet.name}/300x250/index.html`}
+										src={`/banner-ads/${adSet.name}/300x250/index.html`}
 										frameborder="0"
 										title={`${data.title} 300x250 Banner Ad`}
 									/>
@@ -135,7 +135,7 @@
 								<div class="restart" data-size="300x50">
 									<iframe
 										loading="lazy"
-										src={`../banner-ads/${adSet.name}/300x50/index.html`}
+										src={`/banner-ads/${adSet.name}/300x50/index.html`}
 										frameborder="0"
 										title={`${data.title} 300x50 Banner Ad`}
 									/>
