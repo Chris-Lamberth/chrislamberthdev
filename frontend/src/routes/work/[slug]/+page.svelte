@@ -297,7 +297,7 @@
 	.post_nav a,
 	.post_nav span {
 		font-family: var(--serif);
-		color: #000;
+		color: var(--txt-color);
 		text-decoration: none;
 		font-size: 1.4rem;
 		line-height: 2em;

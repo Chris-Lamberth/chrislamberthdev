@@ -50,16 +50,14 @@
 							tabindex="0"
 							on:keydown={(e) => e.key === 'Enter' && selectCategory('all')}
 							on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
-							in:fly={{ duration: 300, delay: 0, x: 40 }}
 							on:click={() => selectCategory('all')}
 						>
 							all
 						</button>
-						{#each categories as category, index}
+						{#each categories as category}
 							<button
 								class="item"
 								tabindex="0"
-								in:fly={{ duration: 300, delay: (index + 1) * 10, x: 40 }}
 								on:click={() => selectCategory(category)}
 								on:keydown={(e) => e.key === 'Enter' && selectCategory(category)}
 								on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
@@ -125,7 +123,7 @@
 	}
 	a {
 		text-decoration: none;
-		color: #000;
+		color: var(--txt-color);
 		outline: none;
 	}
 	a:hover .img {
@@ -146,7 +144,8 @@
 	}
 	.categories span {
 		font-size: 0.7rem;
-		color: #9f9f9f;
+		color: var(--txt-color);
+		opacity: 0.6;
 		display: inline-block;
 		margin: 0 0.4em 0 0;
 	}

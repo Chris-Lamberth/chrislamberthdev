@@ -72,7 +72,7 @@
 	.bg {
 		position: fixed;
 		inset: 0 0 auto 0;
-		background: #f0f0f0;
+		background: var(--bg-color);
 		height: 100vh;
 	}
 	.bg::after {
@@ -80,7 +80,7 @@
 		position: absolute;
 		inset: 0;
 		z-index: 1;
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 1) 50%);
+		background: var(--bg-gradient);
 	}
 	.layer {
 		position: absolute;
@@ -88,14 +88,14 @@
 	}
 	.layer:nth-child(1) {
 		background: url('/images/layer3.svg') center top / cover no-repeat;
-		opacity: 0.4;
+		opacity: var(--opacity-1);
 	}
 	.layer:nth-child(2) {
 		background: url('/images/layer2.svg') center top / cover no-repeat;
-		opacity: 0.6;
+		opacity: var(--opacity-2);
 	}
 	.layer:nth-child(3) {
 		background: url('/images/layer1.svg') center top / cover no-repeat;
-		opacity: 0.8;
+		opacity: var(--opacity-3);
 	}
 </style>

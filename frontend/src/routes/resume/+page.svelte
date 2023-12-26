@@ -11,7 +11,7 @@
 					<h1 in:fly={{ duration: 300, delay: 50, x: 30 }}>Chris Lamberth</h1>
 					<p in:fly={{ duration: 300, delay: 100, x: 30 }}>web developer & graphic designer</p>
 				</div>
-				<div n:fade={{ duration: 200, delay: 200 }}>
+				<div nfade={{ duration: 200, delay: 200 }}>
 					<button class="download">
 						<span>Download PDF</span>
 						<svg

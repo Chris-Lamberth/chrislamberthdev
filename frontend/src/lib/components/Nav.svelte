@@ -142,6 +142,7 @@
 		transform: translate(40vw, 9.5rem);
 		transition: color 0.26s linear;
 		width: fit-content;
+		color: var(--txt-color);
 	}
 	.int .txt {
 		transform: translate(4rem, 0.8rem);
@@ -154,6 +155,7 @@
 		margin: 0 0 0.2em 0;
 	}
 	.int .name {
+		color: #fff;
 		font-size: 1.2rem;
 		letter-spacing: 1px;
 		margin: 0 0 0.05em 0;
@@ -184,7 +186,7 @@
 		font-family: var(--serif);
 		font-size: 1.6rem;
 		line-height: 1em;
-		color: #000;
+		color: var(--txt-color);
 		text-decoration: none;
 		transform-origin: center center;
 		transition: color 0.26s var(--easing-1), scale 0.26s var(--easing-1);
@@ -199,7 +201,8 @@
 		pointer-events: none;
 	}
 	a.activeHome {
-		color: #c3c3c3;
+		color: var(--txt-color);
+		opacity: 0.15;
 		pointer-events: none;
 	}
 	.nav_btn {

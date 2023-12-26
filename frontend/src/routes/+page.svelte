@@ -62,7 +62,7 @@
 	}
 	.feed .txt a {
 		font-family: var(--serif);
-		color: #000;
+		color: var(--txt-color);
 		text-decoration: none;
 		font-size: 1.4rem;
 		transition: scale 0.26s var(--easing-1);
