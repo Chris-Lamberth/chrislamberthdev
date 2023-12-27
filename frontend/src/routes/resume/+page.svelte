@@ -103,10 +103,10 @@
 <style>
 	.resume {
 		padding: 3rem;
-		border: 1px rgb(238, 238, 238) solid;
+
 		border-radius: var(--radius);
 		margin: 0 0 3rem 0;
-		background: rgba(255, 255, 255, 0.6);
+		color: var(--txt-color);
 	}
 	.header {
 		margin: 0 0 3rem 0;

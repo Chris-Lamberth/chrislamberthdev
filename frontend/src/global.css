@@ -22,19 +22,28 @@
 	--opacity-2: 0.6;
 	--opacity-3: 0.8;
 }
+[data-theme='light'] .resume {
+	background: rgba(255, 255, 255, 0.6);
+	border: 1px rgb(238, 238, 238) solid;
+}
 
 [data-theme='dark'] {
-	--txt-color: #fff;
+	--txt-color: #d0d0d0;
 	--bg-color: #000;
 	--bg-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 50%);
-	--opacity-1: 0.01;
-	--opacity-2: 0.02;
-	--opacity-3: 0.03;
+	--opacity-1: 0.04;
+	--opacity-2: 0.05;
+	--opacity-3: 0.06;
 }
 
 [data-theme='dark'] .arrow,
 [data-theme='dark'] .filter-btn {
 	filter: invert();
+}
+
+[data-theme='dark'] .resume {
+	background: rgba(0, 0, 0, 0.4);
+	border: 1px rgb(21, 21, 21) solid;
 }
 
 * {

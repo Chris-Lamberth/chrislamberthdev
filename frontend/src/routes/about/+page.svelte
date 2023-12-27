@@ -104,11 +104,13 @@
 		--gap: 1.6rem;
 	}
 	h2 {
+		color: var(--txt-color);
 		font-family: var(--serif);
 		font-size: 2rem;
 		margin: 0 0 0.8rem 0;
 	}
 	p {
+		color: var(--txt-color);
 		font-size: 1.2rem;
 		margin: 0 0 var(--gap) 0;
 	}

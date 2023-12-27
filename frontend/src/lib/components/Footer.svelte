@@ -42,7 +42,7 @@
 
 <style>
 	footer {
-		background: #000;
+		background: linear-gradient(90deg, #0e0e0e 0%, #000 100%);
 		padding: 3rem 0;
 		margin: auto 0 0 0;
 		position: relative;
