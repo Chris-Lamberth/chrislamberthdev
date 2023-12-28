@@ -33,15 +33,15 @@
 		background-repeat: no-repeat;
 		background-position: center center;
 		border-radius: var(--radius);
-		box-shadow: 0 0 0 0 rgba(255, 255, 255, 1), 0 0 0 0px #000;
+		box-shadow: 0 0 0 0 var(--bg-color), 0 0 0 0px var(--txt-color);
 		transition: box-shadow 0.1s ease-in-out;
 	}
 	a:hover .img {
-		box-shadow: 0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px #000;
+		box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 4px var(--txt-color);
 	}
 	a:focus .img {
 		outline: none;
-		box-shadow: 0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px #000;
+		box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 4px var(--txt-color);
 	}
 	@media (width <= 600px) {
 		.group {

@@ -42,11 +42,13 @@
 
 <style>
 	footer {
-		background: linear-gradient(90deg, #0e0e0e 0%, #000 100%);
+		background: linear-gradient(90deg, #0b0b0b 0%, #000 100%);
 		padding: 3rem 0;
 		margin: auto 0 0 0;
 		position: relative;
+		border-top: 0.5px solid #202020;
 	}
+
 	.group {
 		display: flex;
 		justify-content: space-between;

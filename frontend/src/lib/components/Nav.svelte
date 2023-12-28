@@ -116,11 +116,11 @@
 		position: absolute;
 		inset: -20px 0 auto 0;
 		height: calc(100% + 20px);
-		background: linear-gradient(15deg, #02242a 0%, #000 50%, #00221d 90%);
 		translate: 0 -100%;
 		transition: translate 0.26s var(--easing-1);
 		overflow: hidden;
 	}
+
 	.bar.int::before {
 		translate: 0 0;
 	}
@@ -221,7 +221,7 @@
 		scale: 0.8;
 	}
 	.nav_btn > div {
-		background: #000;
+		background: var(--txt-color);
 		border-radius: 2rem;
 		width: 100%;
 		height: 100%;
@@ -245,7 +245,7 @@
 		background: #fff;
 	}
 	.nav_btn.close-state > div {
-		background: #fff;
+		background: #f0f0f0;
 	}
 	.mobile-state-open {
 		translate: -100% 0;

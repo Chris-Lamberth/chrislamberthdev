@@ -239,11 +239,16 @@
 	}
 	h2 {
 		margin: 0 0 0.5em 0;
+		color: var(--txt-color);
 	}
 	h3 {
 		font-family: var(--serif);
 		font-size: 2rem;
 		margin: 0 0 1em 0;
+		color: var(--txt-color);
+	}
+	.info p {
+		color: var(--txt-color);
 	}
 	.content_grid {
 		display: grid;
@@ -308,10 +313,11 @@
 	}
 	hr {
 		border: none;
-		height: 1px;
-		background: var(--gray-100);
+		height: 0.5px;
+		background: var(--txt-color);
 		border-radius: 4px;
 		margin: 0 0 1rem 0;
+		opacity: 0.2;
 	}
 	.post_nav .previous::after {
 		translate: 0.8rem 0;
