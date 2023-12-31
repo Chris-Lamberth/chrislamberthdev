@@ -188,10 +188,10 @@
 		scale: 1;
 	}
 
-	.filter:hover::after,
-	.filter:focus-within::after {
+	.filter:hover::after {
 		scale: 1;
 	}
+
 	.filter-btn {
 		background: transparent;
 		border: none;
@@ -256,5 +256,25 @@
 		color: var(--color-accent);
 		outline: none;
 		scale: 1.05;
+	}
+
+	/* dark mode */
+
+	:global([data-theme='dark']) .filter-btn {
+		filter: invert();
+	}
+	:global([data-theme='dark']) .dropdown-menu {
+		border: var(--color-accent) 1px solid;
+	}
+	:global([data-theme='dark']) .filter .active .filter-btn {
+		color: #000;
+		filter: none;
+	}
+	:global([data-theme='dark']) .filter:hover .filter-btn {
+		color: #fff;
+		filter: none;
+	}
+	:global([data-theme='dark']) .filter:hover .active .filter-btn {
+		color: #000;
 	}
 </style>

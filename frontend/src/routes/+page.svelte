@@ -116,4 +116,9 @@
 			margin: 0 0 2rem 0;
 		}
 	}
+
+	/* dark mode */
+	:global([data-theme='dark']) .arrow {
+		filter: invert();
+	}
 </style>

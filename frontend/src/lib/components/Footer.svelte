@@ -111,4 +111,10 @@
 			height: 1.5rem;
 		}
 	}
+
+	/* dark mode */
+	:global([data-theme='dark']) h2,
+	:global([data-theme='dark']) p {
+		color: var(--txt-color);
+	}
 </style>

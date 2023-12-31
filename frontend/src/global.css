@@ -22,25 +22,7 @@
 	--opacity-2: 0.6;
 	--opacity-3: 0.8;
 }
-[data-theme='light'] .resume {
-	background: rgba(255, 255, 255, 0.6);
-	border: 1px rgb(238, 238, 238) solid;
-}
-[data-theme='light'] .bar::before {
-	background: linear-gradient(15deg, #02242a 0%, #000 50%, #00221d 90%);
-}
-[data-theme='light'] .card {
-	background: linear-gradient(100deg, #02242a 0%, #000 50%, #00221d 90%);
-}
-[data-theme='light'] input,
-[data-theme='light'] textarea {
-	background: linear-gradient(90deg, #003037 0%, #003f33 100%);
-	border: none;
-}
-[data-theme='light'] input::placeholder,
-[data-theme='light'] textarea::placeholder {
-	color: #8bb1ae;
-}
+
 [data-theme='dark'] {
 	--txt-color: #d0d0d0;
 	--bg-color: #000;
@@ -50,28 +32,6 @@
 	--opacity-3: 0.06;
 }
 
-[data-theme='dark'] .arrow,
-[data-theme='dark'] .filter-btn {
-	filter: invert();
-}
-
-[data-theme='dark'] .resume {
-	background: rgba(0, 0, 0, 0.4);
-	border: 1px rgb(21, 21, 21) solid;
-}
-[data-theme='dark'] .bar::before {
-	background: linear-gradient(90deg, #0b0b0b 0%, #000 100%);
-	border-bottom: 0.5px solid #202020;
-}
-[data-theme='dark'] .card {
-	background: linear-gradient(130deg, #0b0b0b 0%, #000 100%);
-	border: 0.5px solid #202020;
-}
-[data-theme='dark'] input,
-[data-theme='dark'] textarea {
-	background: linear-gradient(10deg, #000 0%, #0b0b0b 100%);
-	border: 0.5px solid #202020;
-}
 * {
 	box-sizing: border-box;
 	margin: 0;

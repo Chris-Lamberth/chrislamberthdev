@@ -70,11 +70,9 @@
 		padding: 3rem;
 	}
 	.card h2 {
-		color: #fff;
 		margin: 0 0 calc(var(--headline-pad) / 2) 0;
 	}
 	.card p {
-		color: #fff;
 		margin: 0 0 var(--headline-pad) 0;
 	}
 	form {
@@ -126,9 +124,9 @@
 		font-family: var(--serif);
 		letter-spacing: 0.03em;
 		font-size: 1rem;
-		background: linear-gradient(90deg, #00deff 0%, #00ffcc 100%);
+
 		padding: 1em;
-		border-radius: 1000px;
+		border-radius: 0.6em;
 		min-width: 120px;
 		box-shadow: 0 0 0 0px #000, 0 0 0 0px #00ffcc;
 		transition: scale 0.15s ease-in-out, box-shadow 0.1s ease-in-out;
@@ -144,5 +142,50 @@
 	}
 	form button:active {
 		scale: 0.95;
+	}
+
+	/* light theme */
+	:global([data-theme='light']) .card {
+		background: linear-gradient(100deg, #02242a 0%, #000 50%, #00221d 90%);
+	}
+	:global([data-theme='light']) h2,
+	:global([data-theme='light']) p {
+		color: #fff;
+	}
+	:global([data-theme='light']) form button {
+		background: linear-gradient(90deg, #00deff 0%, #00ffcc 100%);
+	}
+	:global([data-theme='light']) input,
+	:global([data-theme='light']) textarea {
+		background: linear-gradient(90deg, #003037 0%, #003f33 100%);
+		border: none;
+	}
+	:global([data-theme='light']) input::placeholder,
+	:global([data-theme='light']) textarea::placeholder {
+		color: #8bb1ae;
+	}
+
+	/* dark theme */
+	:global([data-theme='dark']) .card {
+		background: linear-gradient(130deg, #191919 0%, #000 100%);
+		border: 0.5px solid #202020;
+	}
+	:global([data-theme='dark']) h2,
+	:global([data-theme='dark']) p {
+		color: var(--txt-color);
+	}
+	:global([data-theme='dark']) form button {
+		background: #000;
+		border: 1px solid var(--color-accent);
+		color: #fff;
+	}
+	:global([data-theme='dark']) form button:hover {
+		background: var(--color-accent);
+		color: #000;
+	}
+	:global([data-theme='dark']) input,
+	:global([data-theme='dark']) textarea {
+		background: linear-gradient(10deg, #000 0%, #0b0b0b 100%);
+		border: 0.5px solid #202020;
 	}
 </style>

@@ -189,7 +189,7 @@
 	.details p strong {
 		font-weight: 500;
 	}
-	/* write a media query */
+
 	@media (max-width: 700px) {
 		.resume {
 			padding: 2rem;
@@ -198,5 +198,17 @@
 			flex-direction: column-reverse;
 			gap: 2.2rem;
 		}
+	}
+
+	/* light mode */
+	:global([data-theme='light']) .resume {
+		background: rgba(255, 255, 255, 0.6);
+		border: 1px rgb(238, 238, 238) solid;
+	}
+
+	/* dark mode */
+	:global([data-theme='dark']) .resume {
+		background: rgba(0, 0, 0, 0.4);
+		border: 1px rgb(21, 21, 21) solid;
 	}
 </style>

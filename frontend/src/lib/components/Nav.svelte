@@ -299,4 +299,15 @@
 			color: var(--color-accent);
 		}
 	}
+
+	/* light mode */
+	:global([data-theme='light']) .bar::before {
+		background: linear-gradient(15deg, #02242a 0%, #000 50%, #00221d 90%);
+	}
+
+	/* dark mode */
+	:global([data-theme='dark']) .bar::before {
+		background: linear-gradient(90deg, #0b0b0b 0%, #000 100%);
+		border-bottom: 0.5px solid #202020;
+	}
 </style>
