@@ -103,10 +103,10 @@
 <style>
 	.resume {
 		padding: 3rem;
-
 		border-radius: var(--radius);
 		margin: 0 0 3rem 0;
 		color: var(--txt-color);
+		transition: background 0.1s linear, border 0.1s linear;
 	}
 	.header {
 		margin: 0 0 3rem 0;

@@ -72,6 +72,14 @@
 			toggleNav();
 		}
 	}
+
+	// theme
+	import { theme, updateTheme } from '$lib/theme.js';
+
+	// Function to toggle the theme
+	function toggleTheme() {
+		$theme === 'light' ? updateTheme('dark') : updateTheme('light');
+	}
 </script>
 
 <div class="bar" class:int={isInteriorPage}>
@@ -95,6 +103,13 @@
 				<a class="line" href="/about" on:click={toggleNav} class:active={aboutActive}>about</a>
 				<a class="line" href="/resume" on:click={toggleNav} class:active={resumeActive}>resume</a>
 				<a class="line" href="/work" on:click={toggleNav} class:active={workActive}>work</a>
+				<button title="toggle light/dark mode" class="theme-toggle" on:click={toggleTheme}>
+					{#if $theme === 'light'}
+						<img src="/images/light.svg" alt="light mode" />
+					{:else}
+						<img src="/images/dark.svg" alt="dark mode" />
+					{/if}
+				</button>
 			</nav>
 		</div>
 	</div>
@@ -254,6 +269,71 @@
 		background: var(--color-accent);
 	}
 
+	.theme-toggle {
+		width: 25px;
+		height: 25px;
+		position: relative;
+		z-index: 2;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		outline: none;
+		transition: scale 0.2s ease;
+	}
+	.theme-toggle:active {
+		scale: 0.8;
+	}
+	.theme-toggle img {
+		width: 70%;
+		height: 70%;
+		opacity: 0.4;
+		transition: filter 0.2s ease, opacity 0.2s ease;
+	}
+	.theme-toggle::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: var(--txt-color);
+		z-index: -1;
+		border-radius: 20rem;
+		scale: 0;
+		transition: scale 0.2s ease;
+	}
+	.theme-toggle:hover img,
+	.theme-toggle:focus-visible img {
+		filter: invert();
+		opacity: 1;
+	}
+	.theme-toggle:hover::before,
+	.theme-toggle:focus-visible::before {
+		scale: 1;
+	}
+
+	/* light mode */
+	:global([data-theme='light']) .bar::before {
+		background: linear-gradient(15deg, #02242a 0%, #000 50%, #00221d 90%);
+	}
+	:global([data-theme='light']) .int .theme-toggle img {
+		filter: invert();
+	}
+	:global([data-theme='light']) .int .theme-toggle:hover img,
+	:global([data-theme='light']) .int .theme-toggle:focus-visible img {
+		filter: none;
+	}
+	:global([data-theme='light']) .int .theme-toggle::before {
+		background: var(--bg-color);
+	}
+
+	/* dark mode */
+	:global([data-theme='dark']) .bar::before {
+		background: linear-gradient(90deg, #0b0b0b 0%, #000 100%);
+		border-bottom: 0.5px solid #202020;
+	}
+	:global([data-theme='dark']) .theme-toggle img {
+		width: 60%;
+		height: 60%;
+	}
+
 	@media (min-width: 1000px) {
 		.txt {
 			transform: translate(26rem, 9.5rem);
@@ -298,16 +378,17 @@
 		a.activeHome {
 			color: var(--color-accent);
 		}
-	}
-
-	/* light mode */
-	:global([data-theme='light']) .bar::before {
-		background: linear-gradient(15deg, #02242a 0%, #000 50%, #00221d 90%);
-	}
-
-	/* dark mode */
-	:global([data-theme='dark']) .bar::before {
-		background: linear-gradient(90deg, #0b0b0b 0%, #000 100%);
-		border-bottom: 0.5px solid #202020;
+		.theme-toggle {
+			width: 50px;
+			height: 50px;
+			margin-top: 2rem;
+		}
+		.theme-toggle img {
+			opacity: 1;
+		}
+		:global([data-theme='light']) .theme-toggle img,
+		:global([data-theme='light']) .int .theme-toggle img {
+			filter: invert();
+		}
 	}
 </style>

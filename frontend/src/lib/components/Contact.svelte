@@ -129,14 +129,14 @@
 		border-radius: 0.6em;
 		min-width: 120px;
 		box-shadow: 0 0 0 0px #000, 0 0 0 0px #00ffcc;
-		transition: scale 0.15s ease-in-out, box-shadow 0.1s ease-in-out;
+		transition: scale 0.15s ease-in-out, box-shadow 0.1s ease-in-out, background 0.1s linear,
+			color 0.1s linear;
 	}
 	form button:focus-visible {
+		outline: none;
 		box-shadow: 0 0 0 2px #000, 0 0 0 4px #00ffcc;
 	}
-	form button:focus {
-		outline: none;
-	}
+
 	form button:hover {
 		scale: 1.07;
 	}
@@ -179,9 +179,11 @@
 		border: 1px solid var(--color-accent);
 		color: #fff;
 	}
-	:global([data-theme='dark']) form button:hover {
+	:global([data-theme='dark']) form button:hover,
+	:global([data-theme='dark']) form button:focus-visible {
 		background: var(--color-accent);
 		color: #000;
+		box-shadow: none;
 	}
 	:global([data-theme='dark']) input,
 	:global([data-theme='dark']) textarea {

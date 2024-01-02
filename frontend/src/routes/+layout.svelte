@@ -33,6 +33,11 @@
 			});
 		}
 	});
+
+	import { initializeTheme } from '$lib/theme.js';
+
+	// Initialize the theme when the component mounts
+	initializeTheme();
 </script>
 
 <div class="bg">
@@ -74,28 +79,55 @@
 		inset: 0 0 auto 0;
 		background: var(--bg-color);
 		height: 100vh;
+		transition: background 0.1s linear;
 	}
 	.bg::after {
 		content: '';
 		position: absolute;
 		inset: 0;
 		z-index: 1;
-		background: var(--bg-gradient);
+		transition: background 0.1s linear;
 	}
 	.layer {
 		position: absolute;
 		inset: 0;
+		transition: opacity 0.1s linear;
 	}
 	.layer:nth-child(1) {
 		background: url('/images/layer3.svg') center top / cover no-repeat;
-		opacity: var(--opacity-1);
 	}
 	.layer:nth-child(2) {
 		background: url('/images/layer2.svg') center top / cover no-repeat;
-		opacity: var(--opacity-2);
 	}
 	.layer:nth-child(3) {
 		background: url('/images/layer1.svg') center top / cover no-repeat;
-		opacity: var(--opacity-3);
+	}
+
+	/* light theme */
+	:global([data-theme='light']) .layer:nth-child(1) {
+		opacity: 0.4;
+	}
+	:global([data-theme='light']) .layer:nth-child(2) {
+		opacity: 0.6;
+	}
+	:global([data-theme='light']) .layer:nth-child(3) {
+		opacity: 0.8;
+	}
+	:global([data-theme='light']) .bg::after {
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 1) 50%);
+	}
+
+	/* dark theme */
+	:global([data-theme='dark']) .layer:nth-child(1) {
+		opacity: 0.05;
+	}
+	:global([data-theme='dark']) .layer:nth-child(2) {
+		opacity: 0.06;
+	}
+	:global([data-theme='dark']) .layer:nth-child(3) {
+		opacity: 0.07;
+	}
+	:global([data-theme='dark']) .bg::after {
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 50%);
 	}
 </style>

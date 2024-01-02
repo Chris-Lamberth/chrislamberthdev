@@ -36,7 +36,7 @@
 			<div
 				aria-label="Filter by category"
 				role="button"
-				tabindex="0"
+				tabindex="-1"
 				class="dropdown {dropdownOpen ? 'active' : ''}"
 				on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
 			>
@@ -188,7 +188,8 @@
 		scale: 1;
 	}
 
-	.filter:hover::after {
+	.filter:hover::after,
+	.filter:focus-within::after {
 		scale: 1;
 	}
 
