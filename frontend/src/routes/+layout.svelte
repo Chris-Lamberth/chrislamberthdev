@@ -119,13 +119,13 @@
 
 	/* dark theme */
 	:global([data-theme='dark']) .layer:nth-child(1) {
-		opacity: 0.05;
-	}
-	:global([data-theme='dark']) .layer:nth-child(2) {
 		opacity: 0.06;
 	}
-	:global([data-theme='dark']) .layer:nth-child(3) {
+	:global([data-theme='dark']) .layer:nth-child(2) {
 		opacity: 0.07;
+	}
+	:global([data-theme='dark']) .layer:nth-child(3) {
+		opacity: 0.08;
 	}
 	:global([data-theme='dark']) .bg::after {
 		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 50%);
