@@ -79,16 +79,19 @@
 		inset: 0 0 auto 0;
 		background: var(--bg-color);
 		height: 100vh;
+		transition: background 0.1s linear;
 	}
 	.bg::after {
 		content: '';
 		position: absolute;
 		inset: 0;
 		z-index: 1;
+		transition: background 0.1s linear;
 	}
 	.layer {
 		position: absolute;
 		inset: 0;
+		transition: opacity 0.1s linear;
 	}
 	.layer:nth-child(1) {
 		background: url('/images/layer3.svg') center top / cover no-repeat;

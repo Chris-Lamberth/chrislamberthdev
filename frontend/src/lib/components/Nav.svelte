@@ -334,6 +334,10 @@
 		height: 60%;
 	}
 
+	:global([data-theme='dark']) .bar.int a {
+		color: var(--txt-color);
+	}
+
 	@media (min-width: 1000px) {
 		.txt {
 			transform: translate(26rem, 9.5rem);
