@@ -168,7 +168,7 @@
 	/* dark theme */
 	:global([data-theme='dark']) .card {
 		background: linear-gradient(130deg, #191919 0%, #000 100%);
-		border: 0.5px solid #202020;
+		border: 0.5px solid #313131;
 	}
 	:global([data-theme='dark']) h2,
 	:global([data-theme='dark']) p {
@@ -176,7 +176,7 @@
 	}
 	:global([data-theme='dark']) form button {
 		background: #000;
-		border: 1px solid var(--color-accent);
+		border: 1px solid #313131;
 		color: #fff;
 	}
 	:global([data-theme='dark']) form button:hover,
@@ -188,6 +188,6 @@
 	:global([data-theme='dark']) input,
 	:global([data-theme='dark']) textarea {
 		background: linear-gradient(10deg, #000 0%, #0b0b0b 100%);
-		border: 0.5px solid #202020;
+		border: 0.5px solid #313131;
 	}
 </style>
