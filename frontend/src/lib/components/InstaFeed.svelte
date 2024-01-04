@@ -45,7 +45,6 @@
 	}
 	@media (width <= 600px) {
 		.group {
-			grid-template-columns: 1fr 1fr 1fr 1fr;
 			gap: 1rem;
 		}
 	}

@@ -124,7 +124,6 @@
 		font-family: var(--serif);
 		letter-spacing: 0.03em;
 		font-size: 1rem;
-
 		padding: 1em;
 		border-radius: 0.6em;
 		min-width: 120px;
@@ -175,7 +174,7 @@
 		color: var(--txt-color);
 	}
 	:global([data-theme='dark']) form button {
-		background: #000;
+		background: linear-gradient(10deg, #000 0%, #252525 100%);
 		border: 1px solid #313131;
 		color: #fff;
 	}
@@ -189,5 +188,26 @@
 	:global([data-theme='dark']) textarea {
 		background: linear-gradient(10deg, #000 0%, #0b0b0b 100%);
 		border: 0.5px solid #313131;
+	}
+
+	@media (width <= 600px) {
+		.card {
+			padding: 2rem;
+		}
+		input,
+		textarea {
+			padding: 1rem;
+			font-size: 1rem;
+		}
+		.bottom {
+			flex-direction: column-reverse;
+		}
+		.bottom p {
+			margin: 0;
+		}
+		form button {
+			width: 100%;
+			padding: 1.4rem;
+		}
 	}
 </style>

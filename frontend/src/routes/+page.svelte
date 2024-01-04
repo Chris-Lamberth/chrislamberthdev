@@ -1,11 +1,33 @@
 <script>
+	import { onMount } from 'svelte';
 	import Feed from '$lib/components/Feed.svelte';
 	import InstaFeed from '$lib/components/InstaFeed.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 	import { fade } from 'svelte/transition';
 	export let data;
+
 	const { posts } = data.posts;
 	const { instaPosts } = data.instaPosts;
+
+	let windowWidth = 0;
+	let postLimit = 6;
+
+	function updateWidth() {
+		windowWidth = window.innerWidth;
+	}
+
+	onMount(() => {
+		window.addEventListener('resize', updateWidth);
+		updateWidth();
+	});
+
+	$: {
+		if (windowWidth < 600) {
+			postLimit = 4;
+		} else {
+			postLimit = 6;
+		}
+	}
 </script>
 
 <section class="feed" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
@@ -22,7 +44,7 @@
 			</a>
 		</div>
 		{#if posts && posts.length}
-			<Feed {posts} limit={6} />
+			<Feed {posts} limit={postLimit} />
 		{:else}
 			<p>Loading...</p>
 		{/if}

@@ -151,11 +151,11 @@
 	}
 	@media (width <= 600px) {
 		.group {
-			grid-gap: 1rem;
-			grid-template-columns: 1fr 1fr;
+			grid-gap: 2rem;
+			grid-template-columns: 1fr;
 		}
 		.img {
-			height: 8rem;
+			height: 15rem;
 		}
 		.txt {
 			padding: 0.5rem 0 0 0.5rem;
