@@ -67,7 +67,7 @@
 		transition: height 0.4s var(--easing-1);
 	}
 	.spacer.int {
-		height: 2rem;
+		height: 4rem;
 	}
 	@media (max-width: 680px) {
 		.spacer {

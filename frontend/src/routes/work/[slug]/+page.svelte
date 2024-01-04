@@ -270,14 +270,29 @@
 	}
 	.btn {
 		padding: 1em 2em;
-		background: #000;
 		border-radius: 0.6em;
 		display: inline-block;
 		color: #fff;
 		text-decoration: none;
+		transition: scale 0.15s ease-in-out, background 0.1s linear, color 0.1s ease;
 	}
-	.btn:hover {
+
+	:global([data-theme='light']) .btn {
+		background: #000;
+	}
+	:global([data-theme='dark']) .btn {
+		background: linear-gradient(10deg, #000 0%, #252525 100%);
+		border: 1px solid #313131;
+	}
+	:global([data-theme='dark']) .btn:hover,
+	:global([data-theme='dark']) .btn:focus-visible {
+		background: var(--color-accent);
+		color: #000;
+	}
+	.btn:hover,
+	.btn:focus-visible {
 		background: #272727;
+		scale: 1.07;
 	}
 	.cta .btn {
 		margin: 0 0 3em 0;

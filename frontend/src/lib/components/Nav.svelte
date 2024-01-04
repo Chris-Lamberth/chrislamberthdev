@@ -337,6 +337,10 @@
 	:global([data-theme='dark']) .bar.int a {
 		color: var(--txt-color);
 	}
+	:global([data-theme='dark']) a.active,
+	.bar.int a.active {
+		color: var(--color-accent);
+	}
 
 	@media (min-width: 1000px) {
 		.txt {
@@ -374,6 +378,10 @@
 			border-radius: var(--radius) 0 var(--radius) var(--radius);
 			transition: translate 0.26s var(--easing-1);
 			width: 100%;
+		}
+		:global([data-theme='dark']) nav {
+			background: #000;
+			border: 0.5px solid var(--color-accent);
 		}
 		a {
 			font-size: 3rem;

@@ -102,11 +102,8 @@
 
 <style>
 	.resume {
-		padding: 3rem;
-		border-radius: var(--radius);
 		margin: 0 0 3rem 0;
 		color: var(--txt-color);
-		transition: background 0.1s linear, border 0.1s linear;
 	}
 	.header {
 		margin: 0 0 3rem 0;
@@ -142,6 +139,10 @@
 		width: 1.6rem;
 		height: 1.6rem;
 		stroke: #000;
+		transition: stroke 0.15s linear;
+	}
+	:global([data-theme='dark']) .download svg {
+		stroke: var(--txt-color);
 	}
 	.download span {
 		position: absolute;
@@ -155,10 +156,13 @@
 		align-items: center;
 		margin: -0.4rem -0.4rem -0.4rem 0;
 		opacity: 0;
-		transition: opacity 0.15s ease;
+		transition: opacity 0.15s linear;
 	}
 	.download:hover span {
 		opacity: 1;
+	}
+	:global([data-theme='dark']) .download:hover svg {
+		stroke: #000;
 	}
 	.download:active {
 		scale: 0.9;
@@ -198,17 +202,5 @@
 			flex-direction: column-reverse;
 			gap: 2.2rem;
 		}
-	}
-
-	/* light mode */
-	:global([data-theme='light']) .resume {
-		background: rgba(255, 255, 255, 0.6);
-		border: 1px rgb(238, 238, 238) solid;
-	}
-
-	/* dark mode */
-	:global([data-theme='dark']) .resume {
-		background: rgba(0, 0, 0, 0.4);
-		border: 1px rgb(21, 21, 21) solid;
 	}
 </style>

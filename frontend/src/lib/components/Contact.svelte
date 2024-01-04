@@ -166,7 +166,7 @@
 
 	/* dark theme */
 	:global([data-theme='dark']) .card {
-		background: linear-gradient(130deg, #191919 0%, #000 100%);
+		background: linear-gradient(130deg, #1f1f1f 0%, #000 100%);
 		border: 0.5px solid #313131;
 	}
 	:global([data-theme='dark']) h2,

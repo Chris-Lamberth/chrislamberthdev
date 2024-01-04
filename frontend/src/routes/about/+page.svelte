@@ -114,9 +114,7 @@
 		font-size: 1.2rem;
 		margin: 0 0 var(--gap) 0;
 	}
-	article {
-		padding: 2rem 0;
-	}
+
 	.group {
 		display: flex;
 		gap: var(--gap);
