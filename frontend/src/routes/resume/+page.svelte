@@ -195,9 +195,6 @@
 	}
 
 	@media (max-width: 700px) {
-		.resume {
-			padding: 2rem;
-		}
 		.details {
 			flex-direction: column-reverse;
 			gap: 2.2rem;
