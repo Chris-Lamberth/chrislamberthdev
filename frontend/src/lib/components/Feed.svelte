@@ -40,7 +40,11 @@
 				class="dropdown {dropdownOpen ? 'active' : ''}"
 				on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
 			>
-				<button class="filter-btn" on:click={() => (dropdownOpen = !dropdownOpen)}>
+				<button
+					aria-label="Filter"
+					class="filter-btn"
+					on:click={() => (dropdownOpen = !dropdownOpen)}
+				>
 					{selectedCategory}
 				</button>
 				{#if dropdownOpen}

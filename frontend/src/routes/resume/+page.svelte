@@ -3,6 +3,13 @@
 	import { fade, fly } from 'svelte/transition';
 </script>
 
+<svelte:head>
+	<meta
+		name="description"
+		content="Uncover the detailed resume of Chris Lamberth, showcasing his multifaceted career as a Web Developer and Graphic Designer. This page highlights his robust professional background, education, and a wide range of technical and creative skills. Ideal for those seeking to understand Chris's expertise and career trajectory in depth."
+	/>
+</svelte:head>
+
 <div class="container" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
 	<div class="resume">
 		<div class="header">

@@ -2,6 +2,13 @@
 	import { fade, fly } from 'svelte/transition';
 </script>
 
+<svelte:head>
+	<meta
+		name="description"
+		content="Discover the creative world of Chris Lamberth, a Graphic Designer and Web Developer with a unique blend of artistic flair and technical expertise. Learn about his inspiring journey from Memphis to Jacksonville, and how his passion and experiences shape his innovative design and development projects."
+	/>
+</svelte:head>
+
 <div class="container" in:fade={{ duration: 200, delay: 50 }} out:fade={{ duration: 50 }}>
 	<article>
 		<div class="group restaurant">

@@ -50,7 +50,7 @@
 
 <div class="group">
 	{#each displayedPosts as post}
-		<a href={post.postURLs} target="_blank">
+		<a aria-label="Instagram Post" href={post.postURLs} target="_blank">
 			<div
 				class="img"
 				style="background-image: url({imgUrl(post.imageUrl)

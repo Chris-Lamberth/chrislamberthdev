@@ -8,6 +8,7 @@
 	let currentPath;
 	$: currentPath = $page.url.pathname;
 	$: isInteriorPage = currentPath == '/';
+	$: pageName = $page.url.pathname.split('/')[1];
 
 	onMount(async () => {
 		const { gsap } = await import('gsap');
@@ -39,6 +40,10 @@
 	// Initialize the theme when the component mounts
 	initializeTheme();
 </script>
+
+<svelte:head>
+	<title>{pageName} | chrislamberth.dev</title>
+</svelte:head>
 
 <div class="bg">
 	<div class="layer" />

@@ -10,6 +10,13 @@
 	const { instaPosts } = data.instaPosts;
 </script>
 
+<svelte:head>
+	<meta
+		name="description"
+		content="Explore Chris Lamberth's creative portfolio, featuring cutting-edge graphic design and web development services. Discover bespoke solutions in logo design, branding, and digital innovation, showcased through diverse client projects. Connect now for transformative design experiences."
+	/>
+</svelte:head>
+
 <section class="feed" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
 	<div class="container">
 		<div class="txt">

@@ -94,7 +94,7 @@
 				</div>
 				<Headshot />
 			</div>
-			<button class="nav_btn" class:close-state={navOpen} on:click={toggleNav}>
+			<button aria-label="Nav" class="nav_btn" class:close-state={navOpen} on:click={toggleNav}>
 				<div />
 				<div />
 			</button>

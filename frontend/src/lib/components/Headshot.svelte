@@ -85,7 +85,13 @@
 	}
 </script>
 
-<a href="/" class="img" class:int={isInteriorPage} use:animation={animationConfig}>
+<a
+	aria-label="Home"
+	href="/"
+	class="img"
+	class:int={isInteriorPage}
+	use:animation={animationConfig}
+>
 	<div bind:this={bgElement} class="bg" />
 	<div
 		class="headshot"
