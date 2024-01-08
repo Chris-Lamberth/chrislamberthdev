@@ -45,7 +45,7 @@
 	<title
 		>{!isInteriorPage === false ? 'chrislamberth.dev' : `${pageName} ⚡ chrislamberth.dev`}</title
 	>
-	<meta name="theme-color" content="#f06449" />
+	<meta name="theme-color" content="#00ffcc" />
 </svelte:head>
 
 <div class="bg">
