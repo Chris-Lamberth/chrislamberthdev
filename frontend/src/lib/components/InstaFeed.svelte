@@ -5,10 +5,16 @@
 
 	import { onMount } from 'svelte';
 
+	// Shuffle the instaPosts initially
+	shuffleArray(instaPosts);
+
 	let displayedPosts = instaPosts.slice(0, limit);
 	let nextPosts = [];
 
 	onMount(() => {
+		// Set the initial displayed posts
+		displayedPosts = instaPosts.slice(0, limit);
+
 		// Initial preload of the next set of images
 		preloadNextPosts();
 
@@ -72,7 +78,18 @@
 		background-position: center center;
 		border-radius: var(--radius);
 		box-shadow: 0 0 0 0 var(--bg-color), 0 0 0 0px var(--txt-color);
-		transition: box-shadow 0.1s ease-in-out;
+	}
+	.group a:nth-child(1) .img {
+		transition: box-shadow 0.1s ease-in-out, background 0.5s linear;
+	}
+	.group a:nth-child(2) .img {
+		transition: box-shadow 0.1s ease-in-out, background 0.5s 0.2s linear;
+	}
+	.group a:nth-child(3) .img {
+		transition: box-shadow 0.1s ease-in-out, background 0.5s 0.3s linear;
+	}
+	.group a:nth-child(4) .img {
+		transition: box-shadow 0.1s ease-in-out, background 0.5s 0.6s linear;
 	}
 	a:hover .img {
 		box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 4px var(--txt-color);

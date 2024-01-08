@@ -103,6 +103,9 @@
 	:root {
 		--gap: 1.6rem;
 	}
+	article {
+		margin: 0 0 3rem 0;
+	}
 	h2 {
 		color: var(--txt-color);
 		font-family: var(--serif);
