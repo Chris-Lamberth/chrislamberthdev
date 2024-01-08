@@ -42,7 +42,10 @@
 </script>
 
 <svelte:head>
-	<title>{pageName} | chrislamberth.dev</title>
+	<title
+		>{!isInteriorPage === false ? 'chrislamberth.dev' : `${pageName} ⚡ chrislamberth.dev`}</title
+	>
+	<meta name="theme-color" content="#f06449" />
 </svelte:head>
 
 <div class="bg">

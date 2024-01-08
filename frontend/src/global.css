@@ -144,3 +144,11 @@ p {
 	box-shadow: 0 0 0 0px #000, 0 0 0 0px #00ffcc;
 	transition: box-shadow 0.1s ease-in-out, background 0.1s linear, color 0.1s linear;
 }
+::-moz-selection {
+	color: #000;
+	background: var(--color-accent);
+}
+::selection {
+	color: #000;
+	background: var(--color-accent);
+}
