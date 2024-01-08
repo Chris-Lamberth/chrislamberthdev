@@ -228,7 +228,7 @@
 		align-items: flex-end;
 		gap: 0.8em;
 		padding: 1.3em var(--site-pad) 1.3em 1.3em;
-		width: 6em;
+		width: 5rem;
 		z-index: 51;
 		transition: scale 0.26s var(--easing-1);
 	}

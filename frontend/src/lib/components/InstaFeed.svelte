@@ -52,7 +52,7 @@
 	{#each displayedPosts as post}
 		<a aria-label="Instagram Post" href={post.postURLs} target="_blank">
 			<div
-				class="img"
+				class="img border-1"
 				style="background-image: url({imgUrl(post.imageUrl)
 					.width(400)
 					.format('webp', 'jpg')
