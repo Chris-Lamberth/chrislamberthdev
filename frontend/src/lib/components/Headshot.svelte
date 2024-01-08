@@ -147,9 +147,9 @@
 		inset: 0;
 		transform: translate(0, 1.8rem) scale(1);
 
-		background: url('/images/headshot/chris.jpg') center center / contain no-repeat;
-		mask: url('/images/headshot/mask.png') center center / contain no-repeat;
-		-webkit-mask: url('/images/headshot/mask.png') center center / contain no-repeat;
+		background: url('/images/headshot/chris.webp') center center / contain no-repeat;
+		mask: url('/images/headshot/mask.webp') center center / contain no-repeat;
+		-webkit-mask: url('/images/headshot/mask.webp') center center / contain no-repeat;
 	}
 	.int .headshot {
 		transform: translate(0, 0.7rem) scale(1.1);
@@ -159,7 +159,7 @@
 		position: absolute;
 		inset: -2rem;
 		translate: 0 0;
-		background: url('/images/headshot/bg.jpg') center center / cover no-repeat;
+		background: url('/images/headshot/bg.webp') center center / cover no-repeat;
 		transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 	@media (max-width: 680px) {

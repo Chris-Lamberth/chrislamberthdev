@@ -13,7 +13,7 @@
 	<article>
 		<div class="group restaurant">
 			<div class="img" in:fly={{ duration: 300, delay: 50, x: 30 }}>
-				<img src="/images/restaurant.jpg" alt="Chris at a restaurant" />
+				<img src="/images/restaurant.webp" alt="Chris at a restaurant" />
 			</div>
 			<div class="txt">
 				<h2 in:fly={{ duration: 300, delay: 50, x: 30 }}>Hi there! I'm&nbsp;Chris.</h2>
@@ -35,7 +35,7 @@
 		</p>
 		<div class="group working">
 			<div class="img" in:fly={{ duration: 300, delay: 60, x: -30 }}>
-				<img src="/images/working.jpg" alt="Chris working at computer" />
+				<img src="/images/working.webp" alt="Chris working at computer" />
 			</div>
 			<div class="txt">
 				<p>
@@ -57,7 +57,7 @@
 
 		<div class="group painting">
 			<div class="img">
-				<img src="/images/painting.jpg" alt="Chris painting" />
+				<img src="/images/painting.webp" alt="Chris painting" />
 			</div>
 			<div class="txt">
 				<p>
@@ -86,7 +86,7 @@
 				<img src="/images/mogley.gif" alt="Mogley spinning" loading="lazy" />
 			</div>
 			<div class="img">
-				<img src="/images/chrisandbrittany.jpg" alt="Chris & Brittany" />
+				<img src="/images/chrisandbrittany.webp" alt="Chris & Brittany" />
 			</div>
 			<div class="img">
 				<img src="/images/little.gif" alt="Little digging" loading="lazy" />
