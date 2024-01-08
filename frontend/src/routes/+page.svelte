@@ -22,10 +22,10 @@
 	});
 
 	$: {
-		if (windowWidth < 600) {
-			postLimit = 4;
-		} else {
+		if (windowWidth > 600) {
 			postLimit = 6;
+		} else {
+			postLimit = 4;
 		}
 	}
 </script>
