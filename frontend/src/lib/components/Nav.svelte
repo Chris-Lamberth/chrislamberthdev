@@ -48,8 +48,8 @@
 					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 				},
 				exit: {
-					x: $windowWidth > 1000 ? '26rem' : $windowWidth <= 680 ? '0' : '40vw',
-					y: $windowWidth <= 680 ? '16rem' : '9.5rem',
+					x: $windowWidth > 1000 ? '26rem' : $windowWidth <= 720 ? '0' : '40vw',
+					y: $windowWidth <= 720 ? '16rem' : '9.5rem',
 					duration: 0.22,
 					delay: 0.05,
 					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
@@ -68,7 +68,7 @@
 	}
 
 	$: {
-		if (navOpen && $windowWidth > 680) {
+		if (navOpen && $windowWidth > 720) {
 			toggleNav();
 		}
 	}
@@ -348,7 +348,7 @@
 		}
 	}
 
-	@media (max-width: 680px) {
+	@media (max-width: 720px) {
 		.txt {
 			width: 100%;
 			text-align: center;
@@ -389,6 +389,7 @@
 		}
 		a.activeHome {
 			color: var(--color-accent);
+			opacity: 1;
 		}
 		.theme-toggle {
 			width: 50px;

@@ -164,7 +164,7 @@
 	}
 	@media (max-width: 680px) {
 		.img {
-			transform: translate(20vw, 2.5rem);
+			transform: translate(18vw, 2.5rem);
 			width: 50vw;
 		}
 	}
