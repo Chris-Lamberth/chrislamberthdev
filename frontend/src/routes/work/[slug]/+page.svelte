@@ -274,7 +274,7 @@
 		display: inline-block;
 		color: #fff;
 		text-decoration: none;
-		transition: scale 0.15s ease-in-out, background 0.1s linear, color 0.1s ease;
+		transition: background 0.1s linear, color 0.1s ease;
 	}
 
 	:global([data-theme='light']) .btn {
@@ -292,7 +292,6 @@
 	.btn:hover,
 	.btn:focus-visible {
 		background: #272727;
-		scale: 1.07;
 	}
 	.cta .btn {
 		margin: 0 0 3em 0;
@@ -408,5 +407,11 @@
 	}
 	.restart:active iframe {
 		display: none;
+	}
+	@media (width <= 600px) {
+		.btn {
+			width: 100%;
+			padding: 1.4rem;
+		}
 	}
 </style>

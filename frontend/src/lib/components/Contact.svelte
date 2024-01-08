@@ -136,13 +136,6 @@
 		box-shadow: 0 0 0 2px #000, 0 0 0 4px #00ffcc;
 	}
 
-	form button:hover {
-		scale: 1.07;
-	}
-	form button:active {
-		scale: 0.95;
-	}
-
 	/* light theme */
 	:global([data-theme='light']) .card {
 		background: linear-gradient(100deg, #02242a 0%, #000 50%, #00221d 90%);

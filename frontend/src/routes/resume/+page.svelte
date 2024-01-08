@@ -11,9 +11,9 @@
 					<h1 in:fly={{ duration: 300, delay: 50, x: 30 }}>Chris Lamberth</h1>
 					<p in:fly={{ duration: 300, delay: 100, x: 30 }}>web developer & graphic designer</p>
 				</div>
-				<div nfade={{ duration: 200, delay: 200 }}>
-					<button class="download">
-						<span>Download PDF</span>
+				<div>
+					<button class="btn download">
+						Download PDF
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -97,6 +97,23 @@
 				</section>
 			</div>
 		</div>
+		<button class="btn download btm">
+			Download PDF
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="lucide lucide-file-down"
+			>
+				<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+				<polyline points="14 2 14 8 20 8" />
+				<path d="M12 18v-6" />
+				<path d="m9 15 3 3 3-3" />
+			</svg>
+		</button>
 	</div>
 </div>
 
@@ -128,40 +145,44 @@
 		font-size: 1.4rem;
 	}
 	.download {
+		font-family: var(--sans);
+		font-size: 0.7rem;
 		position: relative;
-		transition: scale 0.1s ease;
-		display: flex;
-		align-items: stretch;
-		margin: 0 0 0 auto;
-		z-index: 10;
-	}
-	.download svg {
-		width: 1.6rem;
-		height: 1.6rem;
-		stroke: #000;
-		transition: stroke 0.15s linear;
-	}
-	:global([data-theme='dark']) .download svg {
-		stroke: var(--txt-color);
-	}
-	.download span {
-		position: absolute;
-		inset: 0 0 0 auto;
-		padding: 0 3em 0 1.2em;
-		background: var(--color-accent);
-		z-index: -1;
-		white-space: nowrap;
-		border-radius: 5rem;
+		transition: scale 0.1s ease, background 0.1s ease, border 0.1s ease;
 		display: flex;
 		align-items: center;
-		margin: -0.4rem -0.4rem -0.4rem 0;
-		opacity: 0;
-		transition: opacity 0.15s linear;
+		gap: 0.4rem;
+		margin: 0 0 0 auto;
+		z-index: 10;
+		color: var(--txt-color);
+		border: 1px solid var(--txt-color);
+		letter-spacing: unset;
+		line-height: 1;
+		outline: none;
 	}
-	.download:hover span {
-		opacity: 1;
+	.download.btm {
+		margin: 3rem 0 0 0;
+		padding: 1.4rem;
+		display: none;
+		width: 100%;
+		justify-content: center;
+		font-size: 1rem;
 	}
-	:global([data-theme='dark']) .download:hover svg {
+	.download svg {
+		width: 1rem;
+		height: 1rem;
+		stroke: #000;
+		transition: stroke 0.15s linear;
+		stroke: var(--txt-color);
+	}
+	.download:hover,
+	.download:focus-visible {
+		background: var(--color-accent);
+		border: 1px solid var(--color-accent);
+		color: #000;
+	}
+	.download:hover svg,
+	.download:focus-visible svg {
 		stroke: #000;
 	}
 	.download:active {
@@ -193,7 +214,14 @@
 	.details p strong {
 		font-weight: 500;
 	}
-
+	@media (max-width: 600px) {
+		.download {
+			display: none;
+		}
+		.download.btm {
+			display: flex;
+		}
+	}
 	@media (max-width: 700px) {
 		.details {
 			flex-direction: column-reverse;
