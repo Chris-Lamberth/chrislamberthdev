@@ -16,14 +16,15 @@ export const imgUrl = (/** @type {any} */ source) => createImageUrlBuilder(confi
 
 // All Posts (Work)
 export async function getPosts() {
-	return await client.fetch(`*[_type == "post" && defined(slug.current)] | order(_createdAt desc) {
+	return await client.fetch(`*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
 		_id,
 		title,
 		mainImage,
 		"categories": categories[]->{
 		  title
 		},
-		slug
+		slug,
+		publishedAt
 	 }`);
 }
 
