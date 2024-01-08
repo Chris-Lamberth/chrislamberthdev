@@ -8,26 +8,6 @@
 
 	const { posts } = data.posts;
 	const { instaPosts } = data.instaPosts;
-
-	let windowWidth = 0;
-	let postLimit = 6;
-
-	function updateWidth() {
-		windowWidth = window.innerWidth;
-	}
-
-	onMount(() => {
-		window.addEventListener('resize', updateWidth);
-		updateWidth();
-	});
-
-	$: {
-		if (windowWidth > 600) {
-			postLimit = 6;
-		} else {
-			postLimit = 4;
-		}
-	}
 </script>
 
 <section class="feed" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
@@ -44,7 +24,7 @@
 			</a>
 		</div>
 		{#if posts && posts.length}
-			<Feed {posts} limit={postLimit} />
+			<Feed {posts} limit="6" />
 		{:else}
 			<p>Loading...</p>
 		{/if}
