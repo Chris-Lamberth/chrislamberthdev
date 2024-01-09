@@ -148,8 +148,7 @@
 		filter: blur(2px);
 	}
 	:global(body):has(.mobile-state-open) {
-		overflow: none;
-		position: fixed;
+		overflow: hidden;
 	}
 	.wrapper:has(.mobile-state-open) main {
 		pointer-events: none;
