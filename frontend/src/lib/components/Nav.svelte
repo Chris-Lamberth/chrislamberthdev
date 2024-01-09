@@ -132,7 +132,7 @@
 		inset: -20px 0 auto 0;
 		height: calc(100% + 20px);
 		translate: 0 -100%;
-		transition: translate 0.26s var(--easing-1);
+		transition: translate 0.26s var(--easing-1), filter 0.26s ease;
 		overflow: hidden;
 	}
 
@@ -185,6 +185,7 @@
 	}
 	.wrapper {
 		height: var(--bar-height);
+		transition: filter 0.26s ease;
 	}
 	nav {
 		display: flex;
@@ -369,19 +370,19 @@
 		nav {
 			flex-direction: column;
 			justify-content: center;
-			align-items: center;
-			inset: 0 auto auto 120%;
-			padding: calc(var(--bar-height) + var(--site-pad)) 4rem
-				calc(var(--bar-height) + var(--site-pad)) 0;
+			align-items: flex-start;
+			inset: 0 -32rem auto auto;
+			padding: var(--bar-height) 0 var(--bar-height) 4rem;
 			background: linear-gradient(170deg, #02242a 0%, #000 50%, #00221d 90%);
 			z-index: 50;
-			border-radius: var(--radius) 0 var(--radius) var(--radius);
+			border-radius: 0 0 var(--radius) var(--radius);
 			transition: translate 0.26s var(--easing-1);
 			width: 100%;
+			max-width: 25rem;
 		}
 		:global([data-theme='dark']) nav {
 			background: #000;
-			border: 0.5px solid var(--color-accent);
+			outline: 1px solid var(--color-accent);
 		}
 		a {
 			font-size: 3rem;
@@ -403,5 +404,9 @@
 		:global([data-theme='light']) .int .theme-toggle img {
 			filter: invert();
 		}
+	}
+	.bar:has(.mobile-state-open) .wrapper,
+	.bar:has(.mobile-state-open)::before {
+		filter: blur(2px);
 	}
 </style>

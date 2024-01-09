@@ -68,9 +68,11 @@
 	.wrapper {
 		overflow-x: hidden;
 	}
+
 	main {
 		position: relative;
 		min-height: calc(100vh - 13rem);
+		transition: filter 0.26s ease;
 	}
 	.spacer {
 		height: 16rem;
@@ -139,5 +141,17 @@
 	}
 	:global([data-theme='dark']) .bg::after {
 		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 50%);
+	}
+
+	.wrapper:has(.mobile-state-open) main,
+	:global(body):has(.mobile-state-open) .layer {
+		filter: blur(2px);
+	}
+	:global(body):has(.mobile-state-open) {
+		overflow: none;
+		position: fixed;
+	}
+	.wrapper:has(.mobile-state-open) main {
+		pointer-events: none;
 	}
 </style>

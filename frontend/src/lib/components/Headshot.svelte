@@ -36,7 +36,7 @@
 	let animationConfig;
 	onMount(() => {
 		function handleMouseMove(event) {
-			if ($windowWidth > 680) {
+			if ($windowWidth > 720) {
 				const { clientX, clientY } = event;
 				const { innerWidth, innerHeight } = window;
 
@@ -72,10 +72,10 @@
 					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 				},
 				exit: {
-					width: $windowWidth <= 680 ? '50vw' : '30vw',
+					width: $windowWidth <= 720 ? '50vw' : '30vw',
 					height: '12rem',
-					x: $windowWidth <= 680 ? '19vw' : 'auto',
-					y: $windowWidth <= 680 ? '2.5rem' : '6rem',
+					x: $windowWidth <= 720 ? '19vw' : 'auto',
+					y: $windowWidth <= 720 ? '2.5rem' : '6rem',
 					duration: 0.22,
 					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 				}
@@ -162,7 +162,7 @@
 		background: url('/images/headshot/bg.webp') center center / cover no-repeat;
 		transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
-	@media (max-width: 680px) {
+	@media (max-width: 720px) {
 		.img {
 			transform: translate(19vw, 2.5rem);
 			width: 50vw;
