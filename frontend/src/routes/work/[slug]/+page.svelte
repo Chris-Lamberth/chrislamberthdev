@@ -359,6 +359,9 @@
 		gap: 1rem;
 		margin: 0 0 var(--gutter) 0;
 	}
+	:global([data-theme='dark']) .banners .set {
+		background: #151515;
+	}
 	.banners .set > div {
 		display: flex;
 		gap: 1rem;
