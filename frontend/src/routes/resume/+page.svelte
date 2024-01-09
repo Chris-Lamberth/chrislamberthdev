@@ -15,7 +15,9 @@
 		<div class="header">
 			<div class="group">
 				<div>
-					<h1 in:fly={{ duration: 300, delay: 50, x: 30 }}>Chris Lamberth</h1>
+					<h1 in:fly={{ duration: 300, delay: 50, x: 30 }}>
+						Chris Lamberth<span class="hidden">'s Resume</span>
+					</h1>
 					<p in:fly={{ duration: 300, delay: 100, x: 30 }}>web developer & graphic designer</p>
 				</div>
 				<div>

@@ -5,6 +5,7 @@
 	import { fade } from 'svelte/transition';
 </script>
 
+<h1 class="hidden">Chris' work</h1>
 <section class="container" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
 	<div class="wrapper">
 		<Feed {posts} showFilter={true} />

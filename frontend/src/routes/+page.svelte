@@ -16,6 +16,8 @@
 	/>
 </svelte:head>
 
+<h1 class="hidden">Chris Lamberth, Web Developer and Graphic Designer</h1>
+
 <section class="feed" in:fade={{ duration: 200 }} out:fade={{ duration: 50 }}>
 	<div class="container">
 		<div class="txt">
