@@ -59,12 +59,14 @@
 		align-items: flex-start;
 	}
 	h2 {
-		color: #fff;
+		color: #474747;
 		font-family: var(--serif);
 		margin: 0 0 0.2em 0;
+		font-size: 1.4rem;
 	}
 	p {
-		color: #fff;
+		color: #474747;
+		font-size: 0.8rem;
 	}
 	.social {
 		display: grid;
@@ -114,11 +116,5 @@
 		.icon {
 			height: 1.5rem;
 		}
-	}
-
-	/* dark mode */
-	:global([data-theme='dark']) h2,
-	:global([data-theme='dark']) p {
-		color: var(--txt-color);
 	}
 </style>
