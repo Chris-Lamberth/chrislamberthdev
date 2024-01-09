@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
 	import Feed from '$lib/components/Feed.svelte';
 	import InstaFeed from '$lib/components/InstaFeed.svelte';
 	import Contact from '$lib/components/Contact.svelte';
@@ -55,6 +54,7 @@
 <style>
 	.section-headline {
 		padding-left: var(--inset-pad);
+		line-height: 1.1em;
 	}
 	.arrow {
 		margin-right: var(--inset-pad);
