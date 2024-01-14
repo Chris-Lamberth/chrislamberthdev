@@ -445,7 +445,7 @@
 			filter: invert();
 		}
 	}
-	@media (max-width: 460px) {
+	/* @media (max-width: 460px) {
 		nav {
 			inset: 0 auto auto calc(100% + 5rem);
 			padding: var(--bar-height) 0 var(--bar-height) 0;
@@ -453,5 +453,5 @@
 			width: calc(100% + 10rem);
 			max-width: unset;
 		}
-	}
+	} */
 </style>
