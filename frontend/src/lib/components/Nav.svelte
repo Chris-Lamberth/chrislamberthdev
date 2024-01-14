@@ -405,8 +405,4 @@
 			filter: invert();
 		}
 	}
-	.bar:has(.mobile-state-open) .wrapper,
-	.bar:has(.mobile-state-open)::before {
-		filter: blur(2px);
-	}
 </style>

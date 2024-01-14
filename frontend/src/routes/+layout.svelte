@@ -143,10 +143,6 @@
 		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 50%);
 	}
 
-	.wrapper:has(.mobile-state-open) main,
-	:global(body):has(.mobile-state-open) .layer {
-		filter: blur(2px);
-	}
 	:global(body):has(.mobile-state-open) {
 		overflow: hidden;
 	}
