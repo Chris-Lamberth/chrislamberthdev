@@ -80,6 +80,24 @@
 	function toggleTheme() {
 		$theme === 'light' ? updateTheme('dark') : updateTheme('light');
 	}
+
+	// Touch events
+	let startX, currentX;
+
+	function handleTouchStart(event) {
+		startX = event.touches[0].clientX;
+	}
+
+	function handleTouchMove(event) {
+		currentX = event.touches[0].clientX;
+	}
+
+	function handleTouchEnd() {
+		const threshold = 50; // Minimum swipe distance to close nav
+		if (navOpen && startX - currentX > threshold) {
+			toggleNav();
+		}
+	}
 </script>
 
 <div class="bar" class:int={isInteriorPage}>
@@ -98,7 +116,12 @@
 				<div />
 				<div />
 			</button>
-			<nav class:mobile-state-open={navOpen}>
+			<nav
+				class:mobile-state-open={navOpen}
+				on:touchstart={handleTouchStart}
+				on:touchmove={handleTouchMove}
+				on:touchend={handleTouchEnd}
+			>
 				<a class="line" href="/" on:click={toggleNav} class:activeHome={homeActive}>home</a>
 				<a class="line" href="/about" on:click={toggleNav} class:active={aboutActive}>about</a>
 				<a class="line" href="/resume" on:click={toggleNav} class:active={resumeActive}>resume</a>
