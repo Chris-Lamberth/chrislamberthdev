@@ -121,19 +121,21 @@
 		border: none;
 	}
 	form button {
-		font-family: var(--serif);
 		letter-spacing: 0.03em;
 		font-size: 1rem;
 		padding: 1em;
 		border-radius: 0.6em;
 		min-width: 120px;
 		box-shadow: 0 0 0 0px #000, 0 0 0 0px #00ffcc;
-		transition: scale 0.15s ease-in-out, box-shadow 0.1s ease-in-out, background 0.1s linear,
-			color 0.1s linear;
+		transition: scale 0.1s ease-in-out, box-shadow 0.1s ease-in-out, background 0.1s linear,
+			color 0.1s linear, color 0.1s linear;
 	}
 	form button:focus-visible {
 		outline: none;
 		box-shadow: 0 0 0 2px #000, 0 0 0 4px #00ffcc;
+	}
+	form button:active {
+		scale: 0.9;
 	}
 
 	/* light theme */
@@ -145,7 +147,13 @@
 		color: #fff;
 	}
 	:global([data-theme='light']) form button {
-		background: linear-gradient(90deg, #00deff 0%, #00ffcc 100%);
+		background: rgba(0, 0, 0, 0);
+		border: 1px solid var(--color-accent);
+		color: var(--color-accent);
+	}
+	:global([data-theme='light']) form button:hover {
+		background: var(--color-accent);
+		color: #000;
 	}
 	:global([data-theme='light']) input,
 	:global([data-theme='light']) textarea {
