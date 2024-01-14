@@ -80,6 +80,46 @@
 	function toggleTheme() {
 		$theme === 'light' ? updateTheme('dark') : updateTheme('light');
 	}
+
+	// Swipe gesture for mobile
+	function swipe(node) {
+		let startX, startY, movedX, movedY;
+
+		function handleTouchStart(event) {
+			startX = event.touches[0].clientX;
+			startY = event.touches[0].clientY;
+			movedX = movedY = 0;
+
+			node.addEventListener('touchmove', handleTouchMove);
+			node.addEventListener('touchend', handleTouchEnd);
+		}
+
+		function handleTouchMove(event) {
+			movedX = event.touches[0].clientX - startX;
+			movedY = event.touches[0].clientY - startY;
+		}
+
+		function handleTouchEnd(event) {
+			node.removeEventListener('touchmove', handleTouchMove);
+			node.removeEventListener('touchend', handleTouchEnd);
+
+			// Determine if the touch was a swipe to the right
+			if (navOpen && movedX > 50 && Math.abs(movedY) < 50) {
+				// Swipe to the right detected
+				navOpen = false;
+			}
+		}
+
+		node.addEventListener('touchstart', handleTouchStart);
+
+		return {
+			destroy() {
+				node.removeEventListener('touchstart', handleTouchStart);
+				node.removeEventListener('touchmove', handleTouchMove);
+				node.removeEventListener('touchend', handleTouchEnd);
+			}
+		};
+	}
 </script>
 
 <div class="bar" class:int={isInteriorPage}>
@@ -98,7 +138,7 @@
 				<div />
 				<div />
 			</button>
-			<nav class:mobile-state-open={navOpen}>
+			<nav use:swipe class:mobile-state-open={navOpen}>
 				<a class="line" href="/" on:click={toggleNav} class:activeHome={homeActive}>home</a>
 				<a class="line" href="/about" on:click={toggleNav} class:active={aboutActive}>about</a>
 				<a class="line" href="/resume" on:click={toggleNav} class:active={resumeActive}>resume</a>
@@ -403,6 +443,15 @@
 		:global([data-theme='light']) .theme-toggle img,
 		:global([data-theme='light']) .int .theme-toggle img {
 			filter: invert();
+		}
+	}
+	@media (max-width: 460px) {
+		nav {
+			inset: 0 auto auto calc(100% + 5rem);
+			padding: var(--bar-height) 0 var(--bar-height) 0;
+			align-items: center;
+			width: calc(100% + 10rem);
+			max-width: unset;
 		}
 	}
 </style>
