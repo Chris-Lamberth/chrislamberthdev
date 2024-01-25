@@ -75,11 +75,9 @@
 		</div>
 
 		<p>
-			Joining me in my journey is my wonderful partner of over a decade and our two dogs, a Husky
-			named Mogley (No, he doesn't howl or “talk” he's quiet, like his papa) and a Jack
-			Russell/Chihuahua mix named Little, affectionately known as the Fart Squad. We're the
-			adventurous kind, always ready to pack our bags and explore new corners of the world, learning
-			and experiencing as much as we can.
+			Joining me in my journey is my wonderful partner of over a decade and our two dogs, Mogley and
+			Little, aka fArT sQuaD. We're the adventurous kind, always ready to pack our bags and explore
+			new corners of the world, learning and experiencing as much as we can.
 		</p>
 		<div class="group fam">
 			<div class="img">
@@ -111,7 +109,7 @@
 		--gap: 1.6rem;
 	}
 	article {
-		margin: 0 0 3rem 0;
+		margin: 0 0 7rem 0;
 	}
 	h2 {
 		color: var(--txt-color);
