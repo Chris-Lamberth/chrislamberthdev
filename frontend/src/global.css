@@ -160,6 +160,7 @@ body:has(.mobile-state-open)::after {
 	min-width: 120px;
 	box-shadow: 0 0 0 0px #000, 0 0 0 0px #00ffcc;
 	transition: box-shadow 0.1s ease-in-out, background 0.1s linear, color 0.1s linear;
+	text-decoration: none;
 }
 ::-moz-selection {
 	color: #000;

@@ -75,7 +75,7 @@
 						<p class="sub">BA, Graphic Design</p>
 					</div>
 				</section>
-				<button class="btn download">
+				<a href="/docs/chris-lamberth-resume.pdf" download class="btn download">
 					Download PDF
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +91,7 @@
 						<path d="M12 18v-6" />
 						<path d="m9 15 3 3 3-3" />
 					</svg>
-				</button>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -128,6 +128,7 @@
 		letter-spacing: unset;
 		line-height: 1;
 		outline: none;
+		width: fit-content;
 	}
 	.download svg {
 		width: 1rem;
