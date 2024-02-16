@@ -150,7 +150,9 @@
 		<!-- Link for client website -->
 		{#if data.websiteLink}
 			<section class="cta">
-				<a href={data.websiteLink} target="_blank" class="btn">view website</a>
+				<a href={data.websiteLink} rel="noopener noreferrer" target="_blank" class="btn"
+					>view website</a
+				>
 			</section>
 		{/if}
 	</div>
