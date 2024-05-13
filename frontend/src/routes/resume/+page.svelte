@@ -103,7 +103,7 @@
 		color: var(--txt-color);
 	}
 	h1 {
-		font-family: var(--serif);
+		font-family: var(--display);
 		font-size: 2.4rem;
 		margin: 0 0 0.1em 0;
 	}
@@ -114,7 +114,7 @@
 		font-size: 1.1rem;
 	}
 	.download {
-		font-family: var(--sans);
+		font-family: var(--body);
 		font-size: 0.7rem;
 		position: relative;
 		transition: scale 0.1s ease, background 0.1s ease, border 0.1s ease;
@@ -165,7 +165,7 @@
 		margin: 0 0 1.2rem 0;
 	}
 	h3 {
-		font-family: var(--serif);
+		font-family: var(--display);
 		font-size: 0.8rem;
 		letter-spacing: 0.05em;
 	}

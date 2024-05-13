@@ -204,19 +204,19 @@
 		color: #fff;
 	}
 	.name {
-		font-family: var(--serif);
+		font-family: var(--display);
 		font-size: 3rem;
 		line-height: 1em;
 		margin: 0 0 0.2em 0;
 	}
 	.int .name {
 		color: #fff;
-		font-size: 1.2rem;
+		font-size: 1.1rem;
 		letter-spacing: 1px;
 		margin: 0 0 0.05em 0;
 	}
 	.sub {
-		font-family: var(--sans);
+		font-family: var(--body);
 		line-height: 1em;
 		font-size: 1.2rem;
 	}
@@ -239,8 +239,8 @@
 		color: #fff;
 	}
 	a {
-		font-family: var(--serif);
-		font-size: 1.6rem;
+		font-family: var(--display);
+		font-size: 1.4rem;
 		line-height: 1em;
 		color: var(--txt-color);
 		text-decoration: none;

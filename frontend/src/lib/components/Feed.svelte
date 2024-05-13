@@ -200,7 +200,7 @@
 	.filter-btn {
 		background: transparent;
 		border: none;
-		font-family: var(--sans);
+		font-family: var(--body);
 		font-size: 1rem;
 		-webkit-appearance: none;
 		-moz-appearance: none;
@@ -245,7 +245,7 @@
 
 	.dropdown-menu .item {
 		font-size: 1.1rem;
-		font-family: var(--sans);
+		font-family: var(--body);
 		cursor: pointer;
 		white-space: nowrap;
 		color: #fff;

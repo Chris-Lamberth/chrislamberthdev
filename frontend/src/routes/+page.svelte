@@ -72,10 +72,10 @@
 		margin: 0 0 var(--headline-pad) 0;
 	}
 	.feed .txt a {
-		font-family: var(--serif);
+		font-family: var(--display);
 		color: var(--txt-color);
 		text-decoration: none;
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 		transition: scale 0.26s var(--easing-1);
 	}
 	.feed .txt a:active {

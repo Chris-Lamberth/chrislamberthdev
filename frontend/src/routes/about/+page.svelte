@@ -113,8 +113,8 @@
 	}
 	h2 {
 		color: var(--txt-color);
-		font-family: var(--serif);
-		font-size: 2rem;
+		font-family: var(--display);
+		font-size: 1.6rem;
 		margin: 0 0 0.8rem 0;
 	}
 	p {

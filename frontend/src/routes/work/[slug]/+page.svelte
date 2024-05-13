@@ -244,8 +244,8 @@
 		color: var(--txt-color);
 	}
 	h3 {
-		font-family: var(--serif);
-		font-size: 2rem;
+		font-family: var(--display);
+		font-size: 1.8rem;
 		margin: 0 0 1em 0;
 		color: var(--txt-color);
 	}
@@ -317,7 +317,7 @@
 	}
 	.post_nav a,
 	.post_nav span {
-		font-family: var(--serif);
+		font-family: var(--display);
 		color: var(--txt-color);
 		text-decoration: none;
 		font-size: 1.4rem;

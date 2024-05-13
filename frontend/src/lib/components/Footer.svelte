@@ -60,9 +60,10 @@
 	}
 	h2 {
 		color: #474747;
-		font-family: var(--serif);
+		font-family: var(--display);
 		margin: 0 0 0.2em 0;
 		font-size: 1.4rem;
+		line-height: 1em;
 	}
 	p {
 		color: #474747;
