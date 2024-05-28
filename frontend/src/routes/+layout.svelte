@@ -71,7 +71,7 @@
 
 	main {
 		position: relative;
-		min-height: calc(100vh - 13rem);
+		min-height: calc(100vh - 12.34rem);
 		transition: filter 0.26s ease;
 	}
 	.spacer {

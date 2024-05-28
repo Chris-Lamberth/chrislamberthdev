@@ -154,13 +154,16 @@ body:has(.mobile-state-open)::after {
 	font-family: var(--body);
 	letter-spacing: 0.03em;
 	font-size: 1rem;
-	padding: 1em;
+	padding: 1em 2em;
 	border-radius: 0.6em;
 	min-width: 120px;
 	box-shadow: 0 0 0 0px #000, 0 0 0 0px #00ffcc;
 	transition: box-shadow 0.1s ease-in-out, background 0.1s linear, color 0.1s linear;
 	text-decoration: none;
+	display: inline-block;
+	color: #fff;
 }
+
 ::-moz-selection {
 	color: #000;
 	background: var(--color-accent);
@@ -168,4 +171,21 @@ body:has(.mobile-state-open)::after {
 ::selection {
 	color: #000;
 	background: var(--color-accent);
+}
+[data-theme='light'] .btn {
+	background: #000;
+}
+[data-theme='dark'] .btn {
+	background: linear-gradient(10deg, #000 0%, #252525 100%);
+	border: 1px solid #313131;
+}
+[data-theme='dark'] .btn:hover,
+[data-theme='dark'] .btn:focus-visible {
+	background: var(--color-accent);
+	color: #000;
+}
+
+.btn:hover,
+.btn:focus-visible {
+	background: #272727;
 }

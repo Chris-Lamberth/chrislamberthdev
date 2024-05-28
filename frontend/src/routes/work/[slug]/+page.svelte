@@ -270,31 +270,9 @@
 	.cta {
 		text-align: center;
 	}
-	.btn {
-		padding: 1em 2em;
-		border-radius: 0.6em;
-		display: inline-block;
-		color: #fff;
-		text-decoration: none;
-		transition: background 0.1s linear, color 0.1s ease;
-	}
+	
 
-	:global([data-theme='light']) .btn {
-		background: #000;
-	}
-	:global([data-theme='dark']) .btn {
-		background: linear-gradient(10deg, #000 0%, #252525 100%);
-		border: 1px solid #313131;
-	}
-	:global([data-theme='dark']) .btn:hover,
-	:global([data-theme='dark']) .btn:focus-visible {
-		background: var(--color-accent);
-		color: #000;
-	}
-	.btn:hover,
-	.btn:focus-visible {
-		background: #272727;
-	}
+	
 	.cta .btn {
 		margin: 0 0 3em 0;
 	}

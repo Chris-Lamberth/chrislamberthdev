@@ -6,6 +6,6 @@ export const load = async ({ params }) => {
   const post = await getPost(params.slug);
   if (post) return post;
 
-  error(404, "Not found");
+  throw error(404, "work not found");
 };
 
