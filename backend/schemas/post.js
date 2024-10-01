@@ -51,6 +51,14 @@
 		},
 		}),
 		defineField({
+			name: 'altHeaderImage',
+			title: 'Alternative Header image',
+			type: 'image',
+			options: {
+				hotspot: true,
+			},
+		}),
+		defineField({
 		name: 'additionalImages',
 		title: 'Additional Images',
 		type: 'array',
