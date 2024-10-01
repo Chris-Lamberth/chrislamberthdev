@@ -37,12 +37,14 @@
 		</section>
 
 		<!-- Main Image -->
+		<!-- Main Image -->
 		<section
 			class="main-image border-1"
-			style="background-image:url('{imgUrl(data.mainImage.asset)
+			style="background-image:url('{imgUrl(data.altHeaderImage?.asset || data.mainImage.asset)
 				.format('webp', 'jpg')
-				.url()}'); background-position: {data?.mainImage?.hotspot?.x * 100}% {data?.mainImage
-				?.hotspot?.y * 100}%"
+				.url()}'); background-position: {data.altHeaderImage?.hotspot?.x * 100 ||
+				data?.mainImage?.hotspot?.x * 100}% {data.altHeaderImage?.hotspot?.y * 100 ||
+				data?.mainImage?.hotspot?.y * 100}%"
 		/>
 
 		<!-- Rich Text -->
@@ -270,9 +272,7 @@
 	.cta {
 		text-align: center;
 	}
-	
 
-	
 	.cta .btn {
 		margin: 0 0 3em 0;
 	}

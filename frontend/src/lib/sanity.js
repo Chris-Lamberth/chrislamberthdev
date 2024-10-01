@@ -34,6 +34,7 @@ export async function getPost(slug) {
 	  _id,
 	  title,
 	  mainImage,
+	  altHeaderImage,
 	  "categories": categories[]->{
 		 title
 	  },
