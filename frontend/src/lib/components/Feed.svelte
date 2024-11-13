@@ -1,6 +1,4 @@
 <script>
-	import { handlers } from 'svelte/legacy';
-
 	import { imgUrl } from '$lib/sanity';
 	import { fly, fade } from 'svelte/transition';
 	/**
@@ -13,14 +11,9 @@
 	/** @type {Props} */
 	let { posts = [], limit = posts.length, showFilter = false } = $props();
 
-	let categories = [];
-	posts.forEach((post) => {
-		post.categories.forEach((category) => {
-			if (!categories.includes(category.title)) {
-				categories.push(category.title);
-			}
-		});
-	});
+	let categories = $derived([
+		...new Set(posts.flatMap((post) => post.categories.map((category) => category.title)))
+	]);
 
 	let selectedCategory = $state('all');
 	let dropdownOpen = $state(false);
@@ -30,12 +23,13 @@
 		dropdownOpen = false;
 	}
 
-	let filteredPosts =
-		$derived(selectedCategory === 'all'
+	let filteredPosts = $derived(
+		selectedCategory === 'all'
 			? posts
 			: posts.filter((post) =>
 					post.categories.some((category) => category.title === selectedCategory)
-			  ));
+				)
+	);
 </script>
 
 {#if showFilter}
@@ -46,12 +40,12 @@
 				role="button"
 				tabindex="-1"
 				class="dropdown {dropdownOpen ? 'active' : ''}"
-				onkeydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
+				on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
 			>
 				<button
 					aria-label="Filter"
 					class="filter-btn"
-					onclick={() => (dropdownOpen = !dropdownOpen)}
+					on:click={() => (dropdownOpen = !dropdownOpen)}
 				>
 					{selectedCategory}
 				</button>
@@ -60,8 +54,11 @@
 						<button
 							class="item"
 							tabindex="0"
-							onkeydown={handlers((e) => e.key === 'Enter' && selectCategory('all'), (e) => e.key === 'Escape' && (dropdownOpen = false))}
-							onclick={() => selectCategory('all')}
+							on:keydown={(e) => {
+								if (e.key === 'Enter') selectCategory('all');
+								if (e.key === 'Escape') dropdownOpen = false;
+							}}
+							on:click={() => selectCategory('all')}
 						>
 							all
 						</button>
@@ -69,8 +66,11 @@
 							<button
 								class="item"
 								tabindex="0"
-								onclick={() => selectCategory(category)}
-								onkeydown={handlers((e) => e.key === 'Enter' && selectCategory(category), (e) => e.key === 'Escape' && (dropdownOpen = false))}
+								on:click={() => selectCategory(category)}
+								on:keydown={(e) => {
+									if (e.key === 'Enter') selectCategory(category);
+									if (e.key === 'Escape') dropdownOpen = false;
+								}}
 							>
 								{category}
 							</button>
@@ -125,7 +125,9 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center center;
-		box-shadow: 0 0 0 0 var(--bg-color), 0 0 0 0px var(--txt-color);
+		box-shadow:
+			0 0 0 0 var(--bg-color),
+			0 0 0 0px var(--txt-color);
 		transition: box-shadow 0.1s ease-in-out;
 	}
 	.txt {
@@ -137,11 +139,15 @@
 		outline: none;
 	}
 	a:hover .img {
-		box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 4px var(--txt-color);
+		box-shadow:
+			0 0 0 2px var(--bg-color),
+			0 0 0 4px var(--txt-color);
 	}
 	a:focus .img {
 		outline: none;
-		box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 4px var(--txt-color);
+		box-shadow:
+			0 0 0 2px var(--bg-color),
+			0 0 0 4px var(--txt-color);
 	}
 	h3 {
 		font-size: 1rem;

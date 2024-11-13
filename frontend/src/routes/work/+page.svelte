@@ -1,8 +1,8 @@
 <script>
 	import Feed from '$lib/components/Feed.svelte';
-	const { posts } = data.posts;
 	import { fade } from 'svelte/transition';
 	let { data } = $props();
+	const { posts } = data.posts;
 </script>
 
 <h1 class="hidden">Chris' work</h1>

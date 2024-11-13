@@ -1,29 +1,31 @@
 <script>
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
 	import '../global.css';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import { initializeTheme } from '$lib/theme.js';
+
+	let { children } = $props();
 
 	let currentPath = $derived($page.url.pathname);
-	
-	let isInteriorPage = $derived(currentPath == '/');
+	let isInteriorPage = $derived(currentPath === '/');
 	let pageName = $derived($page.url.pathname.split('/')[1]);
 
-	onMount(async () => {
-		const { gsap } = await import('gsap');
-		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+	// Initialize theme
+	initializeTheme();
 
+	// GSAP setup
+	$effect.root(async () => {
 		if (typeof window !== 'undefined') {
+			const { gsap } = await import('gsap');
+			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 			gsap.registerPlugin(ScrollTrigger);
 
 			const layers = document.querySelectorAll('.bg .layer');
-
 			layers.forEach((layer, index) => {
 				gsap.to(layer, {
 					yPercent: -20 * (index + 1),
 					ease: 'power1.out',
-
 					scrollTrigger: {
 						trigger: '.bg',
 						start: 'top top',
@@ -34,18 +36,6 @@
 			});
 		}
 	});
-
-	import { initializeTheme } from '$lib/theme.js';
-	/**
-	 * @typedef {Object} Props
-	 * @property {import('svelte').Snippet} [children]
-	 */
-
-	/** @type {Props} */
-	let { children } = $props();
-
-	// Initialize the theme when the component mounts
-	initializeTheme();
 </script>
 
 <svelte:head>

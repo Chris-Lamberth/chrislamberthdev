@@ -1,14 +1,14 @@
 <script>
-	import { run } from 'svelte/legacy';
-
 	import { imgUrl } from '$lib/sanity';
 	import { page } from '$app/stores';
 	import { fade } from 'svelte/transition';
 	let { data } = $props();
 
-	let previousPost = $state(), currentPost = $state(), nextPost = $state();
+	let previousPost = $state(),
+		currentPost = $state(),
+		nextPost = $state();
 
-	run(() => {
+	$effect(() => {
 		if (data && data.posts && Array.isArray(data.posts.posts)) {
 			const currentSlug = $page.params.slug;
 			const posts = data.posts.posts;
@@ -22,6 +22,13 @@
 			}
 		}
 	});
+
+	let hotspotX = $derived(
+		(data.altHeaderImage?.hotspot?.x || data.mainImage?.hotspot?.x || 0.5) * 100
+	);
+	let hotspotY = $derived(
+		(data.altHeaderImage?.hotspot?.y || data.mainImage?.hotspot?.y || 0.5) * 100
+	);
 </script>
 
 <h1 class="hidden">{data.title}</h1>
@@ -41,14 +48,11 @@
 		</section>
 
 		<!-- Main Image -->
-		<!-- Main Image -->
 		<section
 			class="main-image border-1"
 			style="background-image:url('{imgUrl(data.altHeaderImage?.asset || data.mainImage.asset)
 				.format('webp', 'jpg')
-				.url()}'); background-position: {data.altHeaderImage?.hotspot?.x * 100 ||
-				data?.mainImage?.hotspot?.x * 100}% {data.altHeaderImage?.hotspot?.y * 100 ||
-				data?.mainImage?.hotspot?.y * 100}%"
+				.url()}'); background-position: {hotspotX}% {hotspotY}%"
 		></section>
 
 		<!-- Rich Text -->
@@ -90,64 +94,20 @@
 			<section class="banners">
 				{#each data.adSets as adSet}
 					<div class="set">
-						{#if adSet.size728x90}
-							<div>
-								<div class="restart" data-size="728x90">
-									<iframe
-										loading="lazy"
-										src={`/banner-ads/${adSet.name}/728x90/index.html`}
-										frameborder="0"
-										title={`${data.title} 728x90 Banner Ad`}
-									></iframe>
-								</div>
-							</div>
-						{/if}
-						{#if adSet.size300x600}
-							<div>
-								<div class="restart" data-size="300x600">
-									<iframe
-										loading="lazy"
-										src={`/banner-ads/${adSet.name}/300x600/index.html`}
-										frameborder="0"
-										title={`${data.title} 300x600 Banner Ad`}
-									></iframe>
-								</div>
-							</div>
-						{/if}
-						{#if adSet.size160x600}
-							<div>
-								<div class="restart" data-size="160x600">
-									<iframe
-										loading="lazy"
-										src={`/banner-ads/${adSet.name}/160x600/index.html`}
-										frameborder="0"
-										title={`${data.title} 160x600 Banner Ad`}
-									></iframe>
-								</div>
-							</div>
-						{/if}
-						<div>
-							{#if adSet.size300x250}
-								<div class="restart" data-size="300x250">
-									<iframe
-										loading="lazy"
-										src={`/banner-ads/${adSet.name}/300x250/index.html`}
-										frameborder="0"
-										title={`${data.title} 300x250 Banner Ad`}
-									></iframe>
+						{#each ['728x90', '300x600', '160x600', '300x250', '300x50'] as size}
+							{#if adSet[`size${size}`]}
+								<div>
+									<div class="restart" data-size={size}>
+										<iframe
+											loading="lazy"
+											src={`/banner-ads/${adSet.name}/${size}/index.html`}
+											frameborder="0"
+											title={`${data.title} ${size} Banner Ad`}
+										></iframe>
+									</div>
 								</div>
 							{/if}
-							{#if adSet.size300x50}
-								<div class="restart" data-size="300x50">
-									<iframe
-										loading="lazy"
-										src={`/banner-ads/${adSet.name}/300x50/index.html`}
-										frameborder="0"
-										title={`${data.title} 300x50 Banner Ad`}
-									></iframe>
-								</div>
-							{/if}
-						</div>
+						{/each}
 					</div>
 				{/each}
 			</section>
@@ -172,11 +132,7 @@
 			{#if previousPost}
 				<div>
 					<a class="previous line" href={`/work/${previousPost.slug.current}`}>
-						<object
-							class="arrow"
-							data="/images/arrow.svg"
-							type="image/svg+xml"
-							aria-label="arrow"
+						<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow"
 						></object>
 						previous
 					</a>
@@ -184,11 +140,7 @@
 			{:else}
 				<div>
 					<span class="previous line disabled">
-						<object
-							class="arrow"
-							data="/images/arrow.svg"
-							type="image/svg+xml"
-							aria-label="arrow"
+						<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow"
 						></object>
 						previous
 					</span>
@@ -201,11 +153,7 @@
 				<div>
 					<a class="next line" href={`/work/${nextPost.slug.current}`}>
 						next
-						<object
-							class="arrow"
-							data="/images/arrow.svg"
-							type="image/svg+xml"
-							aria-label="arrow"
+						<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow"
 						></object>
 					</a>
 				</div>
@@ -213,11 +161,7 @@
 				<div>
 					<span class="next line disabled">
 						next
-						<object
-							class="arrow"
-							data="/images/arrow.svg"
-							type="image/svg+xml"
-							aria-label="arrow"
+						<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow"
 						></object>
 					</span>
 				</div>

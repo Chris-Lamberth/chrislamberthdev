@@ -1,65 +1,56 @@
 <script>
-	import { run } from 'svelte/legacy';
-
 	import { page } from '$app/stores';
 	import Headshot from './Headshot.svelte';
 	import { animation } from '$lib/animation';
-	import { onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { theme, updateTheme } from '$lib/theme.js';
 
 	let currentPath = $derived($page.url.pathname);
-	let isInteriorPage = $state();
+	let isInteriorPage = $derived(currentPath !== '/');
 
-	
-	let homeActive = $derived(currentPath === '/');
-	let aboutActive = $derived(currentPath === '/about');
-	let resumeActive = $derived(currentPath === '/resume');
-	let workActive = $derived(currentPath === '/work');
-	run(() => {
-		isInteriorPage = currentPath !== '/';
+	let activeStates = $derived({
+		home: currentPath === '/',
+		about: currentPath === '/about',
+		resume: currentPath === '/resume',
+		work: currentPath === '/work'
 	});
 
 	const windowWidth = writable(typeof window !== 'undefined' ? window.innerWidth : 0);
-	if (typeof window !== 'undefined') {
-		window.addEventListener('resize', () => {
-			windowWidth.set(window.innerWidth);
-		});
-	}
 
-	onMount(() => {
-		windowWidth.set(window.innerWidth);
+	$effect.root(() => {
+		if (typeof window !== 'undefined') {
+			const handleResize = () => {
+				windowWidth.set(window.innerWidth);
+			};
 
-		function handleResize() {
-			windowWidth.set(window.innerWidth);
+			window.addEventListener('resize', handleResize);
+			return () => {
+				window.removeEventListener('resize', handleResize);
+			};
 		}
-
-		window.addEventListener('resize', handleResize);
-
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
 	});
 
-	let animationConfig = $derived({
-			animation: {
-				enter: {
-					x: '4rem',
-					y: '0.8rem',
-					duration: 0.22,
-					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-				},
-				exit: {
-					x: $windowWidth > 1000 ? '26rem' : $windowWidth <= 720 ? '0' : '40vw',
-					y: $windowWidth <= 720 ? '16rem' : '9.5rem',
-					duration: 0.22,
-					delay: 0.05,
-					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-				}
-			},
-			trigger: isInteriorPage
-		});
+	let exitX = $derived($windowWidth > 1000 ? '26rem' : $windowWidth <= 720 ? '0' : '40vw');
+	let exitY = $derived($windowWidth <= 720 ? '16rem' : '9.5rem');
 
-	
+	let animationConfig = $derived({
+		animation: {
+			enter: {
+				x: '4rem',
+				y: '0.8rem',
+				duration: 0.22,
+				ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+			},
+			exit: {
+				x: exitX,
+				y: exitY,
+				duration: 0.22,
+				delay: 0.05,
+				ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+			}
+		},
+		trigger: isInteriorPage
+	});
 
 	// Reactive state variable to track if the nav is open
 	let navOpen = $state(false);
@@ -69,23 +60,25 @@
 		navOpen = !navOpen;
 	}
 
-	run(() => {
+	$effect(() => {
 		if (navOpen && $windowWidth > 720) {
 			toggleNav();
 		}
 	});
 
-	// theme
-	import { theme, updateTheme } from '$lib/theme.js';
+	let nextTheme = $derived($theme === 'light' ? 'dark' : 'light');
 
 	// Function to toggle the theme
 	function toggleTheme() {
-		$theme === 'light' ? updateTheme('dark') : updateTheme('light');
+		updateTheme(nextTheme);
 	}
 
 	// Swipe gesture for mobile
 	function swipe(node) {
-		let startX, startY, movedX, movedY;
+		let startX = $state(0),
+			startY = $state(0),
+			movedX = $state(0),
+			movedY = $state(0);
 
 		function handleTouchStart(event) {
 			startX = event.touches[0].clientX;
@@ -136,16 +129,20 @@
 				</div>
 				<Headshot />
 			</div>
-			<button aria-label="Nav" class="nav_btn" class:close-state={navOpen} onclick={toggleNav}>
+			<button aria-label="Nav" class="nav_btn" class:close-state={navOpen} on:click={toggleNav}>
 				<div></div>
 				<div></div>
 			</button>
 			<nav use:swipe class:mobile-state-open={navOpen}>
-				<a class="line" href="/" onclick={toggleNav} class:activeHome={homeActive}>home</a>
-				<a class="line" href="/about" onclick={toggleNav} class:active={aboutActive}>about</a>
-				<a class="line" href="/resume" onclick={toggleNav} class:active={resumeActive}>resume</a>
-				<a class="line" href="/work" onclick={toggleNav} class:active={workActive}>work</a>
-				<button title="toggle light/dark mode" class="theme-toggle" onclick={toggleTheme}>
+				<a class="line" href="/" on:click={toggleNav} class:activeHome={activeStates.home}>home</a>
+				<a class="line" href="/about" on:click={toggleNav} class:active={activeStates.about}
+					>about</a
+				>
+				<a class="line" href="/resume" on:click={toggleNav} class:active={activeStates.resume}
+					>resume</a
+				>
+				<a class="line" href="/work" on:click={toggleNav} class:active={activeStates.work}>work</a>
+				<button title="toggle light/dark mode" class="theme-toggle" on:click={toggleTheme}>
 					{#if $theme === 'light'}
 						<img src="/images/light.svg" alt="light mode" />
 					{:else}
@@ -174,7 +171,9 @@
 		inset: -20px 0 auto 0;
 		height: calc(100% + 20px);
 		translate: 0 -100%;
-		transition: translate 0.26s var(--easing-1), filter 0.26s ease;
+		transition:
+			translate 0.26s var(--easing-1),
+			filter 0.26s ease;
 		overflow: hidden;
 	}
 
@@ -247,7 +246,9 @@
 		color: var(--txt-color);
 		text-decoration: none;
 		transform-origin: center center;
-		transition: color 0.26s var(--easing-1), scale 0.26s var(--easing-1);
+		transition:
+			color 0.26s var(--easing-1),
+			scale 0.26s var(--easing-1);
 	}
 	a:active {
 		scale: 0.9;
@@ -283,8 +284,11 @@
 		border-radius: 2rem;
 		width: 100%;
 		height: 100%;
-		transition: width 0.26s var(--easing-1), translate 0.26s var(--easing-1),
-			rotate 0.26s var(--easing-1), background 0.1s linear;
+		transition:
+			width 0.26s var(--easing-1),
+			translate 0.26s var(--easing-1),
+			rotate 0.26s var(--easing-1),
+			background 0.1s linear;
 	}
 
 	.nav_btn > div:nth-child(2) {
@@ -330,7 +334,9 @@
 		width: 70%;
 		height: 70%;
 		opacity: 0.4;
-		transition: filter 0.2s ease, opacity 0.2s ease;
+		transition:
+			filter 0.2s ease,
+			opacity 0.2s ease;
 	}
 	.theme-toggle::before {
 		content: '';
