@@ -8,22 +8,22 @@ inject({ mode: dev ? 'development' : 'production' });
 export async function load() {
 
 	const loadPosts = async () => {
-		const posts = await getPosts();
-		if (posts) {
+		try {
+			const posts = await getPosts();
 			return { posts };
-		} else {
-			console.log("Failed to fetch posts"); 
-			return { status: 500, error: new Error('Failed to fetch posts') };
+		} catch (error) {
+			console.error("Failed to fetch posts:", error);
+			return { status: 500, error };
 		}
 	}
 
 	const loadInstaFeed = async () => {
-		const instaPosts = await getInstaPosts();
-		if (instaPosts) {
+		try {
+			const instaPosts = await getInstaPosts();
 			return { instaPosts };
-		} else {
-			console.log("Failed to fetch Instagram feed");
-			return { status: 500, error: new Error('Failed to fetch Instagram feed') };
+		} catch (error) {
+			console.error("Failed to fetch Instagram feed:", error);
+			return { status: 500, error };
 		}
 	}
  

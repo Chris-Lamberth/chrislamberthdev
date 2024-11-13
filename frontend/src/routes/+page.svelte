@@ -3,7 +3,7 @@
 	import InstaFeed from '$lib/components/InstaFeed.svelte';
 	import Contact from '$lib/components/Contact.svelte';
 	import { fade } from 'svelte/transition';
-	export let data;
+	let { data } = $props();
 
 	const { posts } = data.posts;
 	const { instaPosts } = data.instaPosts;
@@ -28,7 +28,7 @@
 					data="/images/arrow.svg"
 					type="image/svg+xml"
 					aria-label="arrow"
-				/>
+				></object>
 			</a>
 		</div>
 		{#if posts && posts.length}

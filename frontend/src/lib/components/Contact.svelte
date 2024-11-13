@@ -1,9 +1,9 @@
 <script>
-	let name = '';
-	let email = '';
-	let message = '';
-	let alertMessage = '';
-	let alertMessageType = '';
+	let name = $state('');
+	let email = $state('');
+	let message = $state('');
+	let alertMessage = $state('');
+	let alertMessageType = $state('');
 
 	const submitForm = async (event) => {
 		event.preventDefault();
@@ -40,7 +40,7 @@
 	<h2 class="section-headline">reach out</h2>
 	<p>Got a rad project or just want to say hello? Shoot me a message and let's chat.</p>
 
-	<form on:submit={submitForm}>
+	<form onsubmit={submitForm}>
 		<div class="field">
 			<input type="text" bind:value={name} id="name" name="name" placeholder="name" />
 		</div>
@@ -55,7 +55,7 @@
 				placeholder="message"
 				cols="30"
 				rows="5"
-			/>
+			></textarea>
 		</div>
 		<div class="bottom">
 			<p class="msg {alertMessageType}">{alertMessage}</p>

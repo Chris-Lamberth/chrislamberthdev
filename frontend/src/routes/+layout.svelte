@@ -1,29 +1,31 @@
 <script>
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
 	import '../global.css';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import { initializeTheme } from '$lib/theme.js';
 
-	let currentPath;
-	$: currentPath = $page.url.pathname;
-	$: isInteriorPage = currentPath == '/';
-	$: pageName = $page.url.pathname.split('/')[1];
+	let { children } = $props();
 
-	onMount(async () => {
-		const { gsap } = await import('gsap');
-		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+	let currentPath = $derived($page.url.pathname);
+	let isInteriorPage = $derived(currentPath === '/');
+	let pageName = $derived($page.url.pathname.split('/')[1]);
 
+	// Initialize theme
+	initializeTheme();
+
+	// GSAP setup
+	$effect.root(async () => {
 		if (typeof window !== 'undefined') {
+			const { gsap } = await import('gsap');
+			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 			gsap.registerPlugin(ScrollTrigger);
 
 			const layers = document.querySelectorAll('.bg .layer');
-
 			layers.forEach((layer, index) => {
 				gsap.to(layer, {
 					yPercent: -20 * (index + 1),
 					ease: 'power1.out',
-
 					scrollTrigger: {
 						trigger: '.bg',
 						start: 'top top',
@@ -34,11 +36,6 @@
 			});
 		}
 	});
-
-	import { initializeTheme } from '$lib/theme.js';
-
-	// Initialize the theme when the component mounts
-	initializeTheme();
 </script>
 
 <svelte:head>
@@ -51,15 +48,15 @@
 </svelte:head>
 
 <div class="bg">
-	<div class="layer" />
-	<div class="layer" />
-	<div class="layer" />
+	<div class="layer"></div>
+	<div class="layer"></div>
+	<div class="layer"></div>
 </div>
 <div class="wrapper">
 	<Nav />
 	<main>
-		<div class="spacer" class:int={!isInteriorPage} />
-		<slot />
+		<div class="spacer" class:int={!isInteriorPage}></div>
+		{@render children?.()}
 	</main>
 	<Footer />
 </div>
@@ -143,10 +140,10 @@
 		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 50%);
 	}
 
-	:global(body):has(.mobile-state-open) {
+	:global(body):has(:global(.mobile-state-open)) {
 		overflow: hidden;
 	}
-	.wrapper:has(.mobile-state-open) main {
+	.wrapper:has(:global(.mobile-state-open)) main {
 		pointer-events: none;
 	}
 </style>
