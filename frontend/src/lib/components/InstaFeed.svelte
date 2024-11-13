@@ -1,14 +1,13 @@
 <script>
 	import { imgUrl } from '$lib/sanity';
-	export let instaPosts = [];
-	export let limit = instaPosts.length;
 
 	import { onMount } from 'svelte';
+	let { instaPosts = [], limit = instaPosts.length } = $props();
 
 	// Shuffle the instaPosts initially
 	shuffleArray(instaPosts);
 
-	let displayedPosts = instaPosts.slice(0, limit);
+	let displayedPosts = $state(instaPosts.slice(0, limit));
 	let nextPosts = [];
 
 	onMount(() => {
@@ -57,7 +56,7 @@
 					.width(400)
 					.format('webp', 'jpg')
 					.url()})"
-			/>
+			></div>
 		</a>
 	{/each}
 </div>

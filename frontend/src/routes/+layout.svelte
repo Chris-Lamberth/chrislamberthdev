@@ -5,10 +5,10 @@
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 
-	let currentPath;
-	$: currentPath = $page.url.pathname;
-	$: isInteriorPage = currentPath == '/';
-	$: pageName = $page.url.pathname.split('/')[1];
+	let currentPath = $derived($page.url.pathname);
+	
+	let isInteriorPage = $derived(currentPath == '/');
+	let pageName = $derived($page.url.pathname.split('/')[1]);
 
 	onMount(async () => {
 		const { gsap } = await import('gsap');
@@ -36,6 +36,13 @@
 	});
 
 	import { initializeTheme } from '$lib/theme.js';
+	/**
+	 * @typedef {Object} Props
+	 * @property {import('svelte').Snippet} [children]
+	 */
+
+	/** @type {Props} */
+	let { children } = $props();
 
 	// Initialize the theme when the component mounts
 	initializeTheme();
@@ -51,15 +58,15 @@
 </svelte:head>
 
 <div class="bg">
-	<div class="layer" />
-	<div class="layer" />
-	<div class="layer" />
+	<div class="layer"></div>
+	<div class="layer"></div>
+	<div class="layer"></div>
 </div>
 <div class="wrapper">
 	<Nav />
 	<main>
-		<div class="spacer" class:int={!isInteriorPage} />
-		<slot />
+		<div class="spacer" class:int={!isInteriorPage}></div>
+		{@render children?.()}
 	</main>
 	<Footer />
 </div>
@@ -143,10 +150,10 @@
 		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 50%);
 	}
 
-	:global(body):has(.mobile-state-open) {
+	:global(body):has(:global(.mobile-state-open)) {
 		overflow: hidden;
 	}
-	.wrapper:has(.mobile-state-open) main {
+	.wrapper:has(:global(.mobile-state-open)) main {
 		pointer-events: none;
 	}
 </style>

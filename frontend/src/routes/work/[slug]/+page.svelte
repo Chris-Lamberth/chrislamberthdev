@@ -1,23 +1,27 @@
 <script>
+	import { run } from 'svelte/legacy';
+
 	import { imgUrl } from '$lib/sanity';
 	import { page } from '$app/stores';
 	import { fade } from 'svelte/transition';
-	export let data;
+	let { data } = $props();
 
-	let previousPost, currentPost, nextPost;
+	let previousPost = $state(), currentPost = $state(), nextPost = $state();
 
-	$: if (data && data.posts && Array.isArray(data.posts.posts)) {
-		const currentSlug = $page.params.slug;
-		const posts = data.posts.posts;
+	run(() => {
+		if (data && data.posts && Array.isArray(data.posts.posts)) {
+			const currentSlug = $page.params.slug;
+			const posts = data.posts.posts;
 
-		const currentIndex = posts.findIndex((p) => p.slug.current === currentSlug);
+			const currentIndex = posts.findIndex((p) => p.slug.current === currentSlug);
 
-		if (currentIndex !== -1) {
-			previousPost = posts[currentIndex - 1] || null;
-			currentPost = posts[currentIndex] || null;
-			nextPost = posts[currentIndex + 1] || null;
+			if (currentIndex !== -1) {
+				previousPost = posts[currentIndex - 1] || null;
+				currentPost = posts[currentIndex] || null;
+				nextPost = posts[currentIndex + 1] || null;
+			}
 		}
-	}
+	});
 </script>
 
 <h1 class="hidden">{data.title}</h1>
@@ -45,7 +49,7 @@
 				.url()}'); background-position: {data.altHeaderImage?.hotspot?.x * 100 ||
 				data?.mainImage?.hotspot?.x * 100}% {data.altHeaderImage?.hotspot?.y * 100 ||
 				data?.mainImage?.hotspot?.y * 100}%"
-		/>
+		></section>
 
 		<!-- Rich Text -->
 		{#if data.body}
@@ -94,7 +98,7 @@
 										src={`/banner-ads/${adSet.name}/728x90/index.html`}
 										frameborder="0"
 										title={`${data.title} 728x90 Banner Ad`}
-									/>
+									></iframe>
 								</div>
 							</div>
 						{/if}
@@ -106,7 +110,7 @@
 										src={`/banner-ads/${adSet.name}/300x600/index.html`}
 										frameborder="0"
 										title={`${data.title} 300x600 Banner Ad`}
-									/>
+									></iframe>
 								</div>
 							</div>
 						{/if}
@@ -118,7 +122,7 @@
 										src={`/banner-ads/${adSet.name}/160x600/index.html`}
 										frameborder="0"
 										title={`${data.title} 160x600 Banner Ad`}
-									/>
+									></iframe>
 								</div>
 							</div>
 						{/if}
@@ -130,7 +134,7 @@
 										src={`/banner-ads/${adSet.name}/300x250/index.html`}
 										frameborder="0"
 										title={`${data.title} 300x250 Banner Ad`}
-									/>
+									></iframe>
 								</div>
 							{/if}
 							{#if adSet.size300x50}
@@ -140,7 +144,7 @@
 										src={`/banner-ads/${adSet.name}/300x50/index.html`}
 										frameborder="0"
 										title={`${data.title} 300x50 Banner Ad`}
-									/>
+									></iframe>
 								</div>
 							{/if}
 						</div>
@@ -173,7 +177,7 @@
 							data="/images/arrow.svg"
 							type="image/svg+xml"
 							aria-label="arrow"
-						/>
+						></object>
 						previous
 					</a>
 				</div>
@@ -185,7 +189,7 @@
 							data="/images/arrow.svg"
 							type="image/svg+xml"
 							aria-label="arrow"
-						/>
+						></object>
 						previous
 					</span>
 				</div>
@@ -202,7 +206,7 @@
 							data="/images/arrow.svg"
 							type="image/svg+xml"
 							aria-label="arrow"
-						/>
+						></object>
 					</a>
 				</div>
 			{:else}
@@ -214,7 +218,7 @@
 							data="/images/arrow.svg"
 							type="image/svg+xml"
 							aria-label="arrow"
-						/>
+						></object>
 					</span>
 				</div>
 			{/if}
@@ -381,7 +385,7 @@
 		[data-size='728x90'] {
 			display: none;
 		}
-		.banners .set div:has([data-size='728x90']) {
+		.banners .set div:has(:global([data-size='728x90'])) {
 			display: none;
 		}
 	}

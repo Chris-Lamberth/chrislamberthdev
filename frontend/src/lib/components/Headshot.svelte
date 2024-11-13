@@ -1,15 +1,19 @@
 <script>
+	import { run } from 'svelte/legacy';
+
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { animation } from '$lib/animation';
 	import { writable } from 'svelte/store';
-	let currentPath;
-	let isInteriorPage;
+	let currentPath = $derived($page.url.pathname);
+	let isInteriorPage = $state();
 
-	$: currentPath = $page.url.pathname;
-	$: isInteriorPage = currentPath !== '/';
+	
+	run(() => {
+		isInteriorPage = currentPath !== '/';
+	});
 
-	let bgElement;
+	let bgElement = $state();
 
 	const windowWidth = writable(typeof window !== 'undefined' ? window.innerWidth : 0);
 	if (typeof window !== 'undefined') {
@@ -33,7 +37,28 @@
 		};
 	});
 
-	let animationConfig;
+	let animationConfig = $derived({
+			animation: {
+				enter: {
+					width: '3.2rem', // '30vw
+					height: '2.8rem',
+					x: 'auto',
+					y: '0.4rem',
+					duration: 0.22,
+					delay: 0.05,
+					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+				},
+				exit: {
+					width: $windowWidth <= 720 ? '50vw' : '30vw',
+					height: '12rem',
+					x: $windowWidth <= 720 ? '19vw' : 'auto',
+					y: $windowWidth <= 720 ? '2.5rem' : '6rem',
+					duration: 0.22,
+					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+				}
+			},
+			trigger: isInteriorPage
+		});
 	onMount(() => {
 		function handleMouseMove(event) {
 			if ($windowWidth > 720) {
@@ -59,30 +84,7 @@
 		};
 	});
 
-	$: {
-		animationConfig = {
-			animation: {
-				enter: {
-					width: '3.2rem', // '30vw
-					height: '2.8rem',
-					x: 'auto',
-					y: '0.4rem',
-					duration: 0.22,
-					delay: 0.05,
-					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-				},
-				exit: {
-					width: $windowWidth <= 720 ? '50vw' : '30vw',
-					height: '12rem',
-					x: $windowWidth <= 720 ? '19vw' : 'auto',
-					y: $windowWidth <= 720 ? '2.5rem' : '6rem',
-					duration: 0.22,
-					ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-				}
-			},
-			trigger: isInteriorPage
-		};
-	}
+	
 </script>
 
 <a
@@ -92,7 +94,7 @@
 	class:int={isInteriorPage}
 	use:animation={animationConfig}
 >
-	<div bind:this={bgElement} class="bg" />
+	<div bind:this={bgElement} class="bg"></div>
 	<div
 		class="headshot"
 		use:animation={{
@@ -116,7 +118,7 @@
 			},
 			trigger: isInteriorPage
 		}}
-	/>
+	></div>
 </a>
 
 <style>

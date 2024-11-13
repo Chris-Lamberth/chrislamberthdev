@@ -1,19 +1,23 @@
 <script>
+	import { run } from 'svelte/legacy';
+
 	import { page } from '$app/stores';
 	import Headshot from './Headshot.svelte';
 	import { animation } from '$lib/animation';
 	import { onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 
-	let currentPath;
-	let isInteriorPage;
+	let currentPath = $derived($page.url.pathname);
+	let isInteriorPage = $state();
 
-	$: currentPath = $page.url.pathname;
-	$: homeActive = currentPath === '/';
-	$: aboutActive = currentPath === '/about';
-	$: resumeActive = currentPath === '/resume';
-	$: workActive = currentPath === '/work';
-	$: isInteriorPage = currentPath !== '/';
+	
+	let homeActive = $derived(currentPath === '/');
+	let aboutActive = $derived(currentPath === '/about');
+	let resumeActive = $derived(currentPath === '/resume');
+	let workActive = $derived(currentPath === '/work');
+	run(() => {
+		isInteriorPage = currentPath !== '/';
+	});
 
 	const windowWidth = writable(typeof window !== 'undefined' ? window.innerWidth : 0);
 	if (typeof window !== 'undefined') {
@@ -36,10 +40,7 @@
 		};
 	});
 
-	let animationConfig;
-
-	$: {
-		animationConfig = {
+	let animationConfig = $derived({
 			animation: {
 				enter: {
 					x: '4rem',
@@ -56,22 +57,23 @@
 				}
 			},
 			trigger: isInteriorPage
-		};
-	}
+		});
+
+	
 
 	// Reactive state variable to track if the nav is open
-	let navOpen = false;
+	let navOpen = $state(false);
 
 	// Function to toggle nav open state
 	function toggleNav() {
 		navOpen = !navOpen;
 	}
 
-	$: {
+	run(() => {
 		if (navOpen && $windowWidth > 720) {
 			toggleNav();
 		}
-	}
+	});
 
 	// theme
 	import { theme, updateTheme } from '$lib/theme.js';
@@ -134,16 +136,16 @@
 				</div>
 				<Headshot />
 			</div>
-			<button aria-label="Nav" class="nav_btn" class:close-state={navOpen} on:click={toggleNav}>
-				<div />
-				<div />
+			<button aria-label="Nav" class="nav_btn" class:close-state={navOpen} onclick={toggleNav}>
+				<div></div>
+				<div></div>
 			</button>
 			<nav use:swipe class:mobile-state-open={navOpen}>
-				<a class="line" href="/" on:click={toggleNav} class:activeHome={homeActive}>home</a>
-				<a class="line" href="/about" on:click={toggleNav} class:active={aboutActive}>about</a>
-				<a class="line" href="/resume" on:click={toggleNav} class:active={resumeActive}>resume</a>
-				<a class="line" href="/work" on:click={toggleNav} class:active={workActive}>work</a>
-				<button title="toggle light/dark mode" class="theme-toggle" on:click={toggleTheme}>
+				<a class="line" href="/" onclick={toggleNav} class:activeHome={homeActive}>home</a>
+				<a class="line" href="/about" onclick={toggleNav} class:active={aboutActive}>about</a>
+				<a class="line" href="/resume" onclick={toggleNav} class:active={resumeActive}>resume</a>
+				<a class="line" href="/work" onclick={toggleNav} class:active={workActive}>work</a>
+				<button title="toggle light/dark mode" class="theme-toggle" onclick={toggleTheme}>
 					{#if $theme === 'light'}
 						<img src="/images/light.svg" alt="light mode" />
 					{:else}

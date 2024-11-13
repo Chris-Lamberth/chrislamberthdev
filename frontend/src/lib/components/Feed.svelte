@@ -1,9 +1,17 @@
 <script>
+	import { handlers } from 'svelte/legacy';
+
 	import { imgUrl } from '$lib/sanity';
-	export let posts = [];
-	export let limit = posts.length;
-	export let showFilter = false;
 	import { fly, fade } from 'svelte/transition';
+	/**
+	 * @typedef {Object} Props
+	 * @property {any} [posts]
+	 * @property {any} [limit]
+	 * @property {boolean} [showFilter]
+	 */
+
+	/** @type {Props} */
+	let { posts = [], limit = posts.length, showFilter = false } = $props();
 
 	let categories = [];
 	posts.forEach((post) => {
@@ -14,20 +22,20 @@
 		});
 	});
 
-	let selectedCategory = 'all';
-	let dropdownOpen = false;
+	let selectedCategory = $state('all');
+	let dropdownOpen = $state(false);
 
 	function selectCategory(category) {
 		selectedCategory = category;
 		dropdownOpen = false;
 	}
 
-	$: filteredPosts =
-		selectedCategory === 'all'
+	let filteredPosts =
+		$derived(selectedCategory === 'all'
 			? posts
 			: posts.filter((post) =>
 					post.categories.some((category) => category.title === selectedCategory)
-			  );
+			  ));
 </script>
 
 {#if showFilter}
@@ -38,12 +46,12 @@
 				role="button"
 				tabindex="-1"
 				class="dropdown {dropdownOpen ? 'active' : ''}"
-				on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
+				onkeydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
 			>
 				<button
 					aria-label="Filter"
 					class="filter-btn"
-					on:click={() => (dropdownOpen = !dropdownOpen)}
+					onclick={() => (dropdownOpen = !dropdownOpen)}
 				>
 					{selectedCategory}
 				</button>
@@ -52,9 +60,8 @@
 						<button
 							class="item"
 							tabindex="0"
-							on:keydown={(e) => e.key === 'Enter' && selectCategory('all')}
-							on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
-							on:click={() => selectCategory('all')}
+							onkeydown={handlers((e) => e.key === 'Enter' && selectCategory('all'), (e) => e.key === 'Escape' && (dropdownOpen = false))}
+							onclick={() => selectCategory('all')}
 						>
 							all
 						</button>
@@ -62,9 +69,8 @@
 							<button
 								class="item"
 								tabindex="0"
-								on:click={() => selectCategory(category)}
-								on:keydown={(e) => e.key === 'Enter' && selectCategory(category)}
-								on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
+								onclick={() => selectCategory(category)}
+								onkeydown={handlers((e) => e.key === 'Enter' && selectCategory(category), (e) => e.key === 'Escape' && (dropdownOpen = false))}
 							>
 								{category}
 							</button>
@@ -90,7 +96,7 @@
 					.url()}); 
            background-position: {post?.mainImage?.hotspot?.x * 100}% {post?.mainImage?.hotspot?.y *
 					100}%"
-			/>
+			></div>
 			<div class="txt">
 				<h3>{post.title}</h3>
 				{#if post.categories}
@@ -188,7 +194,7 @@
 		transition: scale 0.2s ease;
 	}
 
-	.filter:has(.active)::after {
+	.filter:has(:global(.active))::after {
 		scale: 1;
 	}
 
