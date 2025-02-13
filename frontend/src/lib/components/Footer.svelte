@@ -46,11 +46,7 @@
 						/>
 					</svg>
 				</a>
-				<a
-					aria-label="LinkedIn"
-					href="https://www.linkedin.com/in/chris-lamberth-31ab7b28/"
-					target="_blank"
-				>
+				<a aria-label="LinkedIn" href="https://www.linkedin.com/in/chris-lamberth" target="_blank">
 					<svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 23">
 						<path
 							d="m4.98,2.5c0,1.38-1.11,2.5-2.48,2.5S.02,3.88.02,2.5,1.13,0,2.5,0s2.48,1.12,2.48,2.5Zm.02,4.5H0v16h5V7Zm7.98,0h-4.97v16h4.97v-8.4c0-4.67,6.03-5.05,6.03,0v8.4h4.99v-10.13c0-7.88-8.92-7.59-11.02-3.71v-2.16Z"
