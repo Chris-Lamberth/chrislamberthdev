@@ -42,7 +42,12 @@
 				<section>
 					<h2 class="hl_sm">Experience</h2>
 					<div class="item">
-						<h3>2019 - {currentYear}</h3>
+						<h3>2025 - {currentYear}</h3>
+						<h4>Dalton Agency</h4>
+						<p class="sub">Senior Web Developer</p>
+					</div>
+					<div class="item">
+						<h3>2019 - 2025</h3>
 						<h4>Dalton Agency</h4>
 						<p class="sub">Web Developer</p>
 					</div>
@@ -117,7 +122,10 @@
 		font-family: var(--body);
 		font-size: 0.7rem;
 		position: relative;
-		transition: scale 0.1s ease, background 0.1s ease, border 0.1s ease;
+		transition:
+			scale 0.1s ease,
+			background 0.1s ease,
+			border 0.1s ease;
 		display: flex;
 		align-items: center;
 		gap: 0.4rem;
