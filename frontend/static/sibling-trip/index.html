@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Friday the 13th Mini Siblings Weekend: Savannah & Tybee Island</title>
+  <style>
+    :root{
+      --bg:#100d16;
+      --bg-2:#17111f;
+      --card:#1d1627;
+      --card-2:#241b30;
+      --ink:#f5ede3;
+      --muted:#cabcb0;
+      --line:#463355;
+      --gold:#e0af59;
+      --pumpkin:#d26a45;
+      --plum:#775292;
+      --moss:#617862;
+      --blood:#9f3d4e;
+      --cream:#fff0dd;
+      --fog:rgba(255,255,255,.08);
+      --shadow:0 16px 38px rgba(0,0,0,.38);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      line-height:1.58;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(119,82,146,.18), transparent 25%),
+        radial-gradient(circle at 85% 10%, rgba(210,106,69,.10), transparent 20%),
+        linear-gradient(180deg,#0d0a13 0%,#15101c 35%,#110d17 100%);
+    }
+
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(to bottom, transparent 0%, rgba(255,255,255,.02) 50%, transparent 100%),
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.03) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 12%, rgba(255,255,255,.03) 0 1px, transparent 2px),
+        radial-gradient(circle at 62% 26%, rgba(255,255,255,.025) 0 1px, transparent 2px),
+        radial-gradient(circle at 30% 80%, rgba(255,255,255,.02) 0 2px, transparent 3px);
+      opacity:.85;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:56px 20px 48px;
+      background:
+        radial-gradient(circle at 84% 18%, rgba(255,244,207,.24) 0 54px, rgba(255,244,207,.08) 55px, transparent 118px),
+        linear-gradient(180deg, rgba(7,6,10,.2), rgba(7,6,10,.72)),
+        linear-gradient(135deg,#2e1b3b 0%, #1b1626 38%, #203428 100%);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:auto -5% -30px -5%;
+      height:180px;
+      background:
+        radial-gradient(ellipse at 15% 70%, rgba(255,255,255,.08), transparent 42%),
+        radial-gradient(ellipse at 48% 80%, rgba(255,255,255,.07), transparent 46%),
+        radial-gradient(ellipse at 86% 70%, rgba(255,255,255,.08), transparent 38%);
+      filter:blur(8px);
+      opacity:.85;
+    }
+
+    .hero:after{
+      content:"✦ ✦ ✦ ✦ ✦";
+      position:absolute;
+      top:24px;
+      left:24px;
+      color:rgba(255,255,255,.34);
+      font-size:.9rem;
+      letter-spacing:.45rem;
+    }
+
+    .wrap{max-width:920px;margin:0 auto;position:relative;z-index:2}
+
+    .eyebrow{
+      display:inline-block;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.8rem;
+      font-weight:800;
+      color:#f5ca75;
+      margin-bottom:12px;
+      padding:8px 12px;
+      border:1px solid rgba(245,202,117,.28);
+      border-radius:999px;
+      background:rgba(0,0,0,.18);
+      backdrop-filter:blur(4px);
+    }
+
+    h1{
+      margin:0 0 14px;
+      max-width:820px;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(2.3rem,8vw,4.9rem);
+      line-height:.92;
+      color:#fff6e9;
+      text-shadow:0 2px 18px rgba(0,0,0,.32);
+    }
+
+    .sub{
+      margin:0;
+      max-width:760px;
+      color:#f6e8d8;
+      font-size:1.08rem;
+    }
+
+    .hero-badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 13px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.08);
+      color:#fff5ea;
+      font-size:.92rem;
+      font-weight:700;
+      backdrop-filter:blur(6px);
+    }
+
+    main{max-width:920px;margin:-22px auto 64px;padding:0 16px;position:relative;z-index:3}
+
+    section,.card{
+      background:linear-gradient(180deg,var(--card) 0%, var(--card-2) 100%);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:24px;
+      margin:14px 0;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    section:before,.card:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), transparent 28%);
+      opacity:.55;
+    }
+
+    h2{
+      margin:0 0 12px;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:1.78rem;
+      color:#fff1df;
+    }
+
+    h3{
+      margin:16px 0 8px;
+      font-size:1.12rem;
+      color:#ffe7c0;
+    }
+
+    p{margin:8px 0;color:var(--ink)}
+    ul,ol{padding-left:20px;margin:8px 0}
+    li{margin:7px 0}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+    .mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+
+    .stat{
+      background:linear-gradient(180deg,#221a2e,#2a2135);
+      border:1px solid #4f3b62;
+      border-radius:18px;
+      padding:16px;
+      min-height:108px;
+    }
+
+    .stat strong{display:block;color:#fff2df;font-size:1rem;margin-bottom:6px}
+
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      background:#2b2236;
+      border:1px solid #4d3d60;
+      border-radius:999px;
+      padding:8px 12px;
+      margin:3px 4px 3px 0;
+      font-weight:700;
+      color:#f4e7d4;
+      font-size:.92rem;
+    }
+
+    .feature-callout{
+      background:linear-gradient(135deg,#3a1825,#4b2131);
+      border:1px solid #7e3d52;
+    }
+
+    .feature-callout .label{
+      display:inline-block;
+      font-size:.8rem;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#ffd7dd;
+      margin-bottom:8px;
+    }
+
+    .note{
+      background:#241b11;
+      border:1px dashed #bb8c47;
+      color:#f5e2ba;
+      border-radius:16px;
+      padding:14px;
+      margin-top:12px;
+    }
+
+    .option{
+      border-left:6px solid var(--pumpkin);
+      padding-left:18px;
+    }
+    .option:nth-child(2){border-left-color:var(--gold)}
+    .option:nth-child(3){border-left-color:var(--moss)}
+
+    .vibe-tag{
+      display:inline-block;
+      font-size:.8rem;
+      font-weight:800;
+      color:#27170d;
+      background:#ffd494;
+      padding:5px 9px;
+      border-radius:999px;
+      margin-bottom:8px;
+    }
+
+    .price{font-weight:800;color:#ffd58f}
+
+    a{color:#f4bc69;font-weight:800;text-decoration:none;border-bottom:1px solid rgba(244,188,105,.26)}
+    a:hover{border-bottom-color:currentColor}
+
+    .day{
+      border-left:5px solid var(--plum);
+      padding-left:14px;
+      margin:16px 0;
+      position:relative;
+    }
+
+    .day:before{
+      content:"🕯️";
+      position:absolute;
+      left:-16px;
+      top:0;
+      transform:translateX(-100%);
+      opacity:.85;
+    }
+
+    .small{font-size:.95rem;color:var(--muted)}
+
+    .poll{
+      background:linear-gradient(135deg,#211929,#2b2234);
+      border:1px solid #534064;
+    }
+
+    .footer{
+      font-size:.9rem;
+      color:var(--muted);
+      text-align:center;
+      margin:30px 0;
+      padding-bottom:6px;
+    }
+
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      margin:16px 0 6px;
+    }
+
+    strong{color:#fff2df}
+
+    @media (max-width: 560px){
+      .hero{padding:40px 16px 36px}
+      main{padding:0 12px}
+      section,.card{padding:18px;border-radius:20px}
+      .grid,.mini-grid{grid-template-columns:1fr}
+      h2{font-size:1.48rem}
+      .day:before{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Friday the 13th mini siblings escape</div>
+      <h1>Spooky Savannah Weekend<br>with a Tybee Side Quest</h1>
+      <p class="sub">A haunted-but-fun little getaway for the four of us: ghost stories, murder mystery drama, creepy-cute museums, beach air, river views, and the exact right amount of family nonsense.</p>
+      <div class="hero-badges">
+        <span class="hero-badge">👻 haunted vibes</span>
+        <span class="hero-badge">🕯️ campy & spooky</span>
+        <span class="hero-badge">🚗 super drivable</span>
+        <span class="hero-badge">🌊 Tybee detour</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>🖤 The Weekend Mood</h2>
+      <p>This is meant to feel like a <strong>low-stress, high-fun siblings weekend</strong> with a playful Friday-the-13th twist. Think moody Savannah squares, spooky trolley rides, a murder mystery dinner, weird museums, some salt air at Tybee, and lots of time to laugh and hang out.</p>
+      <div>
+        <span class="pill">👻 spooky but fun</span>
+        <span class="pill">🎭 interactive & silly</span>
+        <span class="pill">🦇 weird local flavor</span>
+        <span class="pill">💸 easy on everyone</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>🚗 Logistics</h2>
+      <div class="grid">
+        <div class="stat"><strong>When</strong>Friday, November 13 – Sunday, November 15, 2026</div>
+        <div class="stat"><strong>Where</strong>Savannah, GA with a Tybee Island side trip</div>
+        <div class="stat"><strong>Drive Time</strong>About 2.5 hours or less for everyone</div>
+        <div class="stat"><strong>Lodging Goal</strong>One shared suite just outside downtown Savannah</div>
+      </div>
+    </section>
+
+    <section class="feature-callout">
+      <div class="label">host plan</div>
+      <h2>🎁 I’m Covering the Big Stuff</h2>
+      <p><strong>I’m planning to pay for the lodging and tours/activities</strong> so the weekend feels simple and easy for everyone.</p>
+      <div class="divider"></div>
+      <p><strong>Everyone else would just be responsible for:</strong> food, drinks, snacks, and any souvenirs or personal extras.</p>
+      <p>This way we can all just focus on showing up, having fun, and embracing our creepy little Savannah weekend.</p>
+    </section>
+
+    <section>
+      <h2>🏨 Hotel Plan</h2>
+      <p><strong>Hotel we’re linking:</strong> <a href="https://www.choicehotels.com/georgia/savannah/cambria-hotels" target="_blank" rel="noopener">Cambria Hotel Savannah Downtown Historic District</a>.</p>
+      <p>This is the hotel plan for now: a downtown Savannah stay that keeps us close to the Historic District, restaurants, spooky tours, museums, and the rest of the weekend activities.</p>
+      <div class="mini-grid">
+        <div class="stat">
+          <strong>Why This One Works</strong>
+          Downtown Savannah location, easy access to the Historic District, and a more polished hotel option for the weekend.
+        </div>
+        <div class="stat">
+          <strong>Budget Target</strong>
+          Goal is to keep it at or under $250/night before taxes, fees, and parking. Final pricing will need to be checked once November 2026 dates are available.
+        </div>
+        <div class="stat">
+          <strong>Room Setup Goal</strong>
+          Ideally one shared room or suite setup that works for four people, depending on what is available for the dates.
+        </div>
+        <div class="stat">
+          <strong>Parking Note</strong>
+          Downtown hotels often charge extra for parking, so we should factor that into the lodging budget before booking.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>💰 Budget Snapshot</h2>
+      <p><strong>Overall target:</strong> around <strong>$1,000 max</strong> for the core weekend plan.</p>
+      <p><strong>Covered by me:</strong> lodging + tours/activities.</p>
+      <p><strong>Covered individually:</strong> your own food, drinks, and souvenirs.</p>
+      <p><strong>Free / low-cost anchors:</strong> Tybee beach walk, Forsyth Park, River Street, and general sibling chaos.</p>
+      <div class="note">Prices can vary depending on date, time, taxes, and booking platform. The links below go to official or recommended booking pages so we can check final pricing before anything gets booked.</div>
+    </section>
+
+    <section>
+      <h2>🎭 Choose Your Nighttime Chaos</h2>
+      <div class="card option">
+        <div class="vibe-tag">Option A • theatrical chaos</div>
+        <h3><a href="https://www.thedinnerdetective.com/savannah/" target="_blank" rel="noopener">The Dinner Detective — Murder Mystery Dinner</a></h3>
+        <p><strong>The vibe:</strong> interactive, suspicious, dramatic, and hilarious.</p>
+        <p>We get dinner while a “crime” unfolds around us, and the actors are hidden among the guests. This means one of us could absolutely be accused of murder for entertainment purposes.</p>
+        <p class="price">Estimate: ~$75/person</p>
+      </div>
+
+      <div class="card option">
+        <div class="vibe-tag">Option B • ridiculous history</div>
+        <h3><a href="https://www.moronstour.com/savannah-for-morons" target="_blank" rel="noopener">Savannah for Morons — Comedy Trolley Tour</a></h3>
+        <p><strong>The vibe:</strong> campy, fast, goofy, and intentionally ridiculous.</p>
+        <p>A 90-minute comedy ride that roasts Savannah history with costumes, dumb jokes, and high-energy storytelling. Basically: educational, but in a very unserious way.</p>
+        <p class="price">Estimate: ~$59/person</p>
+      </div>
+
+      <div class="card option">
+        <div class="vibe-tag">Option C • spooky photo ops</div>
+        <h3><a href="https://www.hearseghosttours.com/" target="_blank" rel="noopener">Hearse Ghost Tours</a></h3>
+        <p><strong>The vibe:</strong> spooky, campy, weird, and very Friday-the-13th appropriate.</p>
+        <p>We ride through the city in a converted hearse while hearing haunted stories, dark local lore, and macabre Savannah tales. Peak sibling-photo material.</p>
+        <p class="price">Estimate: ~$25/person</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>👾 Sunday: Weird & Wonderful Grand Finale</h2>
+      <div class="card">
+        <div class="vibe-tag">oddities & pinball</div>
+        <h3><a href="https://gravefacemuseum.com/" target="_blank" rel="noopener">Graveface Museum</a> + <a href="https://graveface.com/" target="_blank" rel="noopener">Graveface Records</a></h3>
+        <p>An atmospheric true-crime and oddities museum packed with cult curiosities, cryptids, taxidermy, dark history, and horror-themed pinball included with admission.</p>
+        <p class="price">Estimate: ~$20/person</p>
+      </div>
+      <div class="card">
+        <div class="vibe-tag">boat ride cooldown</div>
+        <h3><a href="https://savannahriverboat.com/" target="_blank" rel="noopener">Savannah Riverboat Sightseeing Cruise</a></h3>
+        <p>A breezy paddlewheel cruise along the Savannah River so we can unwind, look at the skyline, and feel like spooky Southern socialites before heading home.</p>
+        <p class="price">Estimate: ~$42/person</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>🗓️ Loose Itinerary</h2>
+      <div class="day">
+        <h3>Friday Night — Nov. 13</h3>
+        <ul>
+          <li>Drive in and check into the suite.</li>
+          <li>Grab casual dinner — pizza, burgers, or whatever is easiest.</li>
+          <li>Kick off the weekend with <strong>Option B</strong> comedy trolley or <strong>Option C</strong> hearse ghost tour.</li>
+        </ul>
+      </div>
+      <div class="day">
+        <h3>Saturday Daytime — Nov. 14</h3>
+        <ul>
+          <li>Head to <a href="https://visittybee.com/" target="_blank" rel="noopener">Tybee Island</a> for a beach walk and some fresh air.</li>
+          <li>Stop at <a href="https://www.nps.gov/fopu/index.htm" target="_blank" rel="noopener">Fort Pulaski National Monument</a> along the way.</li>
+          <li>Find a casual spot for shrimp, seafood, or whatever sounds good.</li>
+        </ul>
+      </div>
+      <div class="day">
+        <h3>Saturday Night — Nov. 14</h3>
+        <ul>
+          <li>Do <strong>Option A</strong> murder mystery dinner, or keep the evening flexible and explore downtown/riverfront.</li>
+          <li>Optional add-on earlier in the day: a walk through <a href="https://www.savannahga.gov/879/Forsyth-Park" target="_blank" rel="noopener">Forsyth Park</a>.</li>
+        </ul>
+      </div>
+      <div class="day">
+        <h3>Sunday Morning — Nov. 15</h3>
+        <ul>
+          <li>Visit Graveface Museum and/or Graveface Records.</li>
+          <li>Hop on the Savannah Riverboat sightseeing cruise.</li>
+          <li>Head home by mid-afternoon.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>🌤️ Weather + Packing Notes</h2>
+      <ul>
+        <li>November is usually a great time to visit: mild days, cooler evenings, and fewer crowds.</li>
+        <li>Bring layers for night tours and the riverboat.</li>
+        <li>Wear comfortable shoes — Savannah means walking, uneven sidewalks, and cobblestones.</li>
+        <li>Tybee can feel windier than downtown, so a light jacket is smart.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🧭 Safety + Practical Notes</h2>
+      <ul>
+        <li>Stay together downtown at night, especially after tours or drinks.</li>
+        <li>Use rideshare if parking is annoying or if anyone has been drinking.</li>
+        <li>Check Tybee parking rules and meters before leaving the car.</li>
+        <li>Fort Pulaski entrance is cashless, so bring a card.</li>
+      </ul>
+    </section>
+
+    <section class="poll">
+      <h2>💬 Sibling Poll</h2>
+      <ol>
+        <li>Are you in for the trip?</li>
+        <li>Do the dates — November 13–15, 2026 — work for you?</li>
+        <li>Which nighttime activity should we prioritize: <strong>A</strong>, <strong>B</strong>, or <strong>C</strong>?</li>
+        <li>Are we all good with the plan that I cover lodging and tours, and everyone else covers their own food/drinks/souvenirs?</li>
+      </ol>
+    </section>
+
+    <p class="footer">Spooky Savannah. Tybee breezes. Murder mystery drama. Ghostly rides. Weird museums. Sibling nonsense.</p>
+  </main>
+</body>
+</html>
