@@ -5,8 +5,8 @@
 	import { fade } from 'svelte/transition';
 	let { data } = $props();
 
-	const { posts } = data.posts;
-	const { instaPosts } = data.instaPosts;
+	let posts = $derived(data.posts?.posts ?? []);
+	let instaPosts = $derived(data.instaPosts?.instaPosts ?? []);
 </script>
 
 <svelte:head>

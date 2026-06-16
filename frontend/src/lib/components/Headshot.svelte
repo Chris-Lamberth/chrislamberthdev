@@ -24,7 +24,11 @@
 	});
 
 	$effect.root(() => {
-		if (typeof window !== 'undefined' && $windowWidth > 720) {
+		if (
+			typeof window !== 'undefined' &&
+			$windowWidth > 720 &&
+			!window.matchMedia('(prefers-reduced-motion: reduce)').matches
+		) {
 			const handleMouseMove = (event) => {
 				const { clientX, clientY } = event;
 				const { innerWidth, innerHeight } = window;

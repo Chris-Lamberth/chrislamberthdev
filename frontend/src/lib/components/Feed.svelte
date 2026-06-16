@@ -40,12 +40,12 @@
 				role="button"
 				tabindex="-1"
 				class="dropdown {dropdownOpen ? 'active' : ''}"
-				on:keydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
+				onkeydown={(e) => e.key === 'Escape' && (dropdownOpen = false)}
 			>
 				<button
 					aria-label="Filter"
 					class="filter-btn"
-					on:click={() => (dropdownOpen = !dropdownOpen)}
+					onclick={() => (dropdownOpen = !dropdownOpen)}
 				>
 					{selectedCategory}
 				</button>
@@ -54,20 +54,20 @@
 						<button
 							class="item"
 							tabindex="0"
-							on:keydown={(e) => {
+							onkeydown={(e) => {
 								if (e.key === 'Enter') selectCategory('all');
 								if (e.key === 'Escape') dropdownOpen = false;
 							}}
-							on:click={() => selectCategory('all')}
+							onclick={() => selectCategory('all')}
 						>
 							all
 						</button>
-						{#each categories as category}
+						{#each categories as category (category)}
 							<button
 								class="item"
 								tabindex="0"
-								on:click={() => selectCategory(category)}
-								on:keydown={(e) => {
+								onclick={() => selectCategory(category)}
+								onkeydown={(e) => {
 									if (e.key === 'Enter') selectCategory(category);
 									if (e.key === 'Escape') dropdownOpen = false;
 								}}
@@ -83,7 +83,7 @@
 {/if}
 
 <div class="group">
-	{#each filteredPosts.slice(0, limit) as post, index}
+	{#each filteredPosts.slice(0, limit) as post, index (post._id)}
 		<a
 			href={`/work/${post.slug.current}`}
 			in:fly={{ duration: 100, y: 50, delay: (index + 1) * 30 }}
@@ -101,7 +101,7 @@
 				<h3>{post.title}</h3>
 				{#if post.categories}
 					<p class="categories">
-						{#each post.categories as category, index}
+						{#each post.categories as category, index (category.title)}
 							<span>{category.title}{index < post.categories.length - 1 ? ', ' : ''}</span>
 						{/each}
 					</p>

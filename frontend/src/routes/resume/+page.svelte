@@ -1,6 +1,6 @@
 <script>
 	let currentYear = new Date().getFullYear();
-	import { fade, fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 </script>
 
 <svelte:head>
