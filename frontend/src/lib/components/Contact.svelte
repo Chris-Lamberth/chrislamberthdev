@@ -29,7 +29,7 @@
 				alertMessage = data.error;
 				alertMessageType = 'error';
 			}
-		} catch (error) {
+		} catch {
 			alertMessage = 'There was an error submitting the form.';
 			alertMessageType = 'error';
 		}
@@ -54,8 +54,7 @@
 				id="message"
 				placeholder="message"
 				cols="30"
-				rows="5"
-			></textarea>
+				rows="5"></textarea>
 		</div>
 		<div class="bottom">
 			<p class="msg {alertMessageType}">{alertMessage}</p>
@@ -86,7 +85,9 @@
 		padding: 0.7rem;
 		border-radius: 0.5em;
 		color: #fff;
-		box-shadow: 0 0 0 0px #000, 0 0 0 0px #00ffcc;
+		box-shadow:
+			0 0 0 0px #000,
+			0 0 0 0px #00ffcc;
 		transition: box-shadow 0.1s ease-in-out;
 	}
 	.bottom {
@@ -109,7 +110,9 @@
 	input:focus,
 	textarea:focus {
 		outline: none;
-		box-shadow: 0 0 0 2px #000, 0 0 0 4px #00ffcc;
+		box-shadow:
+			0 0 0 2px #000,
+			0 0 0 4px #00ffcc;
 	}
 
 	input::-webkit-input-placeholder,
@@ -126,13 +129,21 @@
 		padding: 1em;
 		border-radius: 0.6em;
 		min-width: 120px;
-		box-shadow: 0 0 0 0px #000, 0 0 0 0px #00ffcc;
-		transition: scale 0.1s ease-in-out, box-shadow 0.1s ease-in-out, background 0.1s linear,
-			color 0.1s linear, color 0.1s linear;
+		box-shadow:
+			0 0 0 0px #000,
+			0 0 0 0px #00ffcc;
+		transition:
+			scale 0.1s ease-in-out,
+			box-shadow 0.1s ease-in-out,
+			background 0.1s linear,
+			color 0.1s linear,
+			color 0.1s linear;
 	}
 	form button:focus-visible {
 		outline: none;
-		box-shadow: 0 0 0 2px #000, 0 0 0 4px #00ffcc;
+		box-shadow:
+			0 0 0 2px #000,
+			0 0 0 4px #00ffcc;
 	}
 	form button:active {
 		scale: 0.9;

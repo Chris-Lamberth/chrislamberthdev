@@ -1,27 +1,30 @@
 import { gsap } from 'gsap';
 
+const reducedMotion =
+	typeof window !== 'undefined'
+		? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+		: false;
+
 export function animation(node, { animation, trigger }) {
-    let isFirstRun = true;
+	let isFirstRun = true;
 
-    function runAnimation() {
-        if (isFirstRun) {
-            // Directly set the initial position without animation
-            gsap.set(node, trigger ? animation.enter : animation.exit);
-            isFirstRun = false;
-        } else {
-            // Run the animation
-            gsap.to(node, trigger ? animation.enter : animation.exit);
-        }
-    }
+	function runAnimation() {
+		const target = trigger ? animation.enter : animation.exit;
+		if (isFirstRun || reducedMotion) {
+			gsap.set(node, target);
+			isFirstRun = false;
+		} else {
+			gsap.to(node, target);
+		}
+	}
 
-    runAnimation();
+	runAnimation();
 
-    return {
-        update(newParams) {
-            // Update the parameters and run the animation
-            animation = newParams.animation;
-            trigger = newParams.trigger;
-            runAnimation();
-        }
-    };
+	return {
+		update(newParams) {
+			animation = newParams.animation;
+			trigger = newParams.trigger;
+			runAnimation();
+		}
+	};
 }

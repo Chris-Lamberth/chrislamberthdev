@@ -5,7 +5,6 @@
 	let { data } = $props();
 
 	let previousPost = $state(),
-		currentPost = $state(),
 		nextPost = $state();
 
 	$effect(() => {
@@ -17,7 +16,6 @@
 
 			if (currentIndex !== -1) {
 				previousPost = posts[currentIndex - 1] || null;
-				currentPost = posts[currentIndex] || null;
 				nextPost = posts[currentIndex + 1] || null;
 			}
 		}
@@ -40,7 +38,7 @@
 			<h2 class="hl_sm">services</h2>
 			{#if data.categories}
 				<p>
-					{#each data.categories as category, index}
+					{#each data.categories as category, index (category.title)}
 						<span>{category.title}{index < data.categories.length - 1 ? ', ' : ''}</span>
 					{/each}
 				</p>
@@ -58,7 +56,7 @@
 		<!-- Rich Text -->
 		{#if data.body}
 			<section class="rich_text">
-				{#each data.body as item}
+				{#each data.body as item (item._key)}
 					{#if item._type === 'block'}
 						<p>{item.children[0].text}</p>
 					{:else if item._type === 'image'}
@@ -71,7 +69,7 @@
 		<!-- Additional Images -->
 		{#if data.additionalImages && data.additionalImages.length > 0}
 			<section class="content_grid">
-				{#each data.additionalImages as { image, alt, columns }}
+				{#each data.additionalImages as { image, alt, columns }, i (i)}
 					{#if image}
 						<div class="img border-1" style="grid-column: span {columns}">
 							<img
@@ -92,9 +90,9 @@
 		<!-- Banner Ads Section -->
 		{#if data.adSets}
 			<section class="banners">
-				{#each data.adSets as adSet}
+				{#each data.adSets as adSet (adSet.name)}
 					<div class="set">
-						{#each ['728x90', '300x600', '160x600', '300x250', '300x50'] as size}
+						{#each ['728x90', '300x600', '160x600', '300x250', '300x50'] as size (size)}
 							{#if adSet[`size${size}`]}
 								<div>
 									<div class="restart" data-size={size}>

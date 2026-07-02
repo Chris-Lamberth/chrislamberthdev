@@ -94,7 +94,7 @@
 			movedY = event.touches[0].clientY - startY;
 		}
 
-		function handleTouchEnd(event) {
+		function handleTouchEnd() {
 			node.removeEventListener('touchmove', handleTouchMove);
 			node.removeEventListener('touchend', handleTouchEnd);
 
@@ -129,20 +129,19 @@
 				</div>
 				<Headshot />
 			</div>
-			<button aria-label="Nav" class="nav_btn" class:close-state={navOpen} on:click={toggleNav}>
+			<button aria-label="Nav" class="nav_btn" class:close-state={navOpen} onclick={toggleNav}>
 				<div></div>
 				<div></div>
 			</button>
 			<nav use:swipe class:mobile-state-open={navOpen}>
-				<a class="line" href="/" on:click={toggleNav} class:activeHome={activeStates.home}>home</a>
-				<a class="line" href="/about" on:click={toggleNav} class:active={activeStates.about}
-					>about</a
+				<a class="line" href="/" onclick={toggleNav} class:activeHome={activeStates.home}>home</a>
+				<a class="line" href="/about" onclick={toggleNav} class:active={activeStates.about}>about</a
 				>
-				<a class="line" href="/resume" on:click={toggleNav} class:active={activeStates.resume}
+				<a class="line" href="/resume" onclick={toggleNav} class:active={activeStates.resume}
 					>resume</a
 				>
-				<a class="line" href="/work" on:click={toggleNav} class:active={activeStates.work}>work</a>
-				<button title="toggle light/dark mode" class="theme-toggle" on:click={toggleTheme}>
+				<a class="line" href="/work" onclick={toggleNav} class:active={activeStates.work}>work</a>
+				<button title="toggle light/dark mode" class="theme-toggle" onclick={toggleTheme}>
 					{#if $theme === 'light'}
 						<img src="/images/light.svg" alt="light mode" />
 					{:else}

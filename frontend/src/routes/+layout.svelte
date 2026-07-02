@@ -1,9 +1,11 @@
 <script>
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	import '../global.css';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { initializeTheme } from '$lib/theme.js';
+	import { dev } from '$app/environment';
 
 	let { children } = $props();
 
@@ -14,9 +16,19 @@
 	// Initialize theme
 	initializeTheme();
 
+	onMount(async () => {
+		const { inject } = await import('@vercel/analytics');
+		const { injectSpeedInsights } = await import('@vercel/speed-insights/sveltekit');
+		inject({ mode: dev ? 'development' : 'production' });
+		injectSpeedInsights();
+	});
+
 	// GSAP setup
 	$effect.root(async () => {
-		if (typeof window !== 'undefined') {
+		if (
+			typeof window !== 'undefined' &&
+			!window.matchMedia('(prefers-reduced-motion: reduce)').matches
+		) {
 			const { gsap } = await import('gsap');
 			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 			gsap.registerPlugin(ScrollTrigger);

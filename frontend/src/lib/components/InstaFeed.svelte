@@ -1,10 +1,11 @@
 <script>
 	import { imgUrl } from '$lib/sanity';
 
-	let { instaPosts = [], limit = instaPosts.length } = $props();
+	let { instaPosts = [], limit: limitProp = undefined } = $props();
+	let limit = $derived(limitProp ?? instaPosts.length);
 
 	// State management
-	let displayedPosts = $state(instaPosts.slice(0, limit));
+	let displayedPosts = $state([]);
 	let nextPosts = $state([]);
 
 	// Helper functions
@@ -25,13 +26,11 @@
 		});
 	}
 
-	// Initial shuffle
-	shuffleArray(instaPosts);
-
 	// Effect for post rotation
 	$effect.root(() => {
 		if (typeof window !== 'undefined') {
-			// Set initial displayed posts
+			// Initial shuffle and set displayed posts
+			shuffleArray(instaPosts);
 			displayedPosts = instaPosts.slice(0, limit);
 
 			// Initial preload
@@ -49,7 +48,7 @@
 </script>
 
 <div class="group">
-	{#each displayedPosts as post}
+	{#each displayedPosts as post, i (i)}
 		<a aria-label="Instagram Post" href={post.postURLs} target="_blank">
 			<div
 				class="img border-1"
