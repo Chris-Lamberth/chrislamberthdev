@@ -3,6 +3,7 @@
 	import InstaFeed from '#lib/components/InstaFeed.svelte';
 	import Contact from '#lib/components/Contact.svelte';
 	import { fade } from 'svelte/transition';
+	/** @type {import('./$types').PageProps} */
 	let { data } = $props();
 
 	let { posts, instaPosts } = $derived(data);
@@ -45,11 +46,13 @@
 		<div class="group">
 			<div class="insta">
 				<h2 class="section-headline">insta feed</h2>
-				{#if instaPosts?.length}
-					<InstaFeed {instaPosts} limit={4} />
-				{:else if !instaPosts}
-					<p>Instagram feed is temporarily unavailable.</p>
-				{/if}
+				{#await instaPosts then posts}
+					{#if posts?.length}
+						<InstaFeed instaPosts={posts} limit={4} />
+					{:else if !posts}
+						<p>Instagram feed is temporarily unavailable.</p>
+					{/if}
+				{/await}
 			</div>
 			<div class="form">
 				<Contact />

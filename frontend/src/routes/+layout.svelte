@@ -1,7 +1,6 @@
 <script>
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
 	import '../global.css';
 	import Nav from '#lib/components/Nav.svelte';
 	import Footer from '#lib/components/Footer.svelte';
@@ -12,6 +11,7 @@
 	let currentPath = $derived(page.url.pathname);
 	let isHome = $derived(currentPath === '/');
 	let pageName = $derived(page.url.pathname.split('/')[1]);
+	/** @type {HTMLDivElement | undefined} */
 	let background = $state();
 
 	// Initialize theme
@@ -30,25 +30,29 @@
 	onMount(() => {
 		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 		let mounted = true;
+		/** @type {gsap.Context | undefined} */
 		let animations;
-		void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-			if (!mounted) return;
-			gsap.registerPlugin(ScrollTrigger);
-			animations = gsap.context(() => {
-				background.querySelectorAll('.layer').forEach((layer, index) => {
-					gsap.to(layer, {
-						yPercent: -20 * (index + 1),
-						ease: 'power1.out',
-						scrollTrigger: {
-							trigger: background,
-							start: 'top top',
-							end: 'bottom top',
-							scrub: true
-						}
+		void Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(
+			([{ gsap }, { ScrollTrigger }]) => {
+				const container = background;
+				if (!mounted || !container) return;
+				gsap.registerPlugin(ScrollTrigger);
+				animations = gsap.context(() => {
+					container.querySelectorAll('.layer').forEach((layer, index) => {
+						gsap.to(layer, {
+							yPercent: -20 * (index + 1),
+							ease: 'power1.out',
+							scrollTrigger: {
+								trigger: container,
+								start: 'top top',
+								end: 'bottom top',
+								scrub: true
+							}
+						});
 					});
 				});
-			});
-		});
+			}
+		);
 		return () => {
 			mounted = false;
 			animations?.revert();

@@ -1,33 +1,26 @@
-import { gsap } from 'gsap';
+/** @type {import('svelte/action').Action<HTMLElement, { animation: { enter: gsap.TweenVars, exit: gsap.TweenVars }, trigger: boolean }>} */
+export function animation(node, params) {
+	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-const reducedMotion =
-	typeof window !== 'undefined'
-		? window.matchMedia('(prefers-reduced-motion: reduce)').matches
-		: false;
+	/** @type {typeof import('gsap').gsap | undefined} */
+	let engine;
+	let destroyed = false;
+	let current = params;
 
-export function animation(node, { animation, trigger }) {
-	let isFirstRun = true;
-
-	function runAnimation() {
-		const target = trigger ? animation.enter : animation.exit;
-		if (isFirstRun || reducedMotion) {
-			gsap.set(node, target);
-			isFirstRun = false;
-		} else {
-			gsap.to(node, target);
-		}
-	}
-
-	runAnimation();
+	void import('gsap').then(({ gsap }) => {
+		if (destroyed) return;
+		engine = gsap;
+		gsap.set(node, current.trigger ? current.animation.enter : current.animation.exit);
+	});
 
 	return {
-		update(newParams) {
-			animation = newParams.animation;
-			trigger = newParams.trigger;
-			runAnimation();
+		update(next) {
+			current = next;
+			engine?.to(node, next.trigger ? next.animation.enter : next.animation.exit);
 		},
 		destroy() {
-			gsap.killTweensOf(node);
+			destroyed = true;
+			engine?.killTweensOf(node);
 		}
 	};
 }

@@ -1,3 +1,4 @@
+/** @param {unknown} value @param {string[]} [protocols] */
 export function safeExternalUrl(value, protocols = ['https:', 'http:']) {
 	if (typeof value !== 'string') return null;
 

@@ -1,16 +1,17 @@
 <script>
-	import { imgUrl } from '#lib/sanity.js';
+	import SanityImage from '#lib/components/SanityImage.svelte';
+	import PortableTextImage from '#lib/components/PortableTextImage.svelte';
+	import PortableTextLink from '#lib/components/PortableTextLink.svelte';
 	import { safeExternalUrl } from '#lib/links.js';
 	import { PortableText } from '@portabletext/svelte';
-	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
+	/** @type {import('./$types').PageProps} */
 	let { data } = $props();
 
-	let postIndex = $derived(
-		data.posts?.findIndex((post) => post.slug.current === page.params.slug) ?? -1
-	);
-	let previousPost = $derived(postIndex > 0 ? data.posts[postIndex - 1] : null);
-	let nextPost = $derived(postIndex >= 0 ? data.posts[postIndex + 1] : null);
+	const contentSizes = '(max-width: 910px) calc(100vw - 60px), 850px';
+	const bannerSizes = /** @type {const} */ (['728x90', '300x600', '160x600', '300x250', '300x50']);
+	/** @param {number} ratio */
+	const heroSizes = (ratio) => `max(min(100vw - 60px, 850px), calc(30rem * ${ratio}))`;
 	let headerImage = $derived(data.altHeaderImage?.asset ? data.altHeaderImage : data.mainImage);
 	let categories = $derived(
 		(data.categories ?? []).flatMap((category) => (category?.title ? [category.title] : []))
@@ -22,22 +23,6 @@
 		safeExternalUrl(data.websiteLink, ['https:', 'http:', 'mailto:', 'tel:'])
 	);
 </script>
-
-{#snippet bodyImage({ portableText })}
-	{@const image = portableText.value}
-	{#if image.asset}
-		<img src={imgUrl(image).url()} alt={image.alt ?? ''} />
-	{/if}
-{/snippet}
-
-{#snippet bodyLink({ portableText, children })}
-	{@const href = safeExternalUrl(portableText.value.href, ['https:', 'http:', 'mailto:', 'tel:'])}
-	{#if href}
-		<a {href}>{@render children?.()}</a>
-	{:else}
-		{@render children?.()}
-	{/if}
-{/snippet}
 
 <h1 class="hidden">{data.title}</h1>
 <div class="post" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
@@ -53,11 +38,9 @@
 
 		<!-- Main Image -->
 		{#if headerImage?.asset}
-			<div
-				class="main-image border-1"
-				style:background-image={`url('${imgUrl(headerImage.asset).format('webp').url()}')`}
-				style:background-position={`${(headerImage.hotspot?.x ?? 0.5) * 100}% ${(headerImage.hotspot?.y ?? 0.5) * 100}%`}
-			></div>
+			<div class="main-image border-1">
+				<SanityImage image={headerImage} alt="" sizes={heroSizes} cover priority />
+			</div>
 		{/if}
 
 		<!-- Rich Text -->
@@ -65,7 +48,7 @@
 			<section class="rich_text">
 				<PortableText
 					value={data.body}
-					components={{ types: { image: bodyImage }, marks: { link: bodyLink } }}
+					components={{ types: { image: PortableTextImage }, marks: { link: PortableTextLink } }}
 				/>
 			</section>
 		{/if}
@@ -76,14 +59,12 @@
 				{#each data.additionalImages as { image, alt, columns }, i (i)}
 					{#if image?.asset}
 						<div class="img border-1" style="grid-column: span {columns}">
-							<img
-								src={imgUrl(image).url().endsWith('.gif')
-									? imgUrl(image).url()
-									: imgUrl(image).format('webp').url()}
+							<SanityImage
+								{image}
 								alt={alt || 'Image'}
-								style="object-position: {image.hotspot
-									? `${image.hotspot.x * 100}% ${image.hotspot.y * 100}%`
-									: 'center'}"
+								sizes={`auto, ${contentSizes}`}
+								cover
+								respectCrop
 							/>
 						</div>
 					{/if}
@@ -96,7 +77,7 @@
 			<section class="banners">
 				{#each bannerSets as adSet (adSet._key)}
 					<div class="set">
-						{#each ['728x90', '300x600', '160x600', '300x250', '300x50'] as size (size)}
+						{#each bannerSizes as size (size)}
 							{#if adSet[`size${size}`]}
 								<div>
 									<div class="restart" data-size={size}>
@@ -130,9 +111,9 @@
 	<div class="container">
 		<hr />
 		<nav>
-			{#if previousPost}
+			{#if data.previousSlug}
 				<div>
-					<a class="previous line" href={`/work/${encodeURIComponent(previousPost.slug.current)}`}>
+					<a class="previous line" href={`/work/${encodeURIComponent(data.previousSlug)}`}>
 						<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow"
 						></object>
 						previous
@@ -150,9 +131,9 @@
 			<div>
 				<a class="viewall line" href="/work">view all</a>
 			</div>
-			{#if nextPost}
+			{#if data.nextSlug}
 				<div>
-					<a class="next line" href={`/work/${encodeURIComponent(nextPost.slug.current)}`}>
+					<a class="next line" href={`/work/${encodeURIComponent(data.nextSlug)}`}>
 						next
 						<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow"
 						></object>
@@ -180,9 +161,7 @@
 		margin: 0 0 3rem 0;
 	}
 	.main-image {
-		background-position: center center;
-		background-size: cover;
-		background-repeat: no-repeat;
+		overflow: hidden;
 		border-radius: var(--radius);
 		height: 30rem;
 		margin: 0 0 var(--gutter) 0;
@@ -212,11 +191,6 @@
 	.content_grid .img {
 		border-radius: var(--radius);
 		overflow: hidden;
-	}
-	.content_grid .img img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
 	}
 	.cta {
 		text-align: center;

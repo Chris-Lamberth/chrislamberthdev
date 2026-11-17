@@ -40,6 +40,7 @@
 
 	// Reactive state variable to track if the nav is open
 	let navOpen = $state(false);
+	/** @type {HTMLButtonElement | undefined} */
 	let navButton = $state();
 
 	// Function to toggle nav open state
@@ -51,12 +52,14 @@
 		if (windowWidth > 720) navOpen = false;
 	});
 
+	/** @param {KeyboardEvent} event */
 	function closeOnEscape(event) {
 		if (event.key !== 'Escape' || !navOpen) return;
 		navOpen = false;
 		navButton?.focus();
 	}
 
+	/** @type {import('#lib/theme.js').Theme} */
 	let nextTheme = $derived($theme === 'light' ? 'dark' : 'light');
 
 	// Function to toggle the theme
@@ -65,12 +68,14 @@
 	}
 
 	// Swipe gesture for mobile
+	/** @param {HTMLElement} node */
 	function swipe(node) {
 		let startX = $state(0),
 			startY = $state(0),
 			movedX = $state(0),
 			movedY = $state(0);
 
+		/** @param {TouchEvent} event */
 		function handleTouchStart(event) {
 			startX = event.touches[0].clientX;
 			startY = event.touches[0].clientY;
@@ -80,6 +85,7 @@
 			node.addEventListener('touchend', handleTouchEnd);
 		}
 
+		/** @param {TouchEvent} event */
 		function handleTouchMove(event) {
 			movedX = event.touches[0].clientX - startX;
 			movedY = event.touches[0].clientY - startY;

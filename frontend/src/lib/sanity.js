@@ -8,4 +8,7 @@ export const config = {
 	useCdn: true
 };
 
-export const imgUrl = (/** @type {any} */ source) => createImageUrlBuilder(config).image(source);
+const builder = createImageUrlBuilder(config);
+
+/** @param {import("@sanity/image-url").SanityImageSource} source */
+export const imgUrl = (source) => builder.image(source);

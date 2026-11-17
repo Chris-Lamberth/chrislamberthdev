@@ -7,6 +7,7 @@
 	let alertMessageType = $state('');
 	let submitting = $state(false);
 
+	/** @param {SubmitEvent & { currentTarget: HTMLFormElement }} event */
 	const submitForm = async (event) => {
 		event.preventDefault();
 		if (submitting) return;

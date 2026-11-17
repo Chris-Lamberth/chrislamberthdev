@@ -1,16 +1,23 @@
 <script>
-	import { imgUrl } from '#lib/sanity.js';
+	import SanityImage from './SanityImage.svelte';
 	import { fly, fade } from 'svelte/transition';
+	/** @typedef {import('#lib/sanity.types.ts').PostsQueryResult[number]} Post */
 	/**
 	 * @typedef {Object} Props
-	 * @property {any} [posts]
-	 * @property {any} [limit]
+	 * @property {Post[]} [posts]
+	 * @property {number} [limit]
 	 * @property {boolean} [showFilter]
 	 */
 
 	/** @type {Props} */
 	let { posts = [], limit = posts.length, showFilter = false } = $props();
 
+	/** @param {number} ratio */
+	function cardSizes(ratio) {
+		return `(max-width: 600px) max(calc(100vw - 60px), calc(min(15rem, 200px) * ${ratio})), max(calc((min(100vw - 60px, 850px) - 4rem) / 3), calc(min(15vw, 200px) * ${ratio}))`;
+	}
+
+	/** @param {Post} post */
 	function categoryTitles(post) {
 		return (post.categories ?? []).flatMap((category) => (category?.title ? [category.title] : []));
 	}
@@ -20,6 +27,7 @@
 	let selectedCategory = $state('all');
 	let dropdownOpen = $state(false);
 
+	/** @param {string} category */
 	function selectCategory(category) {
 		selectedCategory = category;
 		dropdownOpen = false;
@@ -84,26 +92,33 @@
 
 <div class="group">
 	{#each filteredPosts.slice(0, limit) as post, index (post._id)}
-		<a
-			href={`/work/${encodeURIComponent(post.slug.current)}`}
-			in:fly={{ duration: 100, y: 50, delay: (index + 1) * 30 }}
-		>
-			<div
-				class="img border-1"
-				style:background-image={post.mainImage?.asset
-					? `url(${imgUrl(post.mainImage.asset).width(600).format('webp').url()})`
-					: undefined}
-				style:background-position={`${(post.mainImage?.hotspot?.x ?? 0.5) * 100}% ${(post.mainImage?.hotspot?.y ?? 0.5) * 100}%`}
-			></div>
-			<div class="txt">
-				<h3>{post.title}</h3>
-				{#if categoryTitles(post).length}
-					<p class="categories">
-						{categoryTitles(post).join(', ')}
-					</p>
-				{/if}
-			</div>
-		</a>
+		{@const slug = post.slug?.current}
+		{#if slug}
+			<a
+				href={`/work/${encodeURIComponent(slug)}`}
+				in:fly={{ duration: 100, y: 50, delay: (index + 1) * 30 }}
+			>
+				<div class="img border-1">
+					{#if post.mainImage?.asset}
+						<SanityImage
+							image={post.mainImage}
+							alt=""
+							cover
+							priority={index === 0}
+							sizes={cardSizes}
+						/>
+					{/if}
+				</div>
+				<div class="txt">
+					<h3>{post.title}</h3>
+					{#if categoryTitles(post).length}
+						<p class="categories">
+							{categoryTitles(post).join(', ')}
+						</p>
+					{/if}
+				</div>
+			</a>
+		{/if}
 	{/each}
 </div>
 
@@ -118,9 +133,6 @@
 		max-height: 200px;
 		overflow: hidden;
 		border-radius: var(--radius);
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
 		box-shadow:
 			0 0 0 0 var(--bg-color),
 			0 0 0 0px var(--txt-color);

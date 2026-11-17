@@ -1,6 +1,7 @@
 <script>
 	import Feed from '#lib/components/Feed.svelte';
 	import { fade } from 'svelte/transition';
+	/** @type {import('./$types').PageProps} */
 	let { data } = $props();
 </script>
 

@@ -1,21 +1,25 @@
 <script>
-	import { imgUrl } from '#lib/sanity.js';
 	import { safeExternalUrl } from '#lib/links.js';
+	import SanityImage from './SanityImage.svelte';
+	/** @typedef {import('#lib/sanity.types.ts').InstagramQueryResult} InstagramPosts */
+	/** @typedef {InstagramPosts[number] & { url: string, image: NonNullable<InstagramPosts[number]['postImage']> }} Post */
 
+	/** @type {{ instaPosts?: InstagramPosts, limit?: number }} */
 	let { instaPosts = [], limit: limitProp = undefined } = $props();
 	let posts = $derived(
 		instaPosts.flatMap((post) => {
 			const url = safeExternalUrl(post.postURLs);
-			return url && post.imageUrl
-				? [{ ...post, url, image: imgUrl(post.imageUrl).width(400).format('webp').url() }]
-				: [];
+			return url && post.postImage?.asset ? [{ ...post, url, image: post.postImage }] : [];
 		})
 	);
 	let limit = $derived(limitProp ?? posts.length);
 
+	/** @type {Post[] | undefined} */
 	let displayedPosts = $state();
+	/** @type {HTMLDivElement | undefined} */
 	let group = $state();
 
+	/** @param {Post[]} posts @param {number} limit */
 	function shuffledPosts(posts, limit) {
 		const array = [...posts];
 		for (let i = array.length - 1; i > 0; i--) {
@@ -25,36 +29,38 @@
 		return array.slice(0, limit);
 	}
 
-	function preloadNextPosts(posts, limit) {
-		const nextPosts = shuffledPosts(posts, limit);
-		for (const post of nextPosts) {
-			const img = new Image();
-			img.src = post.image;
-		}
-		return nextPosts;
-	}
-
 	$effect(() => {
 		const currentPosts = posts;
 		const count = limit;
 		const container = group;
 		displayedPosts = undefined;
-		if (currentPosts.length <= count) return;
+		if (!container || currentPosts.length <= count) return;
 
-		let nextPosts = preloadNextPosts(currentPosts, count);
+		let visible = false;
+		const observer = new IntersectionObserver(([entry]) => (visible = entry.isIntersecting));
+		observer.observe(container);
 		const interval = setInterval(() => {
-			if (container?.matches(':focus-within, :hover')) return;
-			displayedPosts = nextPosts;
-			nextPosts = preloadNextPosts(currentPosts, count);
+			if (!visible || document.hidden || container.matches(':focus-within, :hover')) return;
+			displayedPosts = shuffledPosts(currentPosts, count);
 		}, 4000);
-		return () => clearInterval(interval);
+		return () => {
+			clearInterval(interval);
+			observer.disconnect();
+		};
 	});
 </script>
 
 <div class="group" bind:this={group}>
-	{#each displayedPosts ?? posts.slice(0, limit) as post, i (i)}
+	{#each displayedPosts ?? posts.slice(0, limit) as post (post._id)}
 		<a aria-label="Instagram Post" href={post.url} target="_blank" rel="noopener noreferrer">
-			<div class="img border-1" style:background-image={`url(${post.image})`}></div>
+			<div class="img border-1">
+				<SanityImage
+					image={post.image}
+					alt=""
+					sizes="auto, (max-width: 600px) calc((100vw - 76px) / 2), 180px"
+					cover
+				/>
+			</div>
 		</a>
 	{/each}
 </div>
@@ -70,9 +76,7 @@
 	}
 	.group .img {
 		aspect-ratio: 1;
-		background-size: 100%;
-		background-repeat: no-repeat;
-		background-position: center center;
+		overflow: hidden;
 		border-radius: var(--radius);
 		box-shadow:
 			0 0 0 0 var(--bg-color),

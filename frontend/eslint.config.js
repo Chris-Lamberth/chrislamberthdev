@@ -11,6 +11,7 @@ export default [
 			'build',
 			'.svelte-kit',
 			'.vercel/',
+			'src/lib/sanity.types.ts',
 			'package',
 			'.env',
 			'.env.*',

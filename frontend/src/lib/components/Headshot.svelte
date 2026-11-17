@@ -4,12 +4,14 @@
 
 	let currentPath = $derived(page.url.pathname);
 	let isInteriorPage = $derived(currentPath !== '/');
+	/** @type {HTMLDivElement | undefined} */
 	let bgElement = $state();
 
 	let windowWidth = $state(0);
 
 	$effect(() => {
 		if (windowWidth > 720 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			/** @param {MouseEvent} event */
 			const handleMouseMove = (event) => {
 				const { clientX, clientY } = event;
 				const { innerWidth, innerHeight } = window;

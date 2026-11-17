@@ -28,6 +28,8 @@ The frontend and Sanity Studio are separate npm projects. With Node.js 24, run `
 
 Set `PUBLIC_SANITY_PROJECT_ID` in `frontend/.env` and in Vercel's build environment. The frontend reads published content. For a private dataset, set `SANITY_TOKEN` to a read-only token in the local environment and in the Vercel runtime environment.
 
+Run `npm run check` from `frontend/` to type-check the site. After editing the Sanity schema or a GROQ query, run `npm run typegen` from `backend/` and include the updated `frontend/src/lib/sanity.types.ts` in the same change.
+
 ## Contributions
 
 While this is a personal portfolio, contributions for improvements or bug fixes are welcome. 
