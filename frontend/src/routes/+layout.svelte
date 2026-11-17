@@ -1,65 +1,69 @@
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { onMount } from 'svelte';
+	import { gsap } from 'gsap';
 	import '../global.css';
-	import Nav from '$lib/components/Nav.svelte';
-	import Footer from '$lib/components/Footer.svelte';
-	import { initializeTheme } from '$lib/theme.js';
-	import { dev } from '$app/environment';
+	import Nav from '#lib/components/Nav.svelte';
+	import Footer from '#lib/components/Footer.svelte';
+	import { initializeTheme } from '#lib/theme.js';
 
 	let { children } = $props();
 
-	let currentPath = $derived($page.url.pathname);
-	let isInteriorPage = $derived(currentPath === '/');
-	let pageName = $derived($page.url.pathname.split('/')[1]);
+	let currentPath = $derived(page.url.pathname);
+	let isHome = $derived(currentPath === '/');
+	let pageName = $derived(page.url.pathname.split('/')[1]);
+	let background = $state();
 
 	// Initialize theme
 	initializeTheme();
 
-	onMount(async () => {
-		const { inject } = await import('@vercel/analytics');
-		const { injectSpeedInsights } = await import('@vercel/speed-insights/sveltekit');
-		inject({ mode: dev ? 'development' : 'production' });
-		injectSpeedInsights();
+	onMount(() => {
+		void import('@vercel/analytics').then(({ inject }) => {
+			inject({ mode: import.meta.env.DEV ? 'development' : 'production' });
+		});
+		void import('@vercel/speed-insights/sveltekit-next').then(({ injectSpeedInsights }) => {
+			injectSpeedInsights();
+		});
 	});
 
 	// GSAP setup
-	$effect.root(async () => {
-		if (
-			typeof window !== 'undefined' &&
-			!window.matchMedia('(prefers-reduced-motion: reduce)').matches
-		) {
-			const { gsap } = await import('gsap');
-			const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+	onMount(() => {
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		let mounted = true;
+		let animations;
+		void import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+			if (!mounted) return;
 			gsap.registerPlugin(ScrollTrigger);
-
-			const layers = document.querySelectorAll('.bg .layer');
-			layers.forEach((layer, index) => {
-				gsap.to(layer, {
-					yPercent: -20 * (index + 1),
-					ease: 'power1.out',
-					scrollTrigger: {
-						trigger: '.bg',
-						start: 'top top',
-						end: 'bottom top',
-						scrub: true
-					}
+			animations = gsap.context(() => {
+				background.querySelectorAll('.layer').forEach((layer, index) => {
+					gsap.to(layer, {
+						yPercent: -20 * (index + 1),
+						ease: 'power1.out',
+						scrollTrigger: {
+							trigger: background,
+							start: 'top top',
+							end: 'bottom top',
+							scrub: true
+						}
+					});
 				});
 			});
-		}
+		});
+		return () => {
+			mounted = false;
+			animations?.revert();
+		};
 	});
 </script>
 
 <svelte:head>
 	<title
-		>{!isInteriorPage === false
-			? 'Chris Lamberth ⚡ chrislamberth.dev'
-			: `${pageName} ⚡ chrislamberth.dev`}</title
+		>{isHome ? 'Chris Lamberth ⚡ chrislamberth.dev' : `${pageName} ⚡ chrislamberth.dev`}</title
 	>
 	<meta name="theme-color" content="#00ffcc" />
 </svelte:head>
 
-<div class="bg">
+<div class="bg" bind:this={background}>
 	<div class="layer"></div>
 	<div class="layer"></div>
 	<div class="layer"></div>
@@ -67,7 +71,7 @@
 <div class="wrapper">
 	<Nav />
 	<main>
-		<div class="spacer" class:int={!isInteriorPage}></div>
+		<div class="spacer" class:int={!isHome}></div>
 		{@render children?.()}
 	</main>
 	<Footer />

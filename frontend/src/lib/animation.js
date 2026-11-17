@@ -25,6 +25,9 @@ export function animation(node, { animation, trigger }) {
 			animation = newParams.animation;
 			trigger = newParams.trigger;
 			runAnimation();
+		},
+		destroy() {
+			gsap.killTweensOf(node);
 		}
 	};
 }

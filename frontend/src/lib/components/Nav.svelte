@@ -1,37 +1,23 @@
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import Headshot from './Headshot.svelte';
-	import { animation } from '$lib/animation';
-	import { writable } from 'svelte/store';
-	import { theme, updateTheme } from '$lib/theme.js';
+	import { animation } from '#lib/animation.js';
+	import { theme, updateTheme } from '#lib/theme.js';
 
-	let currentPath = $derived($page.url.pathname);
+	let currentPath = $derived(page.url.pathname);
 	let isInteriorPage = $derived(currentPath !== '/');
 
 	let activeStates = $derived({
 		home: currentPath === '/',
 		about: currentPath === '/about',
 		resume: currentPath === '/resume',
-		work: currentPath === '/work'
+		work: currentPath === '/work' || currentPath.startsWith('/work/')
 	});
 
-	const windowWidth = writable(typeof window !== 'undefined' ? window.innerWidth : 0);
+	let windowWidth = $state(0);
 
-	$effect.root(() => {
-		if (typeof window !== 'undefined') {
-			const handleResize = () => {
-				windowWidth.set(window.innerWidth);
-			};
-
-			window.addEventListener('resize', handleResize);
-			return () => {
-				window.removeEventListener('resize', handleResize);
-			};
-		}
-	});
-
-	let exitX = $derived($windowWidth > 1000 ? '26rem' : $windowWidth <= 720 ? '0' : '40vw');
-	let exitY = $derived($windowWidth <= 720 ? '16rem' : '9.5rem');
+	let exitX = $derived(windowWidth > 1000 ? '26rem' : windowWidth <= 720 ? '0' : '40vw');
+	let exitY = $derived(windowWidth <= 720 ? '16rem' : '9.5rem');
 
 	let animationConfig = $derived({
 		animation: {
@@ -54,6 +40,7 @@
 
 	// Reactive state variable to track if the nav is open
 	let navOpen = $state(false);
+	let navButton = $state();
 
 	// Function to toggle nav open state
 	function toggleNav() {
@@ -61,10 +48,14 @@
 	}
 
 	$effect(() => {
-		if (navOpen && $windowWidth > 720) {
-			toggleNav();
-		}
+		if (windowWidth > 720) navOpen = false;
 	});
+
+	function closeOnEscape(event) {
+		if (event.key !== 'Escape' || !navOpen) return;
+		navOpen = false;
+		navButton?.focus();
+	}
 
 	let nextTheme = $derived($theme === 'light' ? 'dark' : 'light');
 
@@ -117,6 +108,8 @@
 	}
 </script>
 
+<svelte:window bind:innerWidth={windowWidth} onkeydown={closeOnEscape} />
+
 <div class="bar" class:int={isInteriorPage}>
 	<div class="container">
 		<div class="group">
@@ -129,18 +122,48 @@
 				</div>
 				<Headshot />
 			</div>
-			<button aria-label="Nav" class="nav_btn" class:close-state={navOpen} onclick={toggleNav}>
+			<button
+				aria-label="Menu"
+				aria-controls="primary-navigation"
+				aria-expanded={navOpen}
+				bind:this={navButton}
+				class="nav_btn"
+				class:close-state={navOpen}
+				onclick={toggleNav}
+			>
 				<div></div>
 				<div></div>
 			</button>
-			<nav use:swipe class:mobile-state-open={navOpen}>
-				<a class="line" href="/" onclick={toggleNav} class:activeHome={activeStates.home}>home</a>
-				<a class="line" href="/about" onclick={toggleNav} class:active={activeStates.about}>about</a
+			<nav id="primary-navigation" aria-label="Primary" use:swipe class:mobile-state-open={navOpen}>
+				<a
+					class="line"
+					href="/"
+					onclick={() => (navOpen = false)}
+					class:activeHome={activeStates.home}
+					aria-current={activeStates.home ? 'page' : undefined}>home</a
 				>
-				<a class="line" href="/resume" onclick={toggleNav} class:active={activeStates.resume}
-					>resume</a
+				<a
+					class="line"
+					href="/about"
+					onclick={() => (navOpen = false)}
+					class:active={activeStates.about}
+					aria-current={activeStates.about ? 'page' : undefined}>about</a
 				>
-				<a class="line" href="/work" onclick={toggleNav} class:active={activeStates.work}>work</a>
+				<a
+					class="line"
+					href="/resume"
+					onclick={() => (navOpen = false)}
+					class:active={activeStates.resume}
+					aria-current={activeStates.resume ? 'page' : undefined}>resume</a
+				>
+				<a
+					class="line"
+					href="/work"
+					onclick={() => (navOpen = false)}
+					class:active={currentPath === '/work'}
+					aria-current={activeStates.work ? (currentPath === '/work' ? 'page' : 'true') : undefined}
+					>work</a
+				>
 				<button title="toggle light/dark mode" class="theme-toggle" onclick={toggleTheme}>
 					{#if $theme === 'light'}
 						<img src="/images/light.svg" alt="light mode" />
@@ -415,6 +438,7 @@
 			display: flex;
 		}
 		nav {
+			visibility: hidden;
 			flex-direction: column;
 			justify-content: center;
 			align-items: flex-start;
@@ -426,6 +450,9 @@
 			transition: translate 0.26s var(--easing-1);
 			width: 100%;
 			max-width: 25rem;
+		}
+		nav.mobile-state-open {
+			visibility: visible;
 		}
 		:global([data-theme='dark']) nav {
 			background: #000;

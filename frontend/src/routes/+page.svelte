@@ -1,12 +1,11 @@
 <script>
-	import Feed from '$lib/components/Feed.svelte';
-	import InstaFeed from '$lib/components/InstaFeed.svelte';
-	import Contact from '$lib/components/Contact.svelte';
+	import Feed from '#lib/components/Feed.svelte';
+	import InstaFeed from '#lib/components/InstaFeed.svelte';
+	import Contact from '#lib/components/Contact.svelte';
 	import { fade } from 'svelte/transition';
 	let { data } = $props();
 
-	let posts = $derived(data.posts?.posts ?? []);
-	let instaPosts = $derived(data.instaPosts?.instaPosts ?? []);
+	let { posts, instaPosts } = $derived(data);
 </script>
 
 <svelte:head>
@@ -31,10 +30,12 @@
 				></object>
 			</a>
 		</div>
-		{#if posts && posts.length}
-			<Feed {posts} limit="6" />
+		{#if posts?.length}
+			<Feed {posts} limit={6} />
+		{:else if posts}
+			<p>No work to show yet.</p>
 		{:else}
-			<p>Loading...</p>
+			<p>Work is temporarily unavailable.</p>
 		{/if}
 	</div>
 </section>
@@ -44,7 +45,11 @@
 		<div class="group">
 			<div class="insta">
 				<h2 class="section-headline">insta feed</h2>
-				<InstaFeed {instaPosts} limit={4} />
+				{#if instaPosts?.length}
+					<InstaFeed {instaPosts} limit={4} />
+				{:else if !instaPosts}
+					<p>Instagram feed is temporarily unavailable.</p>
+				{/if}
 			</div>
 			<div class="form">
 				<Contact />

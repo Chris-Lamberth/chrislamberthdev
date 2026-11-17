@@ -1,13 +1,13 @@
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 </script>
 
 <div class="container">
 	<div class="wrapper">
 		<div>
 			<p>error</p>
-			<h1>{$page.status}</h1>
-			<h2>{$page.error.message}</h2>
+			<h1>{page.status}</h1>
+			<h2>{page.error.message}</h2>
 		</div>
 		<a href="/" class="btn">Home</a>
 	</div>

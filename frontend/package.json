@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"engines": {
-		"node": ">=20.19.0"
+		"node": "^22.17.0 || ^24.0.0"
 	},
 	"scripts": {
 		"dev": "vite dev",
@@ -14,25 +14,29 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
-		"@sveltejs/adapter-auto": "^7.0.1",
-		"@sveltejs/kit": "^2.5.27",
-		"@sveltejs/vite-plugin-svelte": "^7.1.2",
-		"eslint": "^10.5.0",
+		"@sveltejs/adapter-vercel": "^7.0.3",
+		"@sveltejs/kit": "^3.2.0",
+		"@sveltejs/vite-plugin-svelte": "^7.3.1",
+		"eslint": "^10.15.0",
 		"eslint-config-prettier": "^10.1.8",
-		"eslint-plugin-svelte": "^3.19.0",
-		"globals": "^17.6.0",
-		"prettier": "^3.1.0",
+		"eslint-plugin-svelte": "^3.24.1",
+		"globals": "^17.14.0",
+		"prettier": "^3.10.1",
 		"prettier-plugin-svelte": "^4.1.1",
-		"svelte": "^5.0.0",
-		"vite": "^8.0.16"
+		"svelte": "^5.57.3",
+		"typescript": "^6.0.3",
+		"vite": "^8.3.8"
 	},
 	"type": "module",
 	"dependencies": {
-		"@sanity/client": "^7.22.1",
-		"@sanity/image-url": "^2.1.1",
-		"@types/gsap": "^3.0.0",
-		"@vercel/analytics": "^2.0.1",
-		"@vercel/speed-insights": "^2.0.0",
-		"gsap": "^3.12.2"
+		"@portabletext/svelte": "^4.0.0",
+		"@sanity/client": "^8.16.0",
+		"@sanity/image-url": "^2.2.0",
+		"@vercel/analytics": "2.1.0-canary.5",
+		"@vercel/speed-insights": "^2.1.0",
+		"gsap": "^3.15.1"
+	},
+	"imports": {
+		"#lib/*": "./src/lib/*"
 	}
 }

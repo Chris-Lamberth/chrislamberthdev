@@ -1,28 +1,15 @@
-import { getPosts, getInstaPosts } from '$lib/server/sanity';
+import { getPosts, getInstaPosts } from '#lib/server/sanity.js';
 
 export async function load() {
-	const loadPosts = async () => {
-		try {
-			const posts = await getPosts();
-			return { posts };
-		} catch (error) {
-			console.error('Failed to fetch posts:', error);
-			return { status: 500, error };
-		}
-	};
+	const [posts, instaPosts] = await Promise.allSettled([getPosts(), getInstaPosts()]);
 
-	const loadInstaFeed = async () => {
-		try {
-			const instaPosts = await getInstaPosts();
-			return { instaPosts };
-		} catch (error) {
-			console.error('Failed to fetch Instagram feed:', error);
-			return { status: 500, error };
-		}
-	};
+	if (posts.status === 'rejected') console.error('Failed to fetch posts:', posts.reason);
+	if (instaPosts.status === 'rejected') {
+		console.error('Failed to fetch Instagram feed:', instaPosts.reason);
+	}
 
 	return {
-		posts: await loadPosts(),
-		instaPosts: await loadInstaFeed()
+		posts: posts.status === 'fulfilled' ? posts.value : null,
+		instaPosts: instaPosts.status === 'fulfilled' ? instaPosts.value : null
 	};
 }

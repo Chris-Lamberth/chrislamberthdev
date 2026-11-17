@@ -1,5 +1,5 @@
 import { createImageUrlBuilder } from '@sanity/image-url';
-import { PUBLIC_SANITY_PROJECT_ID } from '$env/static/public';
+import { PUBLIC_SANITY_PROJECT_ID } from '$app/env/public';
 
 export const config = {
 	projectId: PUBLIC_SANITY_PROJECT_ID,

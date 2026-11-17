@@ -1,16 +1,21 @@
 <script>
+	const formEndpoint = 'https://formspree.io/f/myyqeova';
 	let name = $state('');
 	let email = $state('');
 	let message = $state('');
 	let alertMessage = $state('');
 	let alertMessageType = $state('');
+	let submitting = $state(false);
 
 	const submitForm = async (event) => {
 		event.preventDefault();
-		const formData = new FormData(event.target);
+		if (submitting) return;
+		const formData = new FormData(event.currentTarget);
+		submitting = true;
+		alertMessage = '';
 
 		try {
-			const response = await fetch('https://formspree.io/f/myyqeova', {
+			const response = await fetch(formEndpoint, {
 				method: 'POST',
 				body: formData,
 				headers: {
@@ -26,12 +31,14 @@
 				message = '';
 			} else {
 				const data = await response.json();
-				alertMessage = data.error;
+				alertMessage = data.error || 'There was an error submitting the form.';
 				alertMessageType = 'error';
 			}
 		} catch {
 			alertMessage = 'There was an error submitting the form.';
 			alertMessageType = 'error';
+		} finally {
+			submitting = false;
 		}
 	};
 </script>
@@ -40,12 +47,30 @@
 	<h2 class="section-headline">reach out</h2>
 	<p>Got a rad project or just want to say hello? Shoot me a message and let's chat.</p>
 
-	<form onsubmit={submitForm}>
+	<form action={formEndpoint} method="post" onsubmit={submitForm}>
 		<div class="field">
-			<input type="text" bind:value={name} id="name" name="name" placeholder="name" />
+			<input
+				type="text"
+				bind:value={name}
+				id="name"
+				name="name"
+				placeholder="name"
+				aria-label="Name"
+				autocomplete="name"
+				required
+			/>
 		</div>
 		<div class="field">
-			<input type="email" bind:value={email} id="email" placeholder="email" name="email" />
+			<input
+				type="email"
+				bind:value={email}
+				id="email"
+				placeholder="email"
+				name="email"
+				aria-label="Email"
+				autocomplete="email"
+				required
+			/>
 		</div>
 		<div class="field">
 			<textarea
@@ -53,12 +78,14 @@
 				name="message"
 				id="message"
 				placeholder="message"
+				aria-label="Message"
+				required
 				cols="30"
 				rows="5"></textarea>
 		</div>
 		<div class="bottom">
-			<p class="msg {alertMessageType}">{alertMessage}</p>
-			<button type="submit">send</button>
+			<p class="msg {alertMessageType}" role="status">{alertMessage}</p>
+			<button type="submit" disabled={submitting}>{submitting ? 'sending…' : 'send'}</button>
 		</div>
 	</form>
 </div>
@@ -115,12 +142,10 @@
 			0 0 0 4px #00ffcc;
 	}
 
-	input::-webkit-input-placeholder,
-	form button::webkit-input-placeholder {
+	input::-webkit-input-placeholder {
 		border: none;
 	}
-	textarea::-webkit-input-placeholder,
-	form button::webkit-input-placeholder {
+	textarea::-webkit-input-placeholder {
 		border: none;
 	}
 	form button {

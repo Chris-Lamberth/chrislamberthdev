@@ -1,33 +1,43 @@
 <script>
-	import { imgUrl } from '$lib/sanity';
-	import { page } from '$app/stores';
+	import { imgUrl } from '#lib/sanity.js';
+	import { safeExternalUrl } from '#lib/links.js';
+	import { PortableText } from '@portabletext/svelte';
+	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
 	let { data } = $props();
 
-	let previousPost = $state(),
-		nextPost = $state();
-
-	$effect(() => {
-		if (data && data.posts && Array.isArray(data.posts.posts)) {
-			const currentSlug = $page.params.slug;
-			const posts = data.posts.posts;
-
-			const currentIndex = posts.findIndex((p) => p.slug.current === currentSlug);
-
-			if (currentIndex !== -1) {
-				previousPost = posts[currentIndex - 1] || null;
-				nextPost = posts[currentIndex + 1] || null;
-			}
-		}
-	});
-
-	let hotspotX = $derived(
-		(data.altHeaderImage?.hotspot?.x || data.mainImage?.hotspot?.x || 0.5) * 100
+	let postIndex = $derived(
+		data.posts?.findIndex((post) => post.slug.current === page.params.slug) ?? -1
 	);
-	let hotspotY = $derived(
-		(data.altHeaderImage?.hotspot?.y || data.mainImage?.hotspot?.y || 0.5) * 100
+	let previousPost = $derived(postIndex > 0 ? data.posts[postIndex - 1] : null);
+	let nextPost = $derived(postIndex >= 0 ? data.posts[postIndex + 1] : null);
+	let headerImage = $derived(data.altHeaderImage?.asset ? data.altHeaderImage : data.mainImage);
+	let categories = $derived(
+		(data.categories ?? []).flatMap((category) => (category?.title ? [category.title] : []))
+	);
+	let bannerSets = $derived(
+		(data.adSets ?? []).filter((set) => /^[a-zA-Z0-9_-]+$/.test(set?.name ?? ''))
+	);
+	let websiteUrl = $derived(
+		safeExternalUrl(data.websiteLink, ['https:', 'http:', 'mailto:', 'tel:'])
 	);
 </script>
+
+{#snippet bodyImage({ portableText })}
+	{@const image = portableText.value}
+	{#if image.asset}
+		<img src={imgUrl(image).url()} alt={image.alt ?? ''} />
+	{/if}
+{/snippet}
+
+{#snippet bodyLink({ portableText, children })}
+	{@const href = safeExternalUrl(portableText.value.href, ['https:', 'http:', 'mailto:', 'tel:'])}
+	{#if href}
+		<a {href}>{@render children?.()}</a>
+	{:else}
+		{@render children?.()}
+	{/if}
+{/snippet}
 
 <h1 class="hidden">{data.title}</h1>
 <div class="post" in:fade={{ duration: 100, delay: 50 }} out:fade={{ duration: 50 }}>
@@ -36,33 +46,27 @@
 			<h2 class="hl_sm">client</h2>
 			<h3>{data.title}</h3>
 			<h2 class="hl_sm">services</h2>
-			{#if data.categories}
-				<p>
-					{#each data.categories as category, index (category.title)}
-						<span>{category.title}{index < data.categories.length - 1 ? ', ' : ''}</span>
-					{/each}
-				</p>
+			{#if categories.length}
+				<p>{categories.join(', ')}</p>
 			{/if}
 		</section>
 
 		<!-- Main Image -->
-		<section
-			class="main-image border-1"
-			style="background-image:url('{imgUrl(data.altHeaderImage?.asset || data.mainImage.asset)
-				.format('webp', 'jpg')
-				.url()}'); background-position: {hotspotX}% {hotspotY}%"
-		></section>
+		{#if headerImage?.asset}
+			<div
+				class="main-image border-1"
+				style:background-image={`url('${imgUrl(headerImage.asset).format('webp').url()}')`}
+				style:background-position={`${(headerImage.hotspot?.x ?? 0.5) * 100}% ${(headerImage.hotspot?.y ?? 0.5) * 100}%`}
+			></div>
+		{/if}
 
 		<!-- Rich Text -->
 		{#if data.body}
 			<section class="rich_text">
-				{#each data.body as item (item._key)}
-					{#if item._type === 'block'}
-						<p>{item.children[0].text}</p>
-					{:else if item._type === 'image'}
-						<img src={imgUrl(item.asset).url()} alt={item.alt || 'Image'} />
-					{/if}
-				{/each}
+				<PortableText
+					value={data.body}
+					components={{ types: { image: bodyImage }, marks: { link: bodyLink } }}
+				/>
 			</section>
 		{/if}
 
@@ -70,7 +74,7 @@
 		{#if data.additionalImages && data.additionalImages.length > 0}
 			<section class="content_grid">
 				{#each data.additionalImages as { image, alt, columns }, i (i)}
-					{#if image}
+					{#if image?.asset}
 						<div class="img border-1" style="grid-column: span {columns}">
 							<img
 								src={imgUrl(image).url().endsWith('.gif')
@@ -88,9 +92,9 @@
 		{/if}
 
 		<!-- Banner Ads Section -->
-		{#if data.adSets}
+		{#if bannerSets.length}
 			<section class="banners">
-				{#each data.adSets as adSet (adSet.name)}
+				{#each bannerSets as adSet (adSet._key)}
 					<div class="set">
 						{#each ['728x90', '300x600', '160x600', '300x250', '300x50'] as size (size)}
 							{#if adSet[`size${size}`]}
@@ -98,6 +102,7 @@
 									<div class="restart" data-size={size}>
 										<iframe
 											loading="lazy"
+											sandbox=""
 											src={`/banner-ads/${adSet.name}/${size}/index.html`}
 											frameborder="0"
 											title={`${data.title} ${size} Banner Ad`}
@@ -112,11 +117,9 @@
 		{/if}
 
 		<!-- Link for client website -->
-		{#if data.websiteLink}
+		{#if websiteUrl}
 			<section class="cta">
-				<a href={data.websiteLink} rel="noopener noreferrer" target="_blank" class="btn"
-					>view website</a
-				>
+				<a href={websiteUrl} rel="noopener noreferrer" target="_blank" class="btn">view website</a>
 			</section>
 		{/if}
 	</div>
@@ -129,7 +132,7 @@
 		<nav>
 			{#if previousPost}
 				<div>
-					<a class="previous line" href={`/work/${previousPost.slug.current}`}>
+					<a class="previous line" href={`/work/${encodeURIComponent(previousPost.slug.current)}`}>
 						<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow"
 						></object>
 						previous
@@ -149,7 +152,7 @@
 			</div>
 			{#if nextPost}
 				<div>
-					<a class="next line" href={`/work/${nextPost.slug.current}`}>
+					<a class="next line" href={`/work/${encodeURIComponent(nextPost.slug.current)}`}>
 						next
 						<object class="arrow" data="/images/arrow.svg" type="image/svg+xml" aria-label="arrow"
 						></object>

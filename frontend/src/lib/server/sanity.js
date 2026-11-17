@@ -1,8 +1,8 @@
 import { createClient } from '@sanity/client';
-import { config } from '$lib/sanity';
-import { SANITY_TOKEN } from '$env/static/private';
+import { config } from '#lib/sanity.js';
+import { SANITY_TOKEN } from '$app/env/private';
 
-const client = createClient({ ...config, token: SANITY_TOKEN });
+const client = createClient({ ...config, token: SANITY_TOKEN, perspective: 'published' });
 
 // All Posts (Work)
 export async function getPosts() {
@@ -45,6 +45,7 @@ export async function getPost(slug) {
 	  },
 	  "websiteLink": websiteLink,
 	  "adSets": adSets[]{
+		_key,
 		name,
 		size728x90,
 		size300x600,
@@ -59,7 +60,7 @@ export async function getPost(slug) {
 
 // Instagram Feed
 export async function getInstaPosts() {
-	return await client.fetch(`*[_type == "instaFeed"]{
+	return await client.fetch(`*[_type == "instaFeed" && defined(postImage.asset) && defined(postURLs)]{
 		_id,
 		name,
 		postURLs,

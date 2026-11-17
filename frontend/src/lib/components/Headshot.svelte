@@ -1,34 +1,15 @@
 <script>
-	import { page } from '$app/stores';
-	import { animation } from '$lib/animation';
-	import { writable } from 'svelte/store';
+	import { page } from '$app/state';
+	import { animation } from '#lib/animation.js';
 
-	let currentPath = $derived($page.url.pathname);
+	let currentPath = $derived(page.url.pathname);
 	let isInteriorPage = $derived(currentPath !== '/');
 	let bgElement = $state();
 
-	const windowWidth = writable(typeof window !== 'undefined' ? window.innerWidth : 0);
+	let windowWidth = $state(0);
 
-	$effect.root(() => {
-		if (typeof window !== 'undefined') {
-			const handleResize = () => {
-				windowWidth.set(window.innerWidth);
-			};
-
-			windowWidth.set(window.innerWidth);
-			window.addEventListener('resize', handleResize);
-			return () => {
-				window.removeEventListener('resize', handleResize);
-			};
-		}
-	});
-
-	$effect.root(() => {
-		if (
-			typeof window !== 'undefined' &&
-			$windowWidth > 720 &&
-			!window.matchMedia('(prefers-reduced-motion: reduce)').matches
-		) {
+	$effect(() => {
+		if (windowWidth > 720 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 			const handleMouseMove = (event) => {
 				const { clientX, clientY } = event;
 				const { innerWidth, innerHeight } = window;
@@ -46,7 +27,10 @@
 			};
 
 			window.addEventListener('mousemove', handleMouseMove);
-			return () => window.removeEventListener('mousemove', handleMouseMove);
+			return () => {
+				window.removeEventListener('mousemove', handleMouseMove);
+				if (bgElement) bgElement.style.transform = '';
+			};
 		}
 	});
 
@@ -62,10 +46,10 @@
 				ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 			},
 			exit: {
-				width: $windowWidth <= 720 ? '50vw' : '30vw',
+				width: windowWidth <= 720 ? '50vw' : '30vw',
 				height: '12rem',
-				x: $windowWidth <= 720 ? '19vw' : 'auto',
-				y: $windowWidth <= 720 ? '2.5rem' : '6rem',
+				x: windowWidth <= 720 ? '19vw' : 'auto',
+				y: windowWidth <= 720 ? '2.5rem' : '6rem',
 				duration: 0.22,
 				ease: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 			}
@@ -95,6 +79,8 @@
 		trigger: isInteriorPage
 	});
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <a
 	href="/"

@@ -1,5 +1,5 @@
 <script>
-	import { imgUrl } from '$lib/sanity';
+	import { imgUrl } from '#lib/sanity.js';
 	import { fly, fade } from 'svelte/transition';
 	/**
 	 * @typedef {Object} Props
@@ -11,9 +11,11 @@
 	/** @type {Props} */
 	let { posts = [], limit = posts.length, showFilter = false } = $props();
 
-	let categories = $derived([
-		...new Set(posts.flatMap((post) => post.categories.map((category) => category.title)))
-	]);
+	function categoryTitles(post) {
+		return (post.categories ?? []).flatMap((category) => (category?.title ? [category.title] : []));
+	}
+
+	let categories = $derived([...new Set(posts.flatMap(categoryTitles))]);
 
 	let selectedCategory = $state('all');
 	let dropdownOpen = $state(false);
@@ -26,9 +28,7 @@
 	let filteredPosts = $derived(
 		selectedCategory === 'all'
 			? posts
-			: posts.filter((post) =>
-					post.categories.some((category) => category.title === selectedCategory)
-				)
+			: posts.filter((post) => categoryTitles(post).includes(selectedCategory))
 	);
 </script>
 
@@ -85,25 +85,21 @@
 <div class="group">
 	{#each filteredPosts.slice(0, limit) as post, index (post._id)}
 		<a
-			href={`/work/${post.slug.current}`}
+			href={`/work/${encodeURIComponent(post.slug.current)}`}
 			in:fly={{ duration: 100, y: 50, delay: (index + 1) * 30 }}
 		>
 			<div
 				class="img border-1"
-				style="background-image: url({imgUrl(post.mainImage.asset)
-					.width(600)
-					.format('webp', 'jpg')
-					.url()}); 
-           background-position: {post?.mainImage?.hotspot?.x * 100}% {post?.mainImage?.hotspot?.y *
-					100}%"
+				style:background-image={post.mainImage?.asset
+					? `url(${imgUrl(post.mainImage.asset).width(600).format('webp').url()})`
+					: undefined}
+				style:background-position={`${(post.mainImage?.hotspot?.x ?? 0.5) * 100}% ${(post.mainImage?.hotspot?.y ?? 0.5) * 100}%`}
 			></div>
 			<div class="txt">
 				<h3>{post.title}</h3>
-				{#if post.categories}
+				{#if categoryTitles(post).length}
 					<p class="categories">
-						{#each post.categories as category, index (category.title)}
-							<span>{category.title}{index < post.categories.length - 1 ? ', ' : ''}</span>
-						{/each}
+						{categoryTitles(post).join(', ')}
 					</p>
 				{/if}
 			</div>
@@ -156,14 +152,10 @@
 		margin: 0.5em 0 0.3em 0;
 	}
 	.categories {
-		line-height: 0.8em;
-	}
-	.categories span {
 		font-size: 0.7rem;
+		line-height: 1.2;
 		color: var(--txt-color);
 		opacity: 0.6;
-		display: inline-block;
-		margin: 0 0.4em 0 0;
 	}
 	@media (width <= 600px) {
 		.group {
