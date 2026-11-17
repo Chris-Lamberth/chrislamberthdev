@@ -104,6 +104,7 @@
 							image={post.mainImage}
 							alt=""
 							cover
+							poster
 							priority={index === 0}
 							sizes={cardSizes}
 						/>

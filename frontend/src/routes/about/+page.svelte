@@ -1,5 +1,6 @@
 <script>
 	import { fade, fly } from 'svelte/transition';
+	import LoopVideo from '#lib/components/LoopVideo.svelte';
 </script>
 
 <svelte:head>
@@ -81,13 +82,21 @@
 		</p>
 		<div class="group fam">
 			<div class="img">
-				<img src="/images/mogley.gif" alt="Mogley spinning" loading="lazy" />
+				<LoopVideo
+					src="/images/mogley.mp4"
+					poster="/images/mogley-poster.webp"
+					label="Mogley spinning"
+				/>
 			</div>
 			<div class="img">
 				<img src="/images/chrisandbrittany.webp" alt="Chris & Brittany" />
 			</div>
 			<div class="img">
-				<img src="/images/little.gif" alt="Little digging" loading="lazy" />
+				<LoopVideo
+					src="/images/little.mp4"
+					poster="/images/little-poster.webp"
+					label="Little digging"
+				/>
 			</div>
 		</div>
 		<p>

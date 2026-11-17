@@ -7,12 +7,23 @@
 	 * @property {string} alt
 	 * @property {string | ((aspectRatio: number) => string)} sizes
 	 * @property {boolean} [priority]
+	 * @property {boolean} [eager]
 	 * @property {boolean} [cover]
 	 * @property {boolean} [respectCrop]
+	 * @property {boolean} [poster]
 	 */
 
 	/** @type {Props} */
-	let { image, alt, sizes, priority = false, cover = false, respectCrop = false } = $props();
+	let {
+		image,
+		alt,
+		sizes,
+		priority = false,
+		eager = false,
+		cover = false,
+		respectCrop = false,
+		poster = false
+	} = $props();
 
 	const candidateWidths = [
 		240, 320, 400, 480, 600, 720, 850, 960, 1080, 1280, 1440, 1700, 1920, 2240, 2560, 2880, 3200,
@@ -35,8 +46,10 @@
 	let maxWidth = $derived(Math.min(typeof sizes === 'function' ? 3840 : 1920, width));
 	let urls = $derived.by(() => {
 		if (!asset || !(width > 0 && height > 0)) return null;
-		const builder = imgUrl(crop ? { asset, crop } : asset);
-		if (dimensions?.[3] === 'gif') return { src: builder.url(), srcset: undefined };
+		let builder = imgUrl(crop ? { asset, crop } : asset);
+		const format = dimensions?.[3].toLowerCase();
+		if (poster && (format === 'gif' || format === 'webp')) builder = builder.frame(1);
+		if (format === 'gif' && !poster) return { src: builder.url(), srcset: undefined };
 
 		/** @param {number} candidate */
 		const sizedUrl = (candidate) => builder.width(candidate).fit('max').format('webp').url();
@@ -57,8 +70,8 @@
 		{width}
 		{height}
 		{alt}
-		loading={priority ? 'eager' : 'lazy'}
-		fetchpriority={priority ? 'high' : undefined}
+		loading={priority || eager ? 'eager' : 'lazy'}
+		fetchpriority={priority ? 'high' : eager ? 'low' : undefined}
 		decoding={priority ? undefined : 'async'}
 		style:object-position={`${(image.hotspot?.x ?? 0.5) * 100}% ${(image.hotspot?.y ?? 0.5) * 100}%`}
 	/>
